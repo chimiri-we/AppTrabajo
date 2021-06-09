@@ -71,11 +71,9 @@ public class BaseDatosApp extends SQLiteOpenHelper {
         String dbVenta="create table Venta("+
                 "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "id_cliente INTEGER,"+
-                "cantidad integer,"+
                 "nombre_cliente TEXT,"+
                 "detalle_venta TEXT,"+
                 "fecha TEXT,"+
-                "cod_Joya integer,"+
                 "FOREIGN KEY(id_cliente) REFERENCES Ciente(COLUMN_ID))";
         db.execSQL(dbVenta);
 

@@ -61,6 +61,7 @@ public class DetalleCliente extends AppCompatActivity {
             public void onClick(View v) {
 
                 agregarProducto();
+
             }
         });
 
