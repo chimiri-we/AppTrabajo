@@ -30,7 +30,6 @@ public class BaseDatosApp extends SQLiteOpenHelper {
 
     private static final String TABLE_VENTA = "Venta";
     private static final String COLUMN_TOTAL = "total";
-    private static final String COLUMN_DETALLE = "detalle_venta";
     private static final String COLUMN_FECHA = "fecha";
 
     private static final String TABLE_DETALLE_VENTA = "DetalleVenta";
@@ -68,27 +67,52 @@ public class BaseDatosApp extends SQLiteOpenHelper {
                 + COLUMN_PRECIO + " INTEGER" + ")";
         db.execSQL(CREATE_PRODUCTO_TABLE);
 
-        String CREATE_VENTA_TABLE = "CREATE TABLE "
+
+        String dbVenta="create table Venta("+
+                "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "id_cliente INTEGER,"+
+                "cantidad integer,"+
+                "nombre_cliente TEXT,"+
+                "detalle_venta TEXT,"+
+                "fecha TEXT,"+
+                "cod_Joya integer,"+
+                "FOREIGN KEY(id_cliente) REFERENCES Ciente(COLUMN_ID))";
+        db.execSQL(dbVenta);
+
+        String dbDetalleVenta="create table DetalleVenta("+
+                "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "id_venta INTEGER,"+
+                "id_producto integer,"+
+                "nombre_producto TEXT,"+
+                "precio_producto TEXT,"+
+                "cantidad integer,"+
+                "FOREIGN KEY(id_producto) REFERENCES Producto(COLUMN_ID),"+
+                "FOREIGN KEY(id_venta) REFERENCES Venta(id))";
+        db.execSQL(dbDetalleVenta);
+
+      /*  String CREATE_VENTA_TABLE = "CREATE TABLE "
                 + TABLE_VENTA + "(" + COLUMN_ID
                 + " INTEGER PRIMARY KEY,"
-                + COLUMN_ID_CLIENTE + " TEXT,"
+                + COLUMN_ID_CLIENTE + " INTEGER,"
                 + COLUMN_NOMBRE_CLIENTE + " TEXT,"
                 + COLUMN_DETALLE + " TEXT,"
-                + COLUMN_FECHA + " TEXT" + ")";
+                + COLUMN_FECHA + " TEXT,"
+                +"FOREIGN KEY(COLUMN_ID_CLIENTE) REFERENCES Ciente(COLUMN_ID))";
         db.execSQL(CREATE_VENTA_TABLE);
 
         String CREATE_DETALLE_VENTA_TABLE = "CREATE TABLE "
                 + TABLE_DETALLE_VENTA + "(" + COLUMN_ID
                 + " INTEGER PRIMARY KEY,"
-                + COLUMN_ID_VENTA + " TEXT,"
-                + COLUMN_ID_PRODUCTO + " TEXT,"
+                + COLUMN_ID_VENTA + " INTEGER,"
+                + COLUMN_ID_PRODUCTO + " INTEGER,"
                 + COLUMN_NOMBRE_PRODUCTO + " TEXT,"
                 + COLUMN_PRECIO_PRODUCTO + " TEXT,"
                 + COLUMN_CANTIDAD + " TEXT,"
-                + COLUMN_TOTAL + " TEXT" + ")";
+                +"FOREIGN KEY(COLUMN_ID_VENTA) REFERENCES Venta(COLUMN_ID),"+
+                "FOREIGN KEY(COLUMN_ID_PRODUCTO) REFERENCES Producto(COLUMN_ID))";
         db.execSQL(CREATE_DETALLE_VENTA_TABLE);
 
-
+*/
     }
 
     @Override

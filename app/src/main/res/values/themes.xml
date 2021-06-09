@@ -20,6 +20,7 @@
     <style name="Theme.AppTrabajo.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:textColorPrimary">@color/black</item>
     </style>
 
     <style name="Theme.AppTrabajo.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >

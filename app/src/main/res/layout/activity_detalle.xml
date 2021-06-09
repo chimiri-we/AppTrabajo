@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
         android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/Theme.AppTrabajo.AppBarOverlay">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
@@ -26,6 +26,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="8dp"
@@ -38,23 +42,24 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/textView9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Nombre: "
-                        android:textSize="17sp"
-                        android:textStyle="bold" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/parent"
+                        android:layout_marginTop="@dimen/signup_text_margin_top"
+                        android:hint="Nombre"
+                        app:hintAnimationEnabled="true">
 
-                    <TextView
-                        android:id="@+id/text11"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/activity_horizontal_margin"
+                        <TextView
+                            android:id="@+id/text11"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="NOMBRE"
+                            android:paddingLeft="@dimen/activity_horizontal_margin"
+                            android:paddingRight="@dimen/activity_horizontal_margin"
 
-                        android:paddingRight="@dimen/activity_horizontal_margin"
+                            android:textSize="20sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                        android:textSize="20sp" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -62,22 +67,22 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/textView10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Telefono: "
-                        android:textSize="17sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/text22"
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/parent"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/activity_horizontal_margin"
-                        android:paddingRight="@dimen/activity_horizontal_margin"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/signup_text_margin_top">
 
-                        android:textSize="20sp" />
+                        <TextView
+                            android:id="@+id/text22"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/activity_horizontal_margin"
+                            android:paddingRight="@dimen/activity_horizontal_margin"
+
+                            android:textSize="20sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -85,23 +90,22 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tvDireccion"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Direccion: "
-                        android:textSize="17sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/text3"
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/parent"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/activity_horizontal_margin"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/signup_text_margin_top">
 
-                        android:paddingRight="@dimen/activity_horizontal_margin"
+                        <TextView
+                            android:id="@+id/text3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/activity_horizontal_margin"
 
-                        android:textSize="20sp" />
+                            android:paddingRight="@dimen/activity_horizontal_margin"
+
+                            android:textSize="20sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
 
@@ -121,28 +125,29 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/textView7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="TOTAL:"
-                        android:textSize="20sp" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/signup_text_margin_top"
+                        android:layout_weight="1">
 
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:hint="Total"
-                        android:text=""
-                        android:textSize="20sp" />
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Total"
+                            android:text=""
+                            android:textSize="20sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
                 </LinearLayout>
             </LinearLayout>
 
