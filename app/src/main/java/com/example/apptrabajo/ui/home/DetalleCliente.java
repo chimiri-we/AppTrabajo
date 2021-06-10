@@ -1,11 +1,16 @@
 package com.example.apptrabajo.ui.home;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteAccessPermException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,6 +30,7 @@ import com.example.apptrabajo.datos.BaseDatosApp;
 import com.example.apptrabajo.entidades.Clientes;
 import com.example.apptrabajo.entidades.DetalleVenta;
 import com.example.apptrabajo.entidades.Productos;
+import com.example.apptrabajo.entidades.Venta;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -32,10 +38,16 @@ import java.util.Objects;
 
 public class DetalleCliente extends AppCompatActivity {
 
+
+    private static final String COLUMN_ID_VENTA = "id_venta";
+    private static final String COLUMN_ID_PRODUCTO = "id_producto";
+    private static final String TABLE_VENTA = "Venta";
     ArrayList<Productos> arrayList = new ArrayList<Productos>();
     ArrayList<String> strinsProducto;
     private Context context;
+    Productos productos;
     Clientes clientes;
+    Venta venta;
     int id = 0;
     BaseDatosApp bdLocal;
     TextView t1,t2,t3,t4,t5,t6;
@@ -49,7 +61,7 @@ public class DetalleCliente extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+       // setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         t1 = (TextView) findViewById(R.id.text11);
         t3 = (TextView) findViewById(R.id.text3);
@@ -96,7 +108,29 @@ public class DetalleCliente extends AppCompatActivity {
             t1.setText(clientes.getNombre());
         //    t2.setText(clientes.getTelefono());
             t3.setText(clientes.getDireccion());
-          //  t4.setText(clientes.getDiaVisita());
+          //
+            generarVenta();
+        }
+    }
+
+    private void generarVenta() {
+        Venta venta = new Venta();
+        ContentValues values = new ContentValues();
+        int idCliente = clientes.getId();
+        String nombreCliente = clientes.getNombre();
+        String dtVenta = t1.getText().toString();
+        {
+        //values.put(COLUMN_ID_CLI, cliente.getId());
+        values.put("id_cliente", idCliente);
+        values.put("nombre_cliente", nombreCliente);
+//        values.put("fecha", venta.getFecha());
+
+        values.put("id_detalle", dtVenta);
+        bdLocal = new BaseDatosApp(this.getApplicationContext());
+        SQLiteDatabase db = bdLocal.getReadableDatabase();
+            Toast.makeText(this, "Datos guardados"+ SQLiteAccessPermException.class, Toast.LENGTH_SHORT).show();
+
+            db.insert(TABLE_VENTA, null, values);
         }
     }
 
@@ -106,6 +140,8 @@ public class DetalleCliente extends AppCompatActivity {
         final TextView nameField = subView.findViewById(R.id.tvNombrePro);
         final TextView noField = subView.findViewById(R.id.tvPrecio);
         final EditText edCantidad = subView.findViewById(R.id.tvCantidad);
+ //       final TextView tvTotal = subView.findViewById(R.id.total);
+
 
         spinnerPro = subView.findViewById(R.id.spinnerPro);
         bdLocal = new BaseDatosApp(this.getApplicationContext());
@@ -140,15 +176,25 @@ public class DetalleCliente extends AppCompatActivity {
         builder.setView(subView);
         builder.create();
         builder.setPositiveButton("Agregar Nota", (dialog, which) -> {
+
             final String nombrePro = nameField.getText().toString();
             final String precio = noField.getText().toString();
             final String cantidad = edCantidad.getText().toString();
+            int dato1 = Integer.parseInt(noField.getText().toString());
+            int dato2 = Integer.parseInt(edCantidad.getText().toString());
+            int suma = dato1 * dato2;
+            String resultado = String.valueOf(suma);
+//            tv.setText(resultado);
+
+            Toast.makeText(this, "El total es" + suma, Toast.LENGTH_LONG).show();
+           // final String COLUMN_ID_VENTA = "id_venta";
+           // final String COLUMN_ID_PRODUCTO = "id_producto";
 
             if (TextUtils.isEmpty(nombrePro)) {
                 Toast.makeText(this, "Algo salió mal. Verifique sus valores de entrada", Toast.LENGTH_LONG).show();
             }
             else {
-                DetalleVenta newVenta = new DetalleVenta(nombrePro, precio, cantidad);
+                DetalleVenta newVenta = new DetalleVenta(nombrePro, precio, cantidad, resultado);
                 bdLocal.agregaProductos(newVenta);
 
 
@@ -191,6 +237,42 @@ public class DetalleCliente extends AppCompatActivity {
             }
         }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_detalle, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_edit:
+                showEditScreen();
+                break;
+            case R.id.action_delete:
+              //  new Deletelistapedido().execute();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showEditScreen() {
+
+        int vt = 0;
+        SQLiteDatabase db = bdLocal.getWritableDatabase();
+        DetalleVenta dtVenta=null;
+        Cursor cursor=db.rawQuery( "select SUM(total) from DetalleVenta", null);
+        if (cursor.moveToNext()) {
+            vt = cursor.getInt(0);
+        }
+        db.close();
+
+
+        Toast.makeText(this, "Total es "+cursor.getInt(0), Toast.LENGTH_LONG).show();
+        System.out.println();
+        Log.d("Respuesta: ", cursor.toString());
+
+    }
 
 
     @Override

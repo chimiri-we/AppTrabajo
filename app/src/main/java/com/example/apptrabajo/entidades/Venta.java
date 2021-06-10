@@ -2,17 +2,21 @@ package com.example.apptrabajo.entidades;
 
 public class Venta {
     private int id;
-    private String id_cliente;
+    private int id_cliente;
     private String nombre_cliente;
     private String fecha;
     private String detalle_venta;
 
-    public Venta(int id, String id_cliente, String nombre_cliente, String fecha, String detalle_venta) {
+    public Venta(int id, int id_cliente, String nombre_cliente, String fecha, String detalle_venta) {
         this.id = id;
         this.id_cliente = id_cliente;
         this.nombre_cliente = nombre_cliente;
         this.fecha = fecha;
         this.detalle_venta = detalle_venta;
+    }
+
+    public Venta() {
+
     }
 
     public int getId() {
@@ -23,11 +27,11 @@ public class Venta {
         this.id = id;
     }
 
-    public String getId_cliente() {
+    public int getId_cliente(int id) {
         return id_cliente;
     }
 
-    public void setId_cliente(String id_cliente) {
+    public void setId_cliente(int id_cliente) {
         this.id_cliente = id_cliente;
     }
 

@@ -41,6 +41,10 @@ public class SlideshowFragment extends Fragment  implements Response.Listener<JS
 
     private static final String TABLE_PRODUCTO = "Producto";
     private static final String COLUMN_ID = "id";
+
+    private static final String nombre_producto = "nombre_producto";
+
+    private static final String precioProducto = "precioProducto";
     private static final String COLUMN_NOMBRE = "nombre";
     private static final String COLUMN_PRECIO = "precioProducto";
 
@@ -195,8 +199,8 @@ public class SlideshowFragment extends Fragment  implements Response.Listener<JS
                 arrayList.add(producto);
                 ContentValues values = new ContentValues();
               //  values.put(COLUMN_ID, producto.getId());
-                values.put(COLUMN_NOMBRE, producto.getNombre());
-                values.put(COLUMN_PRECIO, producto.getPrecio());
+                values.put(nombre_producto, producto.getNombre());
+                values.put(precioProducto, producto.getPrecio());
                 bdLocal = new BaseDatosApp(requireContext().getApplicationContext());
                 SQLiteDatabase db = bdLocal.getReadableDatabase();
                 if(db!= null) {

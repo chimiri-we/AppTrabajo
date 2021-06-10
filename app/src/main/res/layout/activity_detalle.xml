@@ -63,7 +63,6 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/parent"
-                        android:layout_marginTop="@dimen/signup_text_margin_top"
                         android:hint="Nombre"
                         app:hintAnimationEnabled="true">
 
@@ -87,10 +86,7 @@
                     android:orientation="horizontal">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        style="@style/parent"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="@dimen/signup_text_margin_top">
+                        style="@style/parent">
 
                         <TextView
                             android:id="@+id/text22"
@@ -110,10 +106,7 @@
                     android:orientation="horizontal">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        style="@style/parent"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="@dimen/signup_text_margin_top">
+                        style="@style/parent">
 
                         <TextView
                             android:id="@+id/text3"

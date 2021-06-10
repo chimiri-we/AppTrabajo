@@ -167,11 +167,15 @@ public class HomeFragment extends Fragment implements Response.Listener<JSONObje
                 cliente.setDiaVisita(jsonObject.getString("dia_visita"));
 
                 ContentValues values = new ContentValues();
+                values.put("nombre", cliente.getNombre());
+                values.put("telefono", cliente.getTelefono());
+                values.put("direccion", cliente.getDireccion());
+                values.put("dia_visita", cliente.getDiaVisita());
                 //values.put(COLUMN_ID_CLI, cliente.getId());
-                values.put(COLUMN_NOMBRE, cliente.getNombre());
-                values.put(COLUMN_TELEFONO, cliente.getTelefono());
-                values.put(COLUMN_DIRECCION, cliente.getDireccion());
-                values.put(COLUMN_DIA_VISITA, cliente.getDiaVisita());
+               // values.put(COLUMN_NOMBRE, cliente.getNombre());
+              //  values.put(COLUMN_TELEFONO, cliente.getTelefono());
+              //  values.put(COLUMN_DIRECCION, cliente.getDireccion());
+              //  values.put(COLUMN_DIA_VISITA, cliente.getDiaVisita());
                 bdLocal = new BaseDatosApp(requireContext().getApplicationContext());
                 SQLiteDatabase db = bdLocal.getReadableDatabase();
                 if(db!= null) {
