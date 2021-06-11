@@ -1,10 +1,12 @@
 package com.example.apptrabajo.datos;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import com.example.apptrabajo.entidades.Clientes;
 import com.example.apptrabajo.entidades.DetalleVenta;
@@ -14,7 +16,7 @@ import java.util.ArrayList;
 
 public class BaseDatosApp extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
     private static final String DATABASE_NAME = "Trabajo";
     private static final String TABLE_CLIENTE = "Cliente";
     private static final String COLUMN_ID = "id";
@@ -217,9 +219,16 @@ public class BaseDatosApp extends SQLiteOpenHelper {
 
 
     }
+   public void deleteContact(int id_detalle) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        if (id_detalle>0){
+            db.delete("DetalleVenta", "id_producto" + " = ?", new String[]{String.valueOf(0)});
 
-
+        }
 
     }
+
+
+}
 
 

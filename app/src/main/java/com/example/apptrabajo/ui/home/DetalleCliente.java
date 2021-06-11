@@ -1,5 +1,6 @@
 package com.example.apptrabajo.ui.home;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -35,9 +36,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.concurrent.LinkedTransferQueue;
 
 public class DetalleCliente extends AppCompatActivity {
 
+    private static final String TABLE_DETALLE_VENTA = "DetalleVenta";
 
     private static final String COLUMN_ID_VENTA = "id_venta";
     private static final String COLUMN_ID_PRODUCTO = "id_producto";
@@ -46,6 +49,7 @@ public class DetalleCliente extends AppCompatActivity {
     ArrayList<String> strinsProducto;
     private Context context;
     Productos productos;
+    DetalleVenta dtv;
     Clientes clientes;
     Venta venta;
     int id = 0;
@@ -172,10 +176,10 @@ public class DetalleCliente extends AppCompatActivity {
         });
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Agragar nueva Nota");
+        builder.setTitle("Agragar un Producto");
         builder.setView(subView);
         builder.create();
-        builder.setPositiveButton("Agregar Nota", (dialog, which) -> {
+        builder.setPositiveButton("Agregar", (dialog, which) -> {
 
             final String nombrePro = nameField.getText().toString();
             final String precio = noField.getText().toString();
@@ -250,11 +254,17 @@ public class DetalleCliente extends AppCompatActivity {
                 showEditScreen();
                 break;
             case R.id.action_delete:
-              //  new Deletelistapedido().execute();
-                break;
+
+                bdLocal.deleteContact(id);
+                Toast.makeText(this, "Se ha eliminado, actualiza la vista", Toast.LENGTH_LONG).show();
+
+
+        break;
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
     private void showEditScreen() {
 

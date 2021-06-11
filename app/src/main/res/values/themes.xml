@@ -53,6 +53,13 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+    <style name="parent2">
+        <item name="colorPrimary">#353533</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 
     <style name="loginParent" parent="parent">
         <item name="android:layout_height">match_parent</item>
@@ -60,7 +67,7 @@
         <item name="android:focusableInTouchMode">true</item>
     </style>
 
-    <style name="headerText" parent="parent">
+    <style name="headerText" parent="parent2">
         <item name="android:textSize">@dimen/headerTextSize</item>
         <item name="android:textAlignment" tools:targetApi="jelly_bean_mr1">center</item>
         <item name="android:textColor">@color/whiteTextColor</item>
@@ -78,7 +85,7 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
-    <style name="modifiedEditText" parent="parent">
+    <style name="modifiedEditText" parent="parent2">
         <item name="android:textSize">@dimen/newsMoreTextSize</item>
         <item name="android:backgroundTint" tools:targetApi="lollipop">@color/purple_700</item>
     </style>

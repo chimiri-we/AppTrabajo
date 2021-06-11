@@ -1,7 +1,7 @@
 package com.example.apptrabajo.entidades;
 
 public class DetalleVenta {
-    private int id;
+    private int id_detalle;
     private int id_producto;
     private int id_venta;
     private String nombre_producto;
@@ -9,8 +9,8 @@ public class DetalleVenta {
     private String precio;
     private String total;
 
-    public DetalleVenta(int id, int id_producto, int id_venta, String nombre_producto, String cantidad, String precio, String total) {
-        this.id = id;
+    public DetalleVenta(int id_detalle, int id_producto, int id_venta, String nombre_producto, String cantidad, String precio, String total) {
+        this.id_detalle = id_detalle;
         this.id_producto = id_producto;
         this.id_venta = id_venta;
         this.nombre_producto = nombre_producto;
@@ -31,7 +31,7 @@ public class DetalleVenta {
     }
 
     public DetalleVenta(int id, String nombre_producto, String precio, String cantidad, String total) {
-        this.id = id;
+        this.id_detalle = id;
         this.nombre_producto = nombre_producto;
         this.cantidad = cantidad;
         this.precio = precio;
@@ -64,11 +64,11 @@ public class DetalleVenta {
 
 
     public int getId() {
-        return id;
+        return id_detalle;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id_detalle = id;
     }
 
     public int getId_producto() {
@@ -117,5 +117,13 @@ public class DetalleVenta {
 
     public void setTotal(String total) {
         this.total = total;
+    }
+
+    public int getId_detalle() {
+        return id_detalle;
+    }
+
+    public void setId_detalle(int id_detalle) {
+        this.id_detalle = id_detalle;
     }
 }

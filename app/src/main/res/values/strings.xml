@@ -13,7 +13,16 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="nombre_cliente">Nombre Cliente</string>
-    <string name="registro">Registro</string>
+    <string name="registro">Registro Cliente</string>
     <string name="Numero_de_Telefono">Numero de Telefono</string>
     <string name="Direccion">Direccion</string>
+
+    <string-array name="dias">
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miercoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+    </string-array>
+
 </resources>

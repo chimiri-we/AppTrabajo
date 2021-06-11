@@ -1,5 +1,6 @@
 package com.example.apptrabajo;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -30,6 +31,7 @@ public class DetalleClienteFragment extends Fragment {
         Spinner spinnerPro;
     ArrayList<Productos> listaProducto;
     ArrayList<String> datosProducto;
+    int id = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,7 +53,7 @@ public class DetalleClienteFragment extends Fragment {
         }
         else {
             detalleVentaView.setVisibility(View.GONE);
-            Toast.makeText(getContext(), "No hay ningún contacto en la base de datos. Empiece a agregar ahora", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "No hay ningún articulo guardado para este cliente", Toast.LENGTH_LONG).show();
         }
     /*    Button btnAdd = view.findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -229,5 +231,10 @@ public class DetalleClienteFragment extends Fragment {
         builder.setNegativeButton("CANCELAR", (dialog, which) -> Toast.makeText(getContext(), "Tarea Cancelada", Toast.LENGTH_LONG).show());
         builder.show();
         onStart();
+    }
+
+    public void deletProducto() {
+        bdLocal.deleteContact(listaProducto.size());
+
     }
 }
