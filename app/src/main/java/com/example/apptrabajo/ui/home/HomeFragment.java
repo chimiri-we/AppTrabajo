@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -53,7 +54,9 @@ public class HomeFragment extends Fragment implements Response.Listener<JSONObje
     private static final String COLUMN_DIRECCION = "direccion";
     private static final String COLUMN_TELEFONO = "telefono";
     private static final String COLUMN_DIA_VISITA = "dia_visita";
+    int id= 0;
 
+    Button btn;
     Coneccion conn;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -62,6 +65,7 @@ public class HomeFragment extends Fragment implements Response.Listener<JSONObje
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         listViewOriginal = binding.produclis;
+        btn = binding.button2;
 
 
 
@@ -128,11 +132,21 @@ public class HomeFragment extends Fragment implements Response.Listener<JSONObje
     }
 });
 
+        btn.setOnClickListener(v -> actualizarDatos());
 
         return root;
     }
 
-    private void cargarWebService() {
+    public void actualizarDatos() {
+
+        bdLocal = new BaseDatosApp(requireContext().getApplicationContext());
+        SQLiteDatabase db = bdLocal.getReadableDatabase();
+        db.execSQL("delete from " + TABLE_CLIENTE);
+        Toast.makeText(getContext(), "Se ha eliminado, actualiza la vista", Toast.LENGTH_LONG).show();
+        onStart();
+    }
+
+    public void cargarWebService() {
         String url="https://servicioparanegocio.es/superClean/consultarUsuario.php?";
         //String url="https://servicioparanegocio.es/superClean/consultarUsuario.php?dia_visita=jueves";
         jsonObjectRequest=new JsonObjectRequest(Request.Method.GET,url,null, this, this);

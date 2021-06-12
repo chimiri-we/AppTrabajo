@@ -74,6 +74,8 @@ public class ClientesAdapter extends ArrayAdapter<Clientes> {
 
 
     }
+
+    //public void deletCliente(id_)
 /*
     @SuppressLint("SetTextI18n")
     @Override

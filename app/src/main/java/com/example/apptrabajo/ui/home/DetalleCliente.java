@@ -120,12 +120,12 @@ public class DetalleCliente extends AppCompatActivity {
     private void generarVenta() {
         Venta venta = new Venta();
         ContentValues values = new ContentValues();
-        int idCliente = clientes.getId();
+  //      int idCliente = clientes.getId();
         String nombreCliente = clientes.getNombre();
         String dtVenta = t1.getText().toString();
         {
         //values.put(COLUMN_ID_CLI, cliente.getId());
-        values.put("id_cliente", idCliente);
+  //      values.put("id_cliente", idCliente);
         values.put("nombre_cliente", nombreCliente);
 //        values.put("fecha", venta.getFecha());
 

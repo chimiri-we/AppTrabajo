@@ -1,10 +1,19 @@
 package com.example.apptrabajo;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteAccessPermException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.BaseAdapter;
+import android.widget.Toast;
 
+import com.example.apptrabajo.datos.BaseDatosApp;
+import com.example.apptrabajo.entidades.Clientes;
+import com.example.apptrabajo.ui.home.HomeFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -20,6 +29,14 @@ import com.example.apptrabajo.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    private static final int DATABASE_VERSION = 16;
+    BaseDatosApp bdLocal;
+
+    private static final String DATABASE_NAME = "Trabajo";
+
+    private static final String TABLE_CLIENTE = "Cliente";
+    int oldVersion;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,4 +80,17 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_edit:
+                HomeFragment homeFragment = new HomeFragment();
+                homeFragment.actualizarDatos();
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }
+
