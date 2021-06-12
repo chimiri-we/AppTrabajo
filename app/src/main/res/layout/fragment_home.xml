@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,20 +11,44 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="70dp">
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:drawable/divider_horizontal_textfield"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:background="#B0F4F125"
+                android:baselineAlignBottom="true"
+                android:foregroundGravity="center_vertical"
+                android:src="@drawable/ic_refresh" />
+
+            <Spinner
+                android:id="@+id/spinner2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:entries="@array/dias"
+                android:gravity="center_horizontal|center_vertical" />
+        </LinearLayout>
+
+
     </androidx.cardview.widget.CardView>
 
     <ListView
         android:id="@+id/produclis"
-        android:layout_below="@id/button"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@id/button" />
 
 
 </RelativeLayout>

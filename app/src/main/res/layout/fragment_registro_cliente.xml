@@ -25,26 +25,31 @@
             style="@style/parent2"
             android:layout_marginTop="@dimen/signup_text_margin_top">
             <EditText
+
+                android:id="@+id/edt_nombre"
                 style="@style/modifiedEditText"
                 android:inputType="text"
                 android:maxLines="1"
-                android:hint="Name"/>
+                android:hint="@string/nombre_cliente"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/parent2"
             android:layout_marginTop="@dimen/signup_text_margin_top">
             <EditText
+                android:id="@+id/edt_telefono"
                 style="@style/modifiedEditText"
                 android:inputType="text"
                 android:maxLines="1"
-                android:hint="Mobile Number"/>
+                android:hint="@string/Numero_de_Telefono"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/parent2"
             android:layout_marginTop="@dimen/signup_text_margin_top">
             <EditText
+
+                android:id="@+id/edt_direccion"
                 style="@style/modifiedEditText"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
@@ -53,6 +58,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/parent2"
+            android:textColorHint="@color/black"
             android:hint="Selecciona dia de Visita"
             android:layout_marginTop="@dimen/signup_text_margin_top">
 
@@ -62,6 +68,17 @@
                 android:layout_height="wrap_content"
                 android:entries="@array/dias"/>
         </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+
+            android:id="@+id/btn_registro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_margin="15dp"
+            android:layout_marginTop="20dp"
+            android:text="Registrar Cliene"
+            app:backgroundTint="#4593E1" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

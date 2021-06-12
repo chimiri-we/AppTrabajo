@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.apptrabajo.R;
 import com.example.apptrabajo.api.Coneccion;
 import com.example.apptrabajo.databinding.FragmentHomeBinding;
 import com.example.apptrabajo.datos.BaseDatosApp;
@@ -55,8 +57,7 @@ public class HomeFragment extends Fragment implements Response.Listener<JSONObje
     private static final String COLUMN_TELEFONO = "telefono";
     private static final String COLUMN_DIA_VISITA = "dia_visita";
     int id= 0;
-
-    Button btn;
+ImageView btn;
     Coneccion conn;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -81,12 +82,14 @@ public class HomeFragment extends Fragment implements Response.Listener<JSONObje
        }
         else {
             adapterCliente.setDropDownViewResource(View.GONE);
-            Toast.makeText(getContext(),"no hay datos", Toast.LENGTH_SHORT).show();
+         //   Toast.makeText(getContext(),"no hay datos", Toast.LENGTH_SHORT).show();
 
-
+            View subView = inflater.inflate(R.layout.dialogo_actualizar_datos, null);
             AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
 
-            builder.setTitle("Editar Nota");
+            builder.setTitle("Actualiza tu base de Datos");
+            builder.setMessage("No tienes tu lista actualizada, porfavor actualiza");
+            builder.setView(subView);
             builder.create();
             builder.setPositiveButton("Actualizar", (dialog, which) -> {
                cargarWebService();
@@ -193,7 +196,7 @@ public class HomeFragment extends Fragment implements Response.Listener<JSONObje
                 bdLocal = new BaseDatosApp(requireContext().getApplicationContext());
                 SQLiteDatabase db = bdLocal.getReadableDatabase();
                 if(db!= null) {
-                    Toast.makeText(getContext(), "Datos guardados"+ SQLiteAccessPermException.class, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Datos guardados", Toast.LENGTH_SHORT).show();
 
                 } else {
                     Toast.makeText(getContext(), "Tienes un problema" +

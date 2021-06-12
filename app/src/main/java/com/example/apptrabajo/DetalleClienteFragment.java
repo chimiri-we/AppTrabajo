@@ -22,8 +22,10 @@ import com.example.apptrabajo.adaptadores.DetalleVentaAdapter;
 import com.example.apptrabajo.datos.BaseDatosApp;
 import com.example.apptrabajo.entidades.DetalleVenta;
 import com.example.apptrabajo.entidades.Productos;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class DetalleClienteFragment extends Fragment {
 
@@ -33,6 +35,8 @@ public class DetalleClienteFragment extends Fragment {
     ArrayList<String> datosProducto;
     int id = 0;
 
+    private CollapsingToolbarLayout mCollapsingView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,6 +44,9 @@ public class DetalleClienteFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_detalle_cliente, container, false);
 
 
+        mCollapsingView = (CollapsingToolbarLayout) requireActivity().findViewById(R.id.toolbar_layout);
+
+       // mCollapsingView.setTitle(cliente.getName());
         RecyclerView detalleVentaView = view.findViewById(R.id.lista_venta);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         detalleVentaView.setLayoutManager(linearLayoutManager);

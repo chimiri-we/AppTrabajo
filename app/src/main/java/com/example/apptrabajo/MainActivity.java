@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
 
+import com.example.apptrabajo.databinding.FragmentHomeBinding;
 import com.example.apptrabajo.datos.BaseDatosApp;
 import com.example.apptrabajo.entidades.Clientes;
 import com.example.apptrabajo.ui.home.HomeFragment;
@@ -29,14 +30,8 @@ import com.example.apptrabajo.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    private static final int DATABASE_VERSION = 16;
+   HomeFragment homeBinding;
     BaseDatosApp bdLocal;
-
-    private static final String DATABASE_NAME = "Trabajo";
-
-    private static final String TABLE_CLIENTE = "Cliente";
-    int oldVersion;
-    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,11 +78,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_edit:
-                HomeFragment homeFragment = new HomeFragment();
-                homeFragment.actualizarDatos();
-
+        if (item.getItemId() == R.id.action_edit) {
+            homeBinding.actualizarDatos();
         }
         return super.onOptionsItemSelected(item);
     }
