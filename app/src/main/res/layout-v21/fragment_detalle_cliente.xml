@@ -57,8 +57,28 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lista_venta"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
 
         android:paddingBottom="8dp" />
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="?android:attr/listDivider" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="TOTAL"
+        android:textColorHint="@color/black">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="TOTA" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
 </LinearLayout>

@@ -1,6 +1,5 @@
 package com.example.apptrabajo.ui.home;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -32,18 +31,16 @@ import com.example.apptrabajo.entidades.Clientes;
 import com.example.apptrabajo.entidades.DetalleVenta;
 import com.example.apptrabajo.entidades.Productos;
 import com.example.apptrabajo.entidades.Venta;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.concurrent.LinkedTransferQueue;
 
 public class DetalleCliente extends AppCompatActivity {
 
-    private static final String TABLE_DETALLE_VENTA = "DetalleVenta";
 
-    private static final String COLUMN_ID_VENTA = "id_venta";
-    private static final String COLUMN_ID_PRODUCTO = "id_producto";
+    private static final String COLUMN_TOTAL = "total";
     private static final String TABLE_VENTA = "Venta";
     ArrayList<Productos> arrayList = new ArrayList<Productos>();
     ArrayList<String> strinsProducto;
@@ -67,9 +64,13 @@ public class DetalleCliente extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
        // setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        t1 = (TextView) findViewById(R.id.text11);
-        t3 = (TextView) findViewById(R.id.text3);
-        t2 = (TextView) findViewById(R.id.text22);
+        CollapsingToolbarLayout collapser =
+                (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+
+
+        final TextView tvTotal = findViewById(R.id.tvTotal);
+        t3 = (TextView) findViewById(R.id.tv_direccion);
+        t2 = (TextView) findViewById(R.id.tv_numeroTel);
         t4 = (TextView) findViewById(R.id.textView12);
         btnAgregar = findViewById(R.id.fab_Agregar_producto);
         btnAgregar.setOnClickListener(new View.OnClickListener() {
@@ -109,9 +110,10 @@ public class DetalleCliente extends AppCompatActivity {
         clientes = bdLocal.verCliente(id);
 
       */
-            t1.setText(clientes.getNombre());
+          //  t1.setText(clientes.getNombre());
         //    t2.setText(clientes.getTelefono());
             t3.setText(clientes.getDireccion());
+            collapser.setTitle(clientes.getNombre());
           //
             generarVenta();
         }
@@ -122,14 +124,14 @@ public class DetalleCliente extends AppCompatActivity {
         ContentValues values = new ContentValues();
   //      int idCliente = clientes.getId();
         String nombreCliente = clientes.getNombre();
-        String dtVenta = t1.getText().toString();
+//        String dtVenta = t1.getText().toString();
         {
         //values.put(COLUMN_ID_CLI, cliente.getId());
   //      values.put("id_cliente", idCliente);
         values.put("nombre_cliente", nombreCliente);
 //        values.put("fecha", venta.getFecha());
 
-        values.put("id_detalle", dtVenta);
+     //   values.put("id_detalle", dtVenta);
         bdLocal = new BaseDatosApp(this.getApplicationContext());
         SQLiteDatabase db = bdLocal.getReadableDatabase();
             Toast.makeText(this, "Datos guardados"+ SQLiteAccessPermException.class, Toast.LENGTH_SHORT).show();
@@ -144,7 +146,7 @@ public class DetalleCliente extends AppCompatActivity {
         final TextView nameField = subView.findViewById(R.id.tvNombrePro);
         final TextView noField = subView.findViewById(R.id.tvPrecio);
         final EditText edCantidad = subView.findViewById(R.id.tvCantidad);
- //       final TextView tvTotal = subView.findViewById(R.id.total);
+       final TextView tvTotal = subView.findViewById(R.id.tvTotal);
 
 
         spinnerPro = subView.findViewById(R.id.spinnerPro);
@@ -191,6 +193,7 @@ public class DetalleCliente extends AppCompatActivity {
 //            tv.setText(resultado);
 
             Toast.makeText(this, "El total es" + suma, Toast.LENGTH_LONG).show();
+          //  tvTotal.setText(suma);
            // final String COLUMN_ID_VENTA = "id_venta";
            // final String COLUMN_ID_PRODUCTO = "id_producto";
 
@@ -269,11 +272,21 @@ public class DetalleCliente extends AppCompatActivity {
     private void showEditScreen() {
 
         int vt = 0;
+        final TextView tvTotal = findViewById(R.id.tvTotal);
+        bdLocal = new BaseDatosApp(this.getApplicationContext());
         SQLiteDatabase db = bdLocal.getWritableDatabase();
         DetalleVenta dtVenta=null;
         Cursor cursor=db.rawQuery( "select SUM(total) from DetalleVenta", null);
         if (cursor.moveToNext()) {
+            DetalleVenta detalleVenta = new DetalleVenta();
             vt = cursor.getInt(0);
+            ContentValues values = new ContentValues();
+            values.put("total", cursor.getInt(0));
+
+            if(db!= null) {
+          tvTotal.setText(String.valueOf(vt).toString());
+
+        }
         }
         db.close();
 

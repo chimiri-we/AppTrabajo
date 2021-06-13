@@ -22,8 +22,15 @@
             android:layout_marginTop="@dimen/loginViewsMargin"/>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/parent2"
-            android:layout_marginTop="@dimen/signup_text_margin_top">
+
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/signup_text_margin_top"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="#1C1A1A"
+            app:endIconTint="#163194"
+            app:hintTextColor="#0288D1">
             <EditText
 
                 android:id="@+id/edt_nombre"
@@ -34,8 +41,15 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/parent2"
-            android:layout_marginTop="@dimen/signup_text_margin_top">
+
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/signup_text_margin_top"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="#1C1A1A"
+            app:endIconTint="#163194"
+            app:hintTextColor="#0288D1">
             <EditText
                 android:id="@+id/edt_telefono"
                 style="@style/modifiedEditText"
@@ -45,8 +59,14 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/parent2"
-            android:layout_marginTop="@dimen/signup_text_margin_top">
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/signup_text_margin_top"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="#1C1A1A"
+            app:endIconTint="#163194"
+            app:hintTextColor="#0288D1">
             <EditText
 
                 android:id="@+id/edt_direccion"
@@ -57,12 +77,21 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/parent2"
-            android:textColorHint="@color/black"
-            android:hint="Selecciona dia de Visita"
-            android:layout_marginTop="@dimen/signup_text_margin_top">
 
-            <Spinner
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/signup_text_margin_top"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="#1C1A1A"
+            app:endIconTint="#163194"
+            android:hint="Selecciona dia de Visita"
+            app:expandedHintEnabled="true"
+            app:hintTextColor="#0288D1">
+
+
+            <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -16,6 +16,9 @@
     <string name="registro">Registro Cliente</string>
     <string name="Numero_de_Telefono">Numero de Telefono</string>
     <string name="Direccion">Direccion</string>
+    <string name="especialidad">Avilidad</string>
+    <string name="request_button">Solicitar</string>
+    <string name="message_no_schedules">No hay Peedidos</string>
 
     <string-array name="dias">
         <item>Lunes</item>

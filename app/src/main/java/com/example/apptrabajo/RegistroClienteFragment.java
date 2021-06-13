@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -73,7 +74,7 @@ public class RegistroClienteFragment extends Fragment {
                 response -> {
                     Toast.makeText(getContext(), "Registro exitoso", Toast.LENGTH_SHORT).show();
                     progressDialog.hide();
-                    edtPasswordCliente.setText("");
+//                    edtPasswordCliente.setText("");
                     edtNumeroCliente.setText("");
                     edtNombreCliente.setText("");
                     edtDireccion.setText("");

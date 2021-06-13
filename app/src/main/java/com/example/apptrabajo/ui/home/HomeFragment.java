@@ -27,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.apptrabajo.MainActivity;
 import com.example.apptrabajo.R;
 import com.example.apptrabajo.api.Coneccion;
 import com.example.apptrabajo.databinding.FragmentHomeBinding;
@@ -93,13 +94,15 @@ ImageView btn;
             builder.create();
             builder.setPositiveButton("Actualizar", (dialog, which) -> {
                cargarWebService();
+
                // finish();
               //  startActivity(getContext());
 
             });
             request= Volley.newRequestQueue(requireContext());
             builder.show();
-            onStart();
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            startActivity(intent);
 
         }
 
