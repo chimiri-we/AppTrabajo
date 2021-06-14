@@ -70,7 +70,7 @@ public class DetalleClienteFragment extends Fragment {
         }
         else {
             detalleVentaView.setVisibility(View.GONE);
-            Toast.makeText(getContext(), "No hay ningún articulo guardado para este cliente", Toast.LENGTH_LONG).show();
+          //  Toast.makeText(getContext(), "No hay ningún articulo guardado para este cliente", Toast.LENGTH_LONG).show();
         }
     /*    Button btnAdd = view.findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new View.OnClickListener() {

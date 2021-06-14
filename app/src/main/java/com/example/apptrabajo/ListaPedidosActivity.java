@@ -58,10 +58,7 @@ public class ListaPedidosActivity  extends AppCompatActivity {
         //setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        nombreCliente = findViewById(R.id.name_cliente);
-        fechaVenta = findViewById(R.id.fecha_text);
-       totalVenta = findViewById(R.id.tv_total_venta);
-       detalle = findViewById(R.id.tv_detalle_venta);
+
        recyclerViewVenta = findViewById(R.id.list_ventas);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerViewVenta.setLayoutManager(linearLayoutManager);

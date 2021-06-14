@@ -13,7 +13,8 @@ import com.example.apptrabajo.entidades.Clientes;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientesAdapter extends ArrayAdapter<Clientes> {
+public class
+ClientesAdapter extends ArrayAdapter<Clientes> {
 
     ArrayList<Clientes> listaClientes;
     ArrayList<Clientes> nuevaListaCliente;

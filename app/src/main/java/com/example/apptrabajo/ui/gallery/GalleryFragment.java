@@ -8,13 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.apptrabajo.R;
 import com.example.apptrabajo.databinding.FragmentGalleryBinding;
@@ -66,7 +62,7 @@ public class GalleryFragment extends Fragment {
         Cursor cursor = db.rawQuery("select * from Cliente", null);
         while (cursor.moveToNext()){
             producto=new Clientes();
-            producto.setId(cursor.getInt(0));
+            producto.setId_cliente(cursor.getInt(0));
             producto.setNombre(cursor.getString(1));
             producto.setTelefono(cursor.getString(2));
             listaProducto.add(producto);

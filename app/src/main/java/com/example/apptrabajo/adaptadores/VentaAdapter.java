@@ -60,7 +60,7 @@ public class VentaAdapter extends RecyclerView.Adapter<VentaModel>
 
         holder.detalle.setText(newventa.getDetalle_venta());
         holder.fechaVenta.setText(newventa.getFecha());
-        //holder.totalV.setText(newventa.getTota_venta());
+        holder.tVenta.setText(String.valueOf(newventa.getTota_venta()));
 
 
     }

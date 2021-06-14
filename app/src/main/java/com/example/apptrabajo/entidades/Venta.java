@@ -37,14 +37,6 @@ public class Venta {
     }
 
 
-    public int getId_cliente(int id) {
-        return id_cliente;
-    }
-
-    public void setId_cliente(int id_cliente) {
-        this.id_cliente = id_cliente;
-    }
-
     public String getNombre_cliente() {
         return nombre_cliente;
     }

@@ -3,7 +3,6 @@ package com.example.apptrabajo.ui.home;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteAccessPermException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -27,7 +24,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.apptrabajo.MainActivity;
 import com.example.apptrabajo.R;
 import com.example.apptrabajo.adaptadores.ClientesAdapter;
 import com.example.apptrabajo.api.Coneccion;
@@ -54,11 +50,6 @@ public class HomeFragment extends Fragment implements Response.Listener<JSONObje
     RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
     private static final String TABLE_CLIENTE = "Cliente";
-    private static final String COLUMN_NOMBRE = "nombre";
-    private static final String COLUMN_DIRECCION = "direccion";
-    private static final String COLUMN_TELEFONO = "telefono";
-    private static final String COLUMN_DIA_VISITA = "dia_visita";
-    int id= 0;
 ImageView btn;
     Coneccion conn;
     ClientesAdapter clientesAdapter;
@@ -115,13 +106,16 @@ ImageView btn;
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-       String cliente =""+nuevaListaCliente.get(position).getId();
+       String cliente =""+nuevaListaCliente.get(position).getId_cliente();
+       String codDetalle = "cod_"+(nuevaListaCliente.get(position).getId_cliente()+1);
 
-      //  Toast.makeText(getContext(), "cliente" + cliente, Toast.LENGTH_SHORT).show();
+    //    Toast.makeText(getContext(), "id del cliente es " + codDetalle, Toast.LENGTH_SHORT).show();
 
 
       Bundle bundle=new Bundle();
+
         bundle.putInt("id", Integer.parseInt(cliente));
+        bundle.putString("cod", codDetalle);
         Intent intent = new Intent(getContext(), DetalleCliente.class);
         intent.putExtras(bundle);
         startActivity(intent);
@@ -171,7 +165,7 @@ ImageView btn;
                 cliente=new Clientes();
                 JSONObject jsonObject=null;
                 jsonObject=json.getJSONObject(i);
-                cliente.setId(jsonObject.optInt("Id"));
+                cliente.setId_cliente(jsonObject.optInt("Id"));
                 cliente.setNombre(jsonObject.optString("nombre"));
                 cliente.setTelefono(jsonObject.optString("telefono"));
                 cliente.setDireccion(jsonObject.optString("direccion"));
@@ -217,11 +211,11 @@ ImageView btn;
         Cursor cursor = db.rawQuery("select * from Cliente", null);
         while (cursor.moveToNext()) {
             clientes=new Clientes();
-            clientes.setId(cursor.getInt(0));
-            clientes.setNombre(cursor.getString(2));
-            clientes.setTelefono(cursor.getString(3));
-            clientes.setDireccion(cursor.getString(4));
-            clientes.setDiaVisita(cursor.getString(5));
+            clientes.setId_cliente(cursor.getInt(0));
+            clientes.setNombre(cursor.getString(1));
+            clientes.setTelefono(cursor.getString(2));
+            clientes.setDireccion(cursor.getString(3));
+            clientes.setDiaVisita(cursor.getString(4));
             nuevaListaCliente.add(clientes);
         }
         clientesAdapter = new ClientesAdapter(getContext(), R.layout.usuarios_list, nuevaListaCliente);

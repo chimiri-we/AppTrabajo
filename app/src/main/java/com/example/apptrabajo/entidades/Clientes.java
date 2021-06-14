@@ -1,24 +1,20 @@
 package com.example.apptrabajo.entidades;
 
 public class Clientes {
-    private int id;
-    private int id_venta;
+    private int id_cliente;
     private String nombre;
     private String telefono;
     private String direccion;
     private String diaVisita;
-    public Clientes(int id, String nombre, String telefono, String direccion, String dia_visita){
-        this.id = id;
+    public Clientes(int id_cliente, String nombre, String telefono, String direccion, String dia_visita){
+        this.id_cliente = id_cliente;
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
         this.diaVisita = dia_visita;
     }
 
-    public Clientes(int id_venta) {
-        this.id_venta = id_venta;
 
-    }
     public Clientes() {
 
     }
@@ -43,12 +39,12 @@ public class Clientes {
 
 
 
-    public int getId() {
-        return id;
+    public int getId_cliente() {
+        return id_cliente;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_cliente(int id_cliente) {
+        this.id_cliente = id_cliente;
     }
 
     public String getNombre() {
@@ -67,11 +63,5 @@ public class Clientes {
         this.telefono = telefono;
     }
 
-    public int getId_venta() {
-        return id_venta;
-    }
 
-    public void setId_venta(int id_venta) {
-        this.id_venta = id_venta;
-    }
 }

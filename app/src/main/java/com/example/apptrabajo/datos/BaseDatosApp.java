@@ -1,12 +1,10 @@
 package com.example.apptrabajo.datos;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
 import com.example.apptrabajo.entidades.Clientes;
 import com.example.apptrabajo.entidades.DetalleVenta;
@@ -17,7 +15,7 @@ import java.util.ArrayList;
 
 public class BaseDatosApp extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 8;
     private static final String DATABASE_NAME = "DatosTrabajo";
     private static final String TABLE_CLIENTE = "Cliente";
     private static final String COLUMN_ID = "id";
@@ -55,12 +53,10 @@ public class BaseDatosApp extends SQLiteOpenHelper {
 
   String dbCliente="create table Cliente("+
                 "id_cliente INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "id_venta INTEGER,"+
                 "nombre TEXT NOT NULL,"+
                 "direccion TEXT,"+
                 "telefono TEXT,"+
-                "dia_visita TEXT,"+
-          "FOREIGN KEY(id_venta) REFERENCES Venta(id_venta))";
+                "dia_visita TEXT)";
         db.execSQL(dbCliente);
         
         String dbProducto="create table Producto("+
@@ -72,12 +68,11 @@ public class BaseDatosApp extends SQLiteOpenHelper {
         String dbVenta="create table Venta("+
                 "id_venta INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "id_cliente INTEGER NOT NULL,"+
-                "nombre_cliente  NOT NULL,"+
-                "id_detalle INTEGER,"+
+                "nombre_cliente TEXT NOT NULL,"+
+                "cod_detalle INTEGER,"+
                 "fecha TEXT,"+
                 "total_venta integer,"+
-                "FOREIGN KEY(id_detalle) REFERENCES DetalleVenta(id_detalle),"+
-                "FOREIGN KEY(id_cliente) REFERENCES Ciente(id_cliente))";
+                "FOREIGN KEY(id_cliente) REFERENCES Cliente(id_cliente))";
         db.execSQL(dbVenta);
 
         String dbDetalleVenta="create table DetalleVenta("+
@@ -88,7 +83,8 @@ public class BaseDatosApp extends SQLiteOpenHelper {
                 "precio_producto TEXT,"+
                 "cantidad integer,"+
                 "total integer,"+
-                "FOREIGN KEY(id_producto) REFERENCES Producto(COLUMN_ID),"+
+                "cod_detalle INTEGER,"+
+                "FOREIGN KEY(id_producto) REFERENCES Producto(id_producto),"+
                 "FOREIGN KEY(id_venta) REFERENCES Venta(id_venta))";
         db.execSQL(dbDetalleVenta);
 
@@ -123,7 +119,6 @@ public class BaseDatosApp extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCTO);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_VENTA);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_DETALLE_VENTA);
-        //onCreate(db);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CLIENTE);
         onCreate(db);
 
@@ -136,7 +131,6 @@ public class BaseDatosApp extends SQLiteOpenHelper {
                 values.put("telefono", clientes.getTelefono());
                 values.put("direccion", clientes.getDireccion());
                 values.put("dia_visita", clientes.getDiaVisita());
-        values.put("id_venta", clientes.getId_venta());
 
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_CLIENTE, null, values);
@@ -145,7 +139,7 @@ public class BaseDatosApp extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("id_cliente", venta.getId_cliente());
         values.put("nombre_cliente", venta.getNombre_cliente());
-        values.put("id_detalle", venta.getDetalle_venta());
+        values.put("cod_detalle", venta.getDetalle_venta());
         values.put("fecha", venta.getFecha());
         values.put("total_venta", venta.getTota_venta());
         SQLiteDatabase db = this.getWritableDatabase();
@@ -172,12 +166,12 @@ public class BaseDatosApp extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
             do {
-                int id = Integer.parseInt(cursor.getString(0));
+                int id_detalle = Integer.parseInt(cursor.getString(0));
                 String nombre_producto = cursor.getString(3);
                 String precio = cursor.getString(4);
                 String cantidad = cursor.getString(5);
                 String total = cursor.getString(6);
-                storeContacts.add(new DetalleVenta(id, nombre_producto, precio, cantidad, total));
+                storeContacts.add(new DetalleVenta(id_detalle, nombre_producto, precio, cantidad, total));
             }
             while (cursor.moveToNext());
         }
@@ -207,11 +201,11 @@ public class BaseDatosApp extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
 
                 clientes = new Clientes();
-                clientes.setId(cursor.getInt(0));
-                clientes.setNombre(cursor.getString(2));
-                clientes.setDireccion(cursor.getString(3));
-                clientes.setTelefono(cursor.getString(4));
-            clientes.setDiaVisita(cursor.getString(5));
+                clientes.setId_cliente(cursor.getInt(0));
+                clientes.setNombre(cursor.getString(1));
+                clientes.setDireccion(cursor.getString(2));
+                clientes.setTelefono(cursor.getString(3));
+            clientes.setDiaVisita(cursor.getString(4));
 
 
         }

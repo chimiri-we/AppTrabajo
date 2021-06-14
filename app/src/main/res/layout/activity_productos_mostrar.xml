@@ -48,28 +48,21 @@
             android:id="@+id/fecha_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
+            android:text="fecha"
             app:layout_constraintStart_toStartOf="@+id/guideline_vertical"
-            app:layout_constraintTop_toBottomOf="@+id/name_cliente"
-            tools:text="Medico General" />
+            app:layout_constraintTop_toBottomOf="@+id/name_cliente" />
 
         <TextView
             android:id="@+id/tv_total_venta"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:ellipsize="end"
-            android:maxLength="128"
-            android:visibility="visible"
+            android:text="Total"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.53"
             app:layout_constraintStart_toStartOf="@+id/guideline_vertical"
-            app:layout_constraintTop_toBottomOf="@+id/fecha_text"
-            tools:text="Universidad Santiago, 2 años de experiencia" />
+            app:layout_constraintTop_toBottomOf="@+id/fecha_text" />
 
         <TextView
             android:id="@+id/tv_detalle_venta"
@@ -77,9 +70,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="24dp"
             android:text="@string/especialidad"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+
             app:layout_constraintStart_toStartOf="@+id/guideline_vertical"
             app:layout_constraintTop_toBottomOf="@+id/tv_total_venta" />
 

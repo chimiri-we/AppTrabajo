@@ -1,12 +1,10 @@
 package com.example.apptrabajo.ui.home;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,8 +30,6 @@ import com.example.apptrabajo.entidades.Productos;
 import com.example.apptrabajo.entidades.Venta;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,16 +47,18 @@ public class DetalleCliente extends AppCompatActivity {
 
     Clientes clientes;
     Venta venta;
+    int totalV;
     int vt;
     int id = 0;
-    int id_detalle = 0;
+    String nombreCli;
     BaseDatosApp bdLocal;
-    TextView  fecha,direccion, telefono, diaVisita, idCliente;
+    TextView  fecha,direccion, telefono, diaVisita, codDetalle;
     TextView tvTotal;
-
-    Spinner spinnerPro;
     String formattedDate;
+    Spinner spinnerPro;
+    String cod;
     FloatingActionButton btnAgregar;
+    CollapsingToolbarLayout collapser;
     public DetalleCliente() {
     }
 
@@ -71,8 +69,7 @@ public class DetalleCliente extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
        // setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        CollapsingToolbarLayout collapser =
-                (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+     collapser = findViewById(R.id.toolbar_layout);
 
         //obtenemos fecha y hora
 
@@ -84,8 +81,9 @@ public class DetalleCliente extends AppCompatActivity {
         fecha.setText(formattedDate);
 
 
-        idCliente = findViewById(R.id.tv_numeroPedido);
-       TextView tvTotal = findViewById(R.id.mostrarTotal);
+       TextView codDetalle = findViewById(R.id.tv_numeroPedido);
+
+      tvTotal = findViewById(R.id.mostrarTotal);
         direccion = findViewById(R.id.tv_direccion);
         telefono = findViewById(R.id.tv_numeroTel);
         diaVisita = findViewById(R.id.tvDia_visita);
@@ -119,23 +117,31 @@ public class DetalleCliente extends AppCompatActivity {
             Bundle extras = getIntent().getExtras();
             if(extras == null){
                 id = Integer.parseInt(null);
+
             } else {
                 id = extras.getInt("id");
+             cod = extras.getString("cod");
             }
+
         } else {
             id = (int) savedInstanceState.getSerializable("id");
+           cod = savedInstanceState.getString("cod");
+            codDetalle.setText(cod);
         }
-
+        codDetalle.setText(cod);
         final BaseDatosApp bdLocal = new BaseDatosApp(DetalleCliente.this);
         clientes = bdLocal.verCliente(id);
 
         if(clientes != null){
 
-           // idCliente.setText(clientes.getId());
+
+          // codDetalle.setText(clientes.getId());
             diaVisita.setText(clientes.getDiaVisita());
            telefono.setText(clientes.getTelefono());
             direccion.setText(clientes.getDireccion());
             collapser.setTitle(clientes.getNombre());
+
+            nombreCli = collapser.getTitle().toString().trim();
           //
 
         }
@@ -280,11 +286,7 @@ public class DetalleCliente extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_edit:
-
-                Venta venta = new Venta(clientes.getId(), clientes.getNombre(), formattedDate, vt);
-                bdLocal.generarVenta(venta);
-                actualizarPedio();
-                Toast.makeText(this, "se ha generado venta" + venta.getId_venta(), Toast.LENGTH_LONG).show();
+                ventaNueva();
 
                 break;
             case R.id.action_delete:
@@ -294,6 +296,21 @@ public class DetalleCliente extends AppCompatActivity {
         break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void ventaNueva() {
+
+        Date fechaActual= Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        formattedDate = df.format(fechaActual);
+       // nombreCli = clientes.getNombre();
+        totalV = Integer.parseInt(tvTotal.getText().toString().trim());
+
+        Venta venta = new Venta(id, nombreCli, cod, formattedDate, totalV);
+        bdLocal.generarVenta(venta);
+        actualizarPedio();
+        Toast.makeText(this, "se ha generado venta" + venta, Toast.LENGTH_SHORT).show();
+
     }
 
     private void actualizarPedio() {
@@ -309,8 +326,7 @@ public class DetalleCliente extends AppCompatActivity {
     public void obtenerTotalVenta() {
 
         int vt = 0;
-        final TextView tvTotal = findViewById(R.id.mostrarTotal);
-        final TextView Total = findViewById(R.id.tvTotal);
+      tvTotal = findViewById(R.id.mostrarTotal);
         bdLocal = new BaseDatosApp(this.getApplicationContext());
         SQLiteDatabase db = bdLocal.getWritableDatabase();
         DetalleVenta dtVenta=null;
@@ -322,7 +338,7 @@ public class DetalleCliente extends AppCompatActivity {
             values.put("total", cursor.getInt(0));
 
             tvTotal.setText(String.valueOf(+vt).toString());
-            Total.setText(String.valueOf(vt));
+
 
 
         }

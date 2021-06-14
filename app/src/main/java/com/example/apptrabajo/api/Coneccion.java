@@ -76,14 +76,14 @@ public class Coneccion extends JSONObject implements Response.Listener<JSONObjec
                 cliente=new Clientes();
                 JSONObject jsonObject=null;
                 jsonObject=json.getJSONObject(i);
-                cliente.setId(jsonObject.optInt("Id_cli"));
+                cliente.setId_cliente(jsonObject.optInt("Id_cli"));
                 cliente.setNombre(jsonObject.optString("nombre_cli"));
                 cliente.setTelefono(jsonObject.optString("telefono_cli"));
                 cliente.setDireccion(jsonObject.optString("direccion_cli"));
                 cliente.setDiaVisita(jsonObject.getString("dia_visita"));
 
                 ContentValues values = new ContentValues();
-                values.put(COLUMN_ID_CLI, cliente.getId());
+                values.put(COLUMN_ID_CLI, cliente.getId_cliente());
                 values.put(COLUMN_NAME_CLI, cliente.getNombre());
                 values.put(COLUMN_TELEFONO, cliente.getTelefono());
                 values.put(COLUMN_DIRECCION, cliente.getDireccion());

@@ -30,8 +30,8 @@ public class DetalleVenta {
         this.precio = precio;
     }
 
-    public DetalleVenta(int id, String nombre_producto, String precio, String cantidad, String total) {
-        this.id_detalle = id;
+    public DetalleVenta(int id_detalle, String nombre_producto, String precio, String cantidad, String total) {
+        this.id_detalle = id_detalle;
         this.nombre_producto = nombre_producto;
         this.cantidad = cantidad;
         this.precio = precio;
