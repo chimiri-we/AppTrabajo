@@ -75,6 +75,8 @@ public class ListaPedidosActivity  extends AppCompatActivity {
            Toast.makeText(this, "No hay ningún articulo guardado para este cliente", Toast.LENGTH_LONG).show();
        }
 
+
+
         mProgress = (ProgressBar) findViewById(R.id.progress);
         mEmptyView = findViewById(R.id.doctors_schedules_empty);
 

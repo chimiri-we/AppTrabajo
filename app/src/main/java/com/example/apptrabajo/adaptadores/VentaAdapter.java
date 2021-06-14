@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -61,9 +62,13 @@ public class VentaAdapter extends RecyclerView.Adapter<VentaModel>
         holder.detalle.setText(newventa.getDetalle_venta());
         holder.fechaVenta.setText(newventa.getFecha());
         holder.tVenta.setText(String.valueOf(newventa.getTota_venta()));
+        holder.tIdVenta.setText(String.valueOf(newventa.getId_venta()));
+
 
 
     }
+
+
 
     @Override
     public int getItemCount() {

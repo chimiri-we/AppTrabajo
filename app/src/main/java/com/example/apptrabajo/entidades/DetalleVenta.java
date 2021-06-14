@@ -8,6 +8,7 @@ public class DetalleVenta {
     private String cantidad;
     private String precio;
     private String total;
+    private String cod_detalle;
 
     public DetalleVenta(int id_detalle, int id_producto, int id_venta, String nombre_producto, String cantidad, String precio, String total) {
         this.id_detalle = id_detalle;
@@ -125,5 +126,13 @@ public class DetalleVenta {
 
     public void setId_detalle(int id_detalle) {
         this.id_detalle = id_detalle;
+    }
+
+    public String getCod_detalle() {
+        return cod_detalle;
+    }
+
+    public void setCod_detalle(String cod_detalle) {
+        this.cod_detalle = cod_detalle;
     }
 }

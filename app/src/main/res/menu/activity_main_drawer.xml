@@ -11,11 +11,11 @@
         <item
             android:id="@+id/nav_registroClienteFragment"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:title="@string/registro" />
 
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:title="@string/lista_producto" />
     </group>
 </menu>

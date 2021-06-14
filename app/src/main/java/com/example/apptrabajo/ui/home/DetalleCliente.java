@@ -1,6 +1,7 @@
 package com.example.apptrabajo.ui.home;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.example.apptrabajo.DetalleClienteFragment;
+import com.example.apptrabajo.MainActivity;
 import com.example.apptrabajo.R;
 import com.example.apptrabajo.datos.BaseDatosApp;
 import com.example.apptrabajo.entidades.Clientes;
@@ -31,10 +33,12 @@ import com.example.apptrabajo.entidades.Venta;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Objects;
 
 public class DetalleCliente extends AppCompatActivity {
@@ -78,6 +82,7 @@ public class DetalleCliente extends AppCompatActivity {
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
         String formattedDate = df.format(fechaActual);
         System.out.println("Current time => " +formattedDate);
+
         fecha.setText(formattedDate);
 
 
@@ -321,7 +326,8 @@ public class DetalleCliente extends AppCompatActivity {
 
         db.delete("DetalleVenta", "id_producto" + " = ?", new String[]{String.valueOf(0)});
        // Toast.makeText(this, "Se ha eliminado, actualiza la vista", Toast.LENGTH_LONG).show();
-        startActivity(getIntent());
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 
@@ -351,6 +357,7 @@ public class DetalleCliente extends AppCompatActivity {
        // Log.d("Respuesta: ", cursor.toString());
 
     }
+
 
 
     @Override

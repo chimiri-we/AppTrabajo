@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class BaseDatosApp extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
     private static final String DATABASE_NAME = "DatosTrabajo";
     private static final String TABLE_CLIENTE = "Cliente";
     private static final String COLUMN_ID = "id";
@@ -88,29 +88,6 @@ public class BaseDatosApp extends SQLiteOpenHelper {
                 "FOREIGN KEY(id_venta) REFERENCES Venta(id_venta))";
         db.execSQL(dbDetalleVenta);
 
-      /*  String CREATE_VENTA_TABLE = "CREATE TABLE "
-                + TABLE_VENTA + "(" + COLUMN_ID
-                + " INTEGER PRIMARY KEY,"
-                + COLUMN_ID_CLIENTE + " INTEGER,"
-                + COLUMN_NOMBRE_CLIENTE + " TEXT,"
-                + COLUMN_DETALLE + " TEXT,"
-                + COLUMN_FECHA + " TEXT,"
-                +"FOREIGN KEY(COLUMN_ID_CLIENTE) REFERENCES Ciente(COLUMN_ID))";
-        db.execSQL(CREATE_VENTA_TABLE);
-
-        String CREATE_DETALLE_VENTA_TABLE = "CREATE TABLE "
-                + TABLE_DETALLE_VENTA + "(" + COLUMN_ID
-                + " INTEGER PRIMARY KEY,"
-                + COLUMN_ID_VENTA + " INTEGER,"
-                + COLUMN_ID_PRODUCTO + " INTEGER,"
-                + COLUMN_NOMBRE_PRODUCTO + " TEXT,"
-                + COLUMN_PRECIO_PRODUCTO + " TEXT,"
-                + COLUMN_CANTIDAD + " TEXT,"
-                +"FOREIGN KEY(COLUMN_ID_VENTA) REFERENCES Venta(COLUMN_ID),"+
-                "FOREIGN KEY(COLUMN_ID_PRODUCTO) REFERENCES Producto(COLUMN_ID))";
-        db.execSQL(CREATE_DETALLE_VENTA_TABLE);
-
-*/
     }
 
     @Override
@@ -154,6 +131,7 @@ public class BaseDatosApp extends SQLiteOpenHelper {
         values.put("id_venta", newVenta.getId_venta());
         values.put("id_producto", newVenta.getId_producto());
         values.put("total", newVenta.getTotal());
+        values.put("cod_detalle", newVenta.getCod_detalle());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_DETALLE_VENTA, null, values);
     }
@@ -167,10 +145,13 @@ public class BaseDatosApp extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 int id_detalle = Integer.parseInt(cursor.getString(0));
+                int id_venta = Integer.parseInt(cursor.getString(1));
+                int id_producto = Integer.parseInt(cursor.getString(2));
                 String nombre_producto = cursor.getString(3);
                 String precio = cursor.getString(4);
                 String cantidad = cursor.getString(5);
                 String total = cursor.getString(6);
+                String detalle_venta = cursor.getString(7);
                 storeContacts.add(new DetalleVenta(id_detalle, nombre_producto, precio, cantidad, total));
             }
             while (cursor.moveToNext());

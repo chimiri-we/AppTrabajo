@@ -20,6 +20,7 @@
     <string name="request_button">Solicitar</string>
     <string name="message_no_schedules">No hay Peedidos</string>
     <string name="ver_detalle">Ver detalle</string>
+    <string name="lista_producto">Lista Producto</string>
 
     <string-array name="dias">
         <item>Lunes</item>
