@@ -1,6 +1,9 @@
 package com.example.apptrabajo;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -9,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +26,7 @@ import com.example.apptrabajo.adaptadores.DetalleVentaAdapter;
 import com.example.apptrabajo.datos.BaseDatosApp;
 import com.example.apptrabajo.entidades.DetalleVenta;
 import com.example.apptrabajo.entidades.Productos;
+import com.example.apptrabajo.ui.home.DetalleCliente;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.util.ArrayList;
@@ -34,8 +39,9 @@ public class DetalleClienteFragment extends Fragment {
     ArrayList<Productos> listaProducto;
     ArrayList<String> datosProducto;
     int id = 0;
-
+    DetalleCliente detalleCliente;
     private CollapsingToolbarLayout mCollapsingView;
+    TextView Total;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +49,7 @@ public class DetalleClienteFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_detalle_cliente, container, false);
 
+     Total = view.findViewById(R.id.tvTotal);
 
         mCollapsingView = (CollapsingToolbarLayout) requireActivity().findViewById(R.id.toolbar_layout);
 
@@ -55,8 +62,11 @@ public class DetalleClienteFragment extends Fragment {
         ArrayList<DetalleVenta> detalleVenta = bdLocal.listDetalleVenta();
         if (detalleVenta.size() > 0) {
             detalleVentaView.setVisibility(View.VISIBLE);
+
+
            DetalleVentaAdapter detalleVentaAdapter = new DetalleVentaAdapter(getContext(), detalleVenta);
             detalleVentaView.setAdapter(detalleVentaAdapter);
+
         }
         else {
             detalleVentaView.setVisibility(View.GONE);
@@ -70,12 +80,35 @@ public class DetalleClienteFragment extends Fragment {
                 startActivity(nuevointent);
             }
         });*/
+       obtenerTotalVenta();
         return view;
 
     }
 
+    private void obtenerTotalVenta() {
+        int vt = 0;
+        bdLocal = new BaseDatosApp(getContext().getApplicationContext());
+        SQLiteDatabase db = bdLocal.getWritableDatabase();
+        DetalleVenta dtVenta=null;
+        Cursor cursor=db.rawQuery( "select SUM(total) from DetalleVenta", null);
+        if (cursor.moveToNext()) {
+            DetalleVenta detalleVenta = new DetalleVenta();
+            vt = cursor.getInt(0);
+            ContentValues values = new ContentValues();
+            values.put("total", cursor.getInt(0));
 
 
+            Total.setText(String.valueOf(vt));
+
+
+        }
+        db.close();
+
+      /*  Toast.makeText(getContext(), "Total es "+cursor.getInt(0), Toast.LENGTH_LONG).show();
+        System.out.println();
+        Log.d("Respuesta: ", cursor.toString());
+*/
+    }
 
 
     private void addTaskDialog() {
@@ -92,40 +125,6 @@ public class DetalleClienteFragment extends Fragment {
         ArrayAdapter<CharSequence> adapterPro = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, datosProducto);
         spinnerPro.setAdapter(adapterPro);
 
-
-      /*  seleccionarItem();
-        spinnerPro.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Contacts ListViewClickProduc = (Contacts) parent.getItemAtPosition(position);
-                //    final String name = ListViewClickProduc.getName();
-                // final String precio = ListViewClickProduc.getPrecio();
-                Contacts contacts = null;
-                assert contacts != null;
-                ListViewClickProduc.setName(contacts.getName().toLowerCase());
-                // ListViewClickProduc.setPrecio(contacts.getPhno().toLowerCase());
-            }
-        });
-
-   /*   spinnerPro.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Contacts ListViewClickProduc = (Contacts) parent.getItemAtPosition(position);
-                //    final String name = ListViewClickProduc.getName();
-                 // final String precio = ListViewClickProduc.getPrecio();
-                Contacts contacts = null;
-                assert contacts != null;
-                ListViewClickProduc.setName(contacts.getName().toLowerCase());
-               // ListViewClickProduc.setPrecio(contacts.getPhno().toLowerCase());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-                return;
-            }
-
-        });*/
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Agragar nueva Nota");
         builder.setView(subView);
@@ -152,13 +151,6 @@ public class DetalleClienteFragment extends Fragment {
                 Productos newProducto = new Productos(name, ph_no);
                 bdLocal.addProductos(newProducto);
 
-
-               // finish();
-               // startActivity(getIntent());
-                // onStart();
-                // notifyDataSetChanged();
-                //  getDelegate().onStart();
-                //    obtenerCosto();
             }
 
         });
@@ -178,24 +170,6 @@ public class DetalleClienteFragment extends Fragment {
 
 
     }
-
- /*   private void cargarProductos() {
-        SQLiteDatabase db=bdLocal.getReadableDatabase();
-
-        Productos producto=null;
-        listaProducto = new ArrayList<Productos>();
-        Cursor cursor=db.rawQuery( "select * from Productos ", null);
-        while (cursor.moveToNext()){
-            producto=new Productos();
-            producto.setId(cursor.getInt(0));
-            producto.setNombre(cursor.getString(1));
-            producto.setPrecio(cursor.getString(2));
-            listaProducto.add(producto);
-        }
-        obtenerLista();
-
-    }*/
-
     private void obtenerLista() {
         datosProducto = new ArrayList<String>();
         datosProducto.add("selecciona");

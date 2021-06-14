@@ -9,11 +9,11 @@ import com.example.apptrabajo.R;
 
 import java.text.BreakIterator;
 
-public class VentaModelo extends RecyclerView.ViewHolder {
+public class VentaDetalleModel extends RecyclerView.ViewHolder {
 
     public  TextView tvNameProducto, tvPrecioProducto, tvTotal, tvCantidad;
 
-   public VentaModelo(View itemView) {
+   public VentaDetalleModel(View itemView) {
             super(itemView);
         tvCantidad = itemView.findViewById(R.id.cantidad);
         tvTotal = itemView.findViewById(R.id.total);

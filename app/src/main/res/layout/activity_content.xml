@@ -7,9 +7,6 @@
     android:fitsSystemWindows="true"
     tools:context=".ListaPedidosActivity">
 
-
-
-
     <include layout="@layout/list_pedidos" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

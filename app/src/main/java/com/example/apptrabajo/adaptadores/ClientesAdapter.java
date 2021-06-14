@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
 import com.example.apptrabajo.R;
 import com.example.apptrabajo.entidades.Clientes;
 
@@ -17,26 +15,24 @@ import java.util.List;
 
 public class ClientesAdapter extends ArrayAdapter<Clientes> {
 
-
-    List<Clientes> listaClientes;
+    ArrayList<Clientes> listaClientes;
+    ArrayList<Clientes> nuevaListaCliente;
+  //  List<Clientes> listaClientes;
     //  List<Usuario> usuarioList;
     //  public ItemClickListener listener;
 
-    public void ClienetsAdapter(Context context, int id, List<Clientes> listaClientes) {
-
+    public ClientesAdapter(Context context, int id, List<Clientes> listCliente) {
+        super(context, id, listCliente);
         this.listaClientes = new ArrayList<>();
-        this.listaClientes.addAll(listaClientes);
+        this.listaClientes.addAll(listCliente);
+        this.nuevaListaCliente = new ArrayList<>();
+        this.nuevaListaCliente.addAll(listCliente);
 
     }
-
-    public ClientesAdapter(@NonNull Context context, int resource) {
-        super(context, resource);
-    }
-
     public static class ViewHolder {
 
-        TextView txtNombre;
-        TextView txtTelefono;
+        TextView tvNombre;
+        TextView tvTelefono;
         //  TextView txtDireccion;
     }
 
@@ -44,18 +40,14 @@ public class ClientesAdapter extends ArrayAdapter<Clientes> {
     public View getView(int position, View convertview, ViewGroup parent) {
 
         ClientesAdapter.ViewHolder holder;
-
-
         if (convertview == null) {
-
             LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            convertview = layoutInflater.inflate(android.R.layout.simple_list_item_1,parent,false);
+            convertview = layoutInflater.inflate(R.layout.usuarios_list,null);
             holder = new  ClientesAdapter.ViewHolder();
 
-         //   holder.txtNombre = convertView.findViewById(R.id.txtNombre);
-            //  holder.txtDireccion = convertView.findViewById(R.id.txtId);
-           // holder.txtTelefono = convertView.findViewById(R.id.txtProfesion);
+           holder.tvNombre = convertview.findViewById(R.id.txtNombre);
+             // holder.txtDireccion = convertView.findViewById(R.id.txtId);
+            holder.tvTelefono = convertview.findViewById(R.id.txtProfesion);
 
             convertview.setTag(holder);
 
@@ -64,11 +56,11 @@ public class ClientesAdapter extends ArrayAdapter<Clientes> {
             holder = ( ClientesAdapter.ViewHolder) convertview.getTag();
         }
 
-        Clientes usuario = listaClientes.get(position);
+        Clientes clientes = nuevaListaCliente.get(position);
 
-        holder.txtNombre.setText(usuario.getNombre());
+        holder.tvNombre.setText(clientes.getNombre());
         // holder.txtDireccion.setText(usuario.getDireccionCliente());
-        holder.txtTelefono.setText(usuario.getTelefono());
+        holder.tvTelefono.setText(clientes.getTelefono());
 
         return convertview;
 

@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class RegistroClienteFragment extends Fragment {
 
-    public static final String REGISTER_URL = "https://servicioparanegocio.es/bdApp/registroUseruno.php";
+    public static final String REGISTER_URL = "https://servicioparanegocio.es/superClean/registro_cliente.php";
 
     public static final String KEY_NOMBRE = "nombre";
     public static final String KEY_DIA_VISITA = "password";

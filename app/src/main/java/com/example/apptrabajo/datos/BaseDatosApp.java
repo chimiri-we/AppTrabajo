@@ -11,13 +11,14 @@ import android.widget.Toast;
 import com.example.apptrabajo.entidades.Clientes;
 import com.example.apptrabajo.entidades.DetalleVenta;
 import com.example.apptrabajo.entidades.Productos;
+import com.example.apptrabajo.entidades.Venta;
 
 import java.util.ArrayList;
 
 public class BaseDatosApp extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 26;
-    private static final String DATABASE_NAME = "Trabajo";
+    private static final int DATABASE_VERSION = 3;
+    private static final String DATABASE_NAME = "DatosTrabajo";
     private static final String TABLE_CLIENTE = "Cliente";
     private static final String COLUMN_ID = "id";
     private static final String id_cliente = "id_cliente";
@@ -54,10 +55,12 @@ public class BaseDatosApp extends SQLiteOpenHelper {
 
   String dbCliente="create table Cliente("+
                 "id_cliente INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "id_venta INTEGER,"+
                 "nombre TEXT NOT NULL,"+
                 "direccion TEXT,"+
                 "telefono TEXT,"+
-                "dia_visita TEXT)";
+                "dia_visita TEXT,"+
+          "FOREIGN KEY(id_venta) REFERENCES Venta(id_venta))";
         db.execSQL(dbCliente);
         
         String dbProducto="create table Producto("+
@@ -72,6 +75,7 @@ public class BaseDatosApp extends SQLiteOpenHelper {
                 "nombre_cliente  NOT NULL,"+
                 "id_detalle INTEGER,"+
                 "fecha TEXT,"+
+                "total_venta integer,"+
                 "FOREIGN KEY(id_detalle) REFERENCES DetalleVenta(id_detalle),"+
                 "FOREIGN KEY(id_cliente) REFERENCES Ciente(id_cliente))";
         db.execSQL(dbVenta);
@@ -132,9 +136,21 @@ public class BaseDatosApp extends SQLiteOpenHelper {
                 values.put("telefono", clientes.getTelefono());
                 values.put("direccion", clientes.getDireccion());
                 values.put("dia_visita", clientes.getDiaVisita());
+        values.put("id_venta", clientes.getId_venta());
 
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_CLIENTE, null, values);
+    }
+    public void generarVenta(Venta venta) {
+        ContentValues values = new ContentValues();
+        values.put("id_cliente", venta.getId_cliente());
+        values.put("nombre_cliente", venta.getNombre_cliente());
+        values.put("id_detalle", venta.getDetalle_venta());
+        values.put("fecha", venta.getFecha());
+        values.put("total_venta", venta.getTota_venta());
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(TABLE_VENTA, null, values);
+
     }
     public void agregaProductos(DetalleVenta newVenta) {
         ContentValues values = new ContentValues();
@@ -182,7 +198,7 @@ public class BaseDatosApp extends SQLiteOpenHelper {
         db.update(TABLE_PRODUCTO, values, COLUMN_ID + " = ?", new String[]{String.valueOf(detalleVenta.getId())});
     }
 
-    public Clientes verCliente(int id) {
+    public Clientes verCliente(int id_cliente) {
         SQLiteDatabase db = this.getWritableDatabase();
        Clientes clientes = null;
         Cursor cursor;
@@ -191,14 +207,40 @@ public class BaseDatosApp extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
 
                 clientes = new Clientes();
-                clientes.setNombre(cursor.getString(1));
-                clientes.setDireccion(cursor.getString(2));
-
+                clientes.setId(cursor.getInt(0));
+                clientes.setNombre(cursor.getString(2));
+                clientes.setDireccion(cursor.getString(3));
+                clientes.setTelefono(cursor.getString(4));
+            clientes.setDiaVisita(cursor.getString(5));
 
 
         }
        cursor.close();
         return clientes;
+    }
+
+
+    public ArrayList<Venta> listVenta() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Venta venta= null;
+        ArrayList<Venta> storeVenta = new ArrayList<>();
+        Cursor cursor;
+        cursor = db.rawQuery("select * from Venta", null);
+        if (cursor.moveToFirst()) {
+            do {
+
+            int idVenta = Integer.parseInt(cursor.getString(0));
+            String nombreClient = cursor.getString(2);
+            String dtVenta = cursor.getString(3);
+            String fechaVenta = cursor.getString(4);
+           int totalVenta = Integer.parseInt(cursor.getString(5));
+
+            storeVenta.add(new Venta(idVenta, nombreClient, dtVenta, fechaVenta, totalVenta));
+        }
+            while (cursor.moveToNext());
+        }
+        cursor.close();
+        return storeVenta;
     }
 
     public ArrayList<Productos> spinerProducto() {

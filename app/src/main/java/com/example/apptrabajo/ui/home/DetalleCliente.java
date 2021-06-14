@@ -3,7 +3,6 @@ package com.example.apptrabajo.ui.home;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteAccessPermException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -33,8 +32,13 @@ import com.example.apptrabajo.entidades.Productos;
 import com.example.apptrabajo.entidades.Venta;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 public class DetalleCliente extends AppCompatActivity {
@@ -44,15 +48,18 @@ public class DetalleCliente extends AppCompatActivity {
     private static final String TABLE_VENTA = "Venta";
     ArrayList<Productos> arrayList = new ArrayList<Productos>();
     ArrayList<String> strinsProducto;
-    private Context context;
-    Productos productos;
-    DetalleVenta dtv;
+
     Clientes clientes;
     Venta venta;
+    int vt;
     int id = 0;
+    int id_detalle = 0;
     BaseDatosApp bdLocal;
-    TextView t1,t2,t3,t4,t5,t6;
+    TextView  fecha,direccion, telefono, diaVisita, idCliente;
+    TextView tvTotal;
+
     Spinner spinnerPro;
+    String formattedDate;
     FloatingActionButton btnAgregar;
     public DetalleCliente() {
     }
@@ -67,17 +74,39 @@ public class DetalleCliente extends AppCompatActivity {
         CollapsingToolbarLayout collapser =
                 (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
 
+        //obtenemos fecha y hora
 
-        final TextView tvTotal = findViewById(R.id.tvTotal);
-        t3 = (TextView) findViewById(R.id.tv_direccion);
-        t2 = (TextView) findViewById(R.id.tv_numeroTel);
-        t4 = (TextView) findViewById(R.id.textView12);
+        fecha = (TextView) findViewById(R.id.tv_fecha);
+        Date fechaActual= Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+        String formattedDate = df.format(fechaActual);
+        System.out.println("Current time => " +formattedDate);
+        fecha.setText(formattedDate);
+
+
+        idCliente = findViewById(R.id.tv_numeroPedido);
+       TextView tvTotal = findViewById(R.id.mostrarTotal);
+        direccion = findViewById(R.id.tv_direccion);
+        telefono = findViewById(R.id.tv_numeroTel);
+        diaVisita = findViewById(R.id.tvDia_visita);
+        tvTotal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                obtenerTotalVenta();
+            }
+        });
+
+
+
+
+
         btnAgregar = findViewById(R.id.fab_Agregar_producto);
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 agregarProducto();
+             //   generateNumeroPedido();
 
             }
         });
@@ -101,21 +130,14 @@ public class DetalleCliente extends AppCompatActivity {
         clientes = bdLocal.verCliente(id);
 
         if(clientes != null){
-        //int ID = getIntent().getIntExtra("id", ID)
-      /*  String cliente = getIntent().getStringExtra("id");
-        Bundle extras = getIntent().getExtras();
-        id = extras.getInt(cliente);
 
-        bdLocal = new BaseDatosApp(DetalleCliente.this);
-        clientes = bdLocal.verCliente(id);
-
-      */
-          //  t1.setText(clientes.getNombre());
-        //    t2.setText(clientes.getTelefono());
-            t3.setText(clientes.getDireccion());
+           // idCliente.setText(clientes.getId());
+            diaVisita.setText(clientes.getDiaVisita());
+           telefono.setText(clientes.getTelefono());
+            direccion.setText(clientes.getDireccion());
             collapser.setTitle(clientes.getNombre());
           //
-            generarVenta();
+
         }
     }
 
@@ -134,7 +156,7 @@ public class DetalleCliente extends AppCompatActivity {
      //   values.put("id_detalle", dtVenta);
         bdLocal = new BaseDatosApp(this.getApplicationContext());
         SQLiteDatabase db = bdLocal.getReadableDatabase();
-            Toast.makeText(this, "Datos guardados"+ SQLiteAccessPermException.class, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Datos de venta Guardados", Toast.LENGTH_SHORT).show();
 
             db.insert(TABLE_VENTA, null, values);
         }
@@ -144,11 +166,11 @@ public class DetalleCliente extends AppCompatActivity {
         LayoutInflater inflater = LayoutInflater.from(this);
         View subView = inflater.inflate(R.layout.add_productos, null);
         final TextView nameField = subView.findViewById(R.id.tvNombrePro);
-        final TextView noField = subView.findViewById(R.id.tvPrecio);
+        final TextView precio = subView.findViewById(R.id.tvPrecio);
         final EditText edCantidad = subView.findViewById(R.id.tvCantidad);
-       final TextView tvTotal = subView.findViewById(R.id.tvTotal);
+        final TextView Total = findViewById(R.id.tvTotal);
 
-
+//inflamos spiner con lista de productos
         spinnerPro = subView.findViewById(R.id.spinnerPro);
         bdLocal = new BaseDatosApp(this.getApplicationContext());
         spinerProducto();
@@ -160,11 +182,11 @@ public class DetalleCliente extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                  if (position!=0) {
                     nameField.setText(arrayList.get(position-1).getNombre());
-                    noField.setText(arrayList.get(position-1).getPrecio());
+                    precio.setText(arrayList.get(position-1).getPrecio());
 
                 }else {
                     nameField.setText("");
-                    noField.setText("");
+                    precio.setText("");
                       }
 
             }
@@ -183,35 +205,39 @@ public class DetalleCliente extends AppCompatActivity {
         builder.create();
         builder.setPositiveButton("Agregar", (dialog, which) -> {
 
+
             final String nombrePro = nameField.getText().toString();
-            final String precio = noField.getText().toString();
+            final String precioProd = precio.getText().toString();
             final String cantidad = edCantidad.getText().toString();
-            int dato1 = Integer.parseInt(noField.getText().toString());
+
+            int dato1 = Integer.parseInt(precio.getText().toString());
             int dato2 = Integer.parseInt(edCantidad.getText().toString());
             int suma = dato1 * dato2;
             String resultado = String.valueOf(suma);
-//            tv.setText(resultado);
 
-            Toast.makeText(this, "El total es" + suma, Toast.LENGTH_LONG).show();
-          //  tvTotal.setText(suma);
-           // final String COLUMN_ID_VENTA = "id_venta";
-           // final String COLUMN_ID_PRODUCTO = "id_producto";
+
 
             if (TextUtils.isEmpty(nombrePro)) {
                 Toast.makeText(this, "Algo salió mal. Verifique sus valores de entrada", Toast.LENGTH_LONG).show();
             }
             else {
-                DetalleVenta newVenta = new DetalleVenta(nombrePro, precio, cantidad, resultado);
-                bdLocal.agregaProductos(newVenta);
+                DetalleVenta newDetalleVenta = new DetalleVenta(nombrePro, precioProd, cantidad, resultado);
+                bdLocal.agregaProductos(newDetalleVenta);
 
+             //   Toast.makeText(this, "El id es" + newDetalleVenta.getId_detalle(), Toast.LENGTH_LONG).show();
 
                 finish();
+
                 startActivity(getIntent());
+
             }
+
         });
         builder.setNegativeButton("CANCELAR", (dialog, which) -> Toast.makeText(this, "Tarea Cancelada", Toast.LENGTH_LONG).show());
         builder.show();
+
         onStart();
+
     }
 
 
@@ -254,25 +280,37 @@ public class DetalleCliente extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_edit:
-                showEditScreen();
+
+                Venta venta = new Venta(clientes.getId(), clientes.getNombre(), formattedDate, vt);
+                bdLocal.generarVenta(venta);
+                actualizarPedio();
+                Toast.makeText(this, "se ha generado venta" + venta.getId_venta(), Toast.LENGTH_LONG).show();
+
                 break;
             case R.id.action_delete:
 
-                bdLocal.deleteContact(id);
-                Toast.makeText(this, "Se ha eliminado, actualiza la vista", Toast.LENGTH_LONG).show();
-
+                actualizarPedio();
 
         break;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private void actualizarPedio() {
+        bdLocal = new BaseDatosApp(this.getApplicationContext());
+        SQLiteDatabase db = bdLocal.getReadableDatabase();
+
+        db.delete("DetalleVenta", "id_producto" + " = ?", new String[]{String.valueOf(0)});
+       // Toast.makeText(this, "Se ha eliminado, actualiza la vista", Toast.LENGTH_LONG).show();
+        startActivity(getIntent());
+    }
 
 
-    private void showEditScreen() {
+    public void obtenerTotalVenta() {
 
         int vt = 0;
-        final TextView tvTotal = findViewById(R.id.tvTotal);
+        final TextView tvTotal = findViewById(R.id.mostrarTotal);
+        final TextView Total = findViewById(R.id.tvTotal);
         bdLocal = new BaseDatosApp(this.getApplicationContext());
         SQLiteDatabase db = bdLocal.getWritableDatabase();
         DetalleVenta dtVenta=null;
@@ -283,17 +321,16 @@ public class DetalleCliente extends AppCompatActivity {
             ContentValues values = new ContentValues();
             values.put("total", cursor.getInt(0));
 
-            if(db!= null) {
-          tvTotal.setText(String.valueOf(vt).toString());
+            tvTotal.setText(String.valueOf(+vt).toString());
+            Total.setText(String.valueOf(vt));
 
-        }
+
         }
         db.close();
 
-
-        Toast.makeText(this, "Total es "+cursor.getInt(0), Toast.LENGTH_LONG).show();
-        System.out.println();
-        Log.d("Respuesta: ", cursor.toString());
+       // Toast.makeText(this, "Total es "+cursor.getInt(0), Toast.LENGTH_LONG).show();
+       // System.out.println();
+       // Log.d("Respuesta: ", cursor.toString());
 
     }
 

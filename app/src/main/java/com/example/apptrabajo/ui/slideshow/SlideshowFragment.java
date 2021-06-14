@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.apptrabajo.R;
+import com.example.apptrabajo.adaptadores.ProductoAdapter;
 import com.example.apptrabajo.databinding.FragmentSlideshowBinding;
 import com.example.apptrabajo.datos.BaseDatosApp;
 import com.example.apptrabajo.entidades.Productos;
@@ -40,13 +41,10 @@ import java.util.Objects;
 public class SlideshowFragment extends Fragment  implements Response.Listener<JSONObject>, Response.ErrorListener {
 
     private static final String TABLE_PRODUCTO = "Producto";
-    private static final String COLUMN_ID = "id";
 
     private static final String nombre_producto = "nombre_producto";
 
     private static final String precioProducto = "precioProducto";
-    private static final String COLUMN_NOMBRE = "nombre";
-    private static final String COLUMN_PRECIO = "precioProducto";
 
     ArrayList<Productos> arrayList = new ArrayList<Productos>();
     ArrayList<String> strinsProducto;
@@ -57,6 +55,7 @@ public class SlideshowFragment extends Fragment  implements Response.Listener<JS
     Connection con;
     //  RecyclerView listView;
     ListView listView;
+    ProductoAdapter productoAdapter;
 
     private SlideshowViewModel slideshowViewModel;
     private FragmentSlideshowBinding binding;
@@ -73,15 +72,15 @@ public class SlideshowFragment extends Fragment  implements Response.Listener<JS
         consultarProducto();
 
 
-        ArrayAdapter<CharSequence> adapterProducto = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, strinsProducto);
-        listView.setAdapter(adapterProducto);
+      //  ArrayAdapter<CharSequence> adapterProducto = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, strinsProducto);
+    //    listView.setAdapter(adapterProducto);
 
         if (arrayList.size() > 0) {
 
-            adapterProducto.setDropDownViewResource(View.VISIBLE);
-            listView.setAdapter(adapterProducto);
+            productoAdapter.setDropDownViewResource(View.VISIBLE);
+            listView.setAdapter(productoAdapter);
         }else {
-            adapterProducto.setDropDownViewResource(View.GONE);
+            productoAdapter.setDropDownViewResource(View.GONE);
             Toast.makeText(getContext(),"no hay datos", Toast.LENGTH_SHORT).show();
           //  LayoutInflater inflater = LayoutInflater.from(getContext());
             View subView = inflater.inflate(R.layout.dialogo_actualizar_datos, null);
@@ -126,8 +125,9 @@ public class SlideshowFragment extends Fragment  implements Response.Listener<JS
             producto.setPrecio(cursor.getString(2));
             arrayList.add(producto);
         }
-        obtenerLista();
-
+   //     obtenerLista();
+        productoAdapter= new ProductoAdapter(getContext(), R.layout.productos_list, arrayList);
+        listView.setAdapter(productoAdapter);
 
     }
 

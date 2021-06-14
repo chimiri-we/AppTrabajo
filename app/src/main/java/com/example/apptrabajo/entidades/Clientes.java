@@ -2,6 +2,7 @@ package com.example.apptrabajo.entidades;
 
 public class Clientes {
     private int id;
+    private int id_venta;
     private String nombre;
     private String telefono;
     private String direccion;
@@ -14,6 +15,10 @@ public class Clientes {
         this.diaVisita = dia_visita;
     }
 
+    public Clientes(int id_venta) {
+        this.id_venta = id_venta;
+
+    }
     public Clientes() {
 
     }
@@ -60,5 +65,13 @@ public class Clientes {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public int getId_venta() {
+        return id_venta;
+    }
+
+    public void setId_venta(int id_venta) {
+        this.id_venta = id_venta;
     }
 }

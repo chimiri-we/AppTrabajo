@@ -29,6 +29,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.apptrabajo.MainActivity;
 import com.example.apptrabajo.R;
+import com.example.apptrabajo.adaptadores.ClientesAdapter;
 import com.example.apptrabajo.api.Coneccion;
 import com.example.apptrabajo.databinding.FragmentHomeBinding;
 import com.example.apptrabajo.datos.BaseDatosApp;
@@ -60,6 +61,7 @@ public class HomeFragment extends Fragment implements Response.Listener<JSONObje
     int id= 0;
 ImageView btn;
     Coneccion conn;
+    ClientesAdapter clientesAdapter;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -73,16 +75,18 @@ ImageView btn;
 
         bdLocal = new BaseDatosApp(getContext());
         consultarClientes();
-        ArrayAdapter<CharSequence> adapterCliente = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, listaCliente);
-        listViewOriginal.setAdapter(adapterCliente);
+     //   ArrayAdapter<CharSequence> adapterCliente = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, listaCliente);
+     //   listViewOriginal.setAdapter(adapterCliente);
 
         if (nuevaListaCliente.size() > 0) {
 
-           adapterCliente.setDropDownViewResource(View.VISIBLE);
-            listViewOriginal.setAdapter(adapterCliente);
+            clientesAdapter.setDropDownViewResource(View.VISIBLE);
+            listViewOriginal.setAdapter(clientesAdapter);
+         //  adapterCliente.setDropDownViewResource(View.VISIBLE);
+         //   listViewOriginal.setAdapter(adapterCliente);
        }
         else {
-            adapterCliente.setDropDownViewResource(View.GONE);
+            clientesAdapter.setDropDownViewResource(View.GONE);
          //   Toast.makeText(getContext(),"no hay datos", Toast.LENGTH_SHORT).show();
 
             View subView = inflater.inflate(R.layout.dialogo_actualizar_datos, null);
@@ -101,8 +105,8 @@ ImageView btn;
             });
             request= Volley.newRequestQueue(requireContext());
             builder.show();
-            Intent intent = new Intent(getContext(), MainActivity.class);
-            startActivity(intent);
+          //  Intent intent = new Intent(getContext(), MainActivity.class);
+         //   startActivity(intent);
 
         }
 
@@ -110,12 +114,10 @@ ImageView btn;
         listViewOriginal.setOnItemClickListener(new AdapterView.OnItemClickListener() {
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-       // Clientes ListViewClickUser = (Clientes) parent.getItemAtPosition(position);
+
        String cliente =""+nuevaListaCliente.get(position).getId();
 
-     //  int ID = nuevaListaCliente.get(position).getId();
-        // printing clicked item on screen using Toast message.
-        Toast.makeText(getContext(), cliente, Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(getContext(), "cliente" + cliente, Toast.LENGTH_SHORT).show();
 
 
       Bundle bundle=new Bundle();
@@ -124,17 +126,6 @@ ImageView btn;
         intent.putExtras(bundle);
         startActivity(intent);
 
-/*
-        Intent intent = new Intent(getContext(), DetalleCliente.class);
-        // Pass all data rank
-        intent.putExtra("nombre",ListViewClickUser.getNombre());
-
-        intent.putExtra("id",ListViewClickUser.getId());
-        // Pass all data country
-        intent.putExtra("telefono",ListViewClickUser.getTelefono());
-        intent.putExtra("direccion",ListViewClickUser.getDireccion());
-        intent.putExtra("dia_visita",ListViewClickUser.getDiaVisita());
-        startActivity(intent);*/
     }
 });
 
@@ -191,11 +182,7 @@ ImageView btn;
                 values.put("telefono", cliente.getTelefono());
                 values.put("direccion", cliente.getDireccion());
                 values.put("dia_visita", cliente.getDiaVisita());
-                //values.put(COLUMN_ID_CLI, cliente.getId());
-               // values.put(COLUMN_NOMBRE, cliente.getNombre());
-              //  values.put(COLUMN_TELEFONO, cliente.getTelefono());
-              //  values.put(COLUMN_DIRECCION, cliente.getDireccion());
-              //  values.put(COLUMN_DIA_VISITA, cliente.getDiaVisita());
+
                 bdLocal = new BaseDatosApp(requireContext().getApplicationContext());
                 SQLiteDatabase db = bdLocal.getReadableDatabase();
                 if(db!= null) {
@@ -213,12 +200,12 @@ ImageView btn;
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Toast.makeText(getContext(), "No se ha podido establecer conexión con el servidor" +
-                    " "+response, Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Verifica tu coneccion", Toast.LENGTH_LONG).show();
 
         }
 
         consultarClientes();
+
     }
 
 
@@ -231,13 +218,15 @@ ImageView btn;
         while (cursor.moveToNext()) {
             clientes=new Clientes();
             clientes.setId(cursor.getInt(0));
-            clientes.setNombre(cursor.getString(1));
-            clientes.setTelefono(cursor.getString(2));
-            clientes.setDireccion(cursor.getString(3));
-            clientes.setDiaVisita(cursor.getString(4));
+            clientes.setNombre(cursor.getString(2));
+            clientes.setTelefono(cursor.getString(3));
+            clientes.setDireccion(cursor.getString(4));
+            clientes.setDiaVisita(cursor.getString(5));
             nuevaListaCliente.add(clientes);
         }
-        obtenerlista();
+        clientesAdapter = new ClientesAdapter(getContext(), R.layout.usuarios_list, nuevaListaCliente);
+        listViewOriginal.setAdapter(clientesAdapter);
+      //  obtenerlista();
     }
 
     private void obtenerlista() {

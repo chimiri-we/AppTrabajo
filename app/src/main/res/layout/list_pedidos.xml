@@ -16,7 +16,7 @@
         android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/doctors_schedules_list"
+        android:id="@+id/list_ventas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"

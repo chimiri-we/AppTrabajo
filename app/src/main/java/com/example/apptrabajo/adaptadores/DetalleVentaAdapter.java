@@ -21,14 +21,13 @@ import com.example.apptrabajo.R;
 import com.example.apptrabajo.datos.BaseDatosApp;
 import com.example.apptrabajo.entidades.DetalleVenta;
 import com.example.apptrabajo.entidades.Productos;
-import com.example.apptrabajo.modelo.VentaModelo;
+import com.example.apptrabajo.modelo.VentaDetalleModel;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class DetalleVentaAdapter extends RecyclerView.Adapter<VentaModelo>
+public class DetalleVentaAdapter extends RecyclerView.Adapter<VentaDetalleModel>
         implements Filterable {
 
     private final Context context;
@@ -52,13 +51,13 @@ public class DetalleVentaAdapter extends RecyclerView.Adapter<VentaModelo>
     @NonNull
     @NotNull
     @Override
-    public VentaModelo onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    public VentaDetalleModel onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.contact_list_layout, parent, false);
-        return new VentaModelo(view);
+        return new VentaDetalleModel(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull VentaModelo holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull VentaDetalleModel holder, int position) {
         final DetalleVenta dtVenta = (DetalleVenta) listProductos.get(position);
         holder.tvCantidad.setText(dtVenta.getCantidad());
 

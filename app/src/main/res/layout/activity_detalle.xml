@@ -11,16 +11,14 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
-        android:background="@color/purple_500"
         android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/Theme.AppTrabajo.AppBarOverlay">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            android:paddingBottom="20dp"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -39,78 +37,126 @@
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:paddingBottom="40dp"
+                android:weightSum="4"
                 app:layout_collapseMode="parallax">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Direccion"
-                    app:boxBackgroundMode="outline"
-                    app:boxStrokeColor="#1C1A1A"
-                    app:endIconTint="#163194"
-                    app:helperTextEnabled="true"
-                    app:helperTextTextAppearance="@style/TextAppearance.AppCompat.Medium"
-                    app:hintEnabled="true"
-                    app:hintTextColor="#0288D1">
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_direccion"
+                    <com.google.android.material.textfield.TextInputLayout
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/Numero_de_Telefono"
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
+
+                        android:paddingRight="@dimen/activity_horizontal_margin"
+                        android:textColorHint="#0E1D7F"
+                        android:textSize="14sp"
+                        app:helperText="@string/Numero_de_Telefono">
+
+                        <TextView
+                            android:id="@+id/tv_numeroTel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="TextView" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:hint="@string/Direccion"
                         android:paddingLeft="@dimen/activity_horizontal_margin"
                         android:paddingRight="@dimen/activity_horizontal_margin"
-                        android:textColorHint="@color/black"
-                        android:textSize="20sp" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/Numero_de_Telefono"
-                    app:boxBackgroundMode="outline"
-                    app:boxStrokeColor="#1C1A1A"
-                    app:endIconTint="#163194"
-                    app:helperTextEnabled="true"
-                    app:hintTextColor="#0288D1">
-
-                    <TextView
-                        android:id="@+id/tv_numeroTel"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/Numero_de_Telefono"
-                        android:paddingLeft="@dimen/activity_horizontal_margin"
-                        android:paddingRight="@dimen/activity_horizontal_margin"
-
                         android:textColorHint="#0E1D7F"
-                        android:textSize="20sp" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:textSize="14sp"
+                        app:helperText="@string/Direccion">
 
-                <com.google.android.material.textfield.TextInputLayout
+                        <TextView
+                            android:id="@+id/tv_direccion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="TextView" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/signup_text_margin_top"
-                    android:hint="Dia de Visita"
-                    app:boxBackgroundMode="outline"
-                    app:boxStrokeColor="#1C1A1A"
-                    app:endIconTint="#163194"
-                    app:hintTextAppearance="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                    app:hintTextColor="#0288D1">
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
-                    <TextView
-                        android:id="@+id/textView12"
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:hint="dia de visita"
                         android:paddingLeft="@dimen/activity_horizontal_margin"
                         android:paddingRight="@dimen/activity_horizontal_margin"
-                        android:textColorHint="#0E0E0E" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:textColorHint="#0E0E0E"
+                        android:textSize="14sp"
+                        app:helperText="Dia de visita">
+
+                        <TextView
+                            android:id="@+id/tvDia_visita"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="TextView" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tv_fecha"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="fecha"
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
+                        android:paddingRight="@dimen/activity_horizontal_margin"
+                        android:textColorHint="#171616"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_numeroPedido"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="N° de Pedido"
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
+                        android:paddingRight="@dimen/activity_horizontal_margin"
+                        android:shadowColor="#2979FF"
+                        android:textColorHint="#121111"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/mostrarTotal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="VER TOTAL"
+                        android:textColorHint="#CC0707"
+                        android:textColorLink="#CA0303"
+                        app:helperText="VER TOTAL"
+                        app:hintTextColor="#2979FF" />
+
+                </LinearLayout>
 
 
             </LinearLayout>
