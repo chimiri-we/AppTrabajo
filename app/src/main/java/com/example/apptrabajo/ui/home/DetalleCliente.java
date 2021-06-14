@@ -142,6 +142,7 @@ public class DetalleCliente extends AppCompatActivity {
             collapser.setTitle(clientes.getNombre());
 
             nombreCli = collapser.getTitle().toString().trim();
+            obtenerTotalVenta();
           //
 
         }
@@ -210,6 +211,7 @@ public class DetalleCliente extends AppCompatActivity {
         builder.setView(subView);
         builder.create();
         builder.setPositiveButton("Agregar", (dialog, which) -> {
+
 
 
             final String nombrePro = nameField.getText().toString();

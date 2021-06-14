@@ -213,8 +213,8 @@ ImageView btn;
             clientes=new Clientes();
             clientes.setId_cliente(cursor.getInt(0));
             clientes.setNombre(cursor.getString(1));
-            clientes.setTelefono(cursor.getString(2));
-            clientes.setDireccion(cursor.getString(3));
+            clientes.setTelefono(cursor.getString(3));
+            clientes.setDireccion(cursor.getString(2));
             clientes.setDiaVisita(cursor.getString(4));
             nuevaListaCliente.add(clientes);
         }

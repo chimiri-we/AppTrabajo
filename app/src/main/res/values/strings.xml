@@ -19,6 +19,7 @@
     <string name="especialidad">Avilidad</string>
     <string name="request_button">Solicitar</string>
     <string name="message_no_schedules">No hay Peedidos</string>
+    <string name="ver_detalle">Ver detalle</string>
 
     <string-array name="dias">
         <item>Lunes</item>

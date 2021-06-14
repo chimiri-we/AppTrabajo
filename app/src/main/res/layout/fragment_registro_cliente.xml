@@ -107,6 +107,7 @@
             android:layout_margin="15dp"
             android:layout_marginTop="20dp"
             android:text="Registrar Cliene"
+            android:textColor="#EAE5E5"
             app:backgroundTint="#4593E1" />
 
     </LinearLayout>

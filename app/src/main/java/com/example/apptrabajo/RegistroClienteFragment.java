@@ -28,8 +28,8 @@ public class RegistroClienteFragment extends Fragment {
     public static final String REGISTER_URL = "https://servicioparanegocio.es/superClean/registro_cliente.php";
 
     public static final String KEY_NOMBRE = "nombre";
-    public static final String KEY_DIA_VISITA = "password";
-    public static final String KEY_DIRECCION = "email";
+    public static final String KEY_DIA_VISITA = "dia_visita";
+    public static final String KEY_DIRECCION = "direccion";
     public static final String KEY_NUMEROTELEFONO = "telefono";
 
     private EditText edtNombreCliente, edtNumeroCliente, edtDireccion, edtPasswordCliente;
