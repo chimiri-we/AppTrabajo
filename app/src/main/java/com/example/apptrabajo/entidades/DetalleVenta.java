@@ -63,6 +63,14 @@ public class DetalleVenta {
         this.total = resultado;
     }
 
+    public DetalleVenta(String nombrePro, String precioProd, String cantidad, String resultado, String s) {
+        this.nombre_producto = nombrePro;
+        this.cantidad = cantidad;
+        this.precio = precioProd;
+        this.total = resultado;
+        this.cod_detalle = s;
+    }
+
 
     public int getId() {
         return id_detalle;

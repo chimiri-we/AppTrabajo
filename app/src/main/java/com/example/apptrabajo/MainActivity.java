@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.example.apptrabajo.databinding.FragmentHomeBinding;
 import com.example.apptrabajo.datos.BaseDatosApp;
 import com.example.apptrabajo.entidades.Clientes;
+import com.example.apptrabajo.entidades.Venta;
+import com.example.apptrabajo.ui.home.DetalleCliente;
 import com.example.apptrabajo.ui.home.HomeFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -80,8 +82,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_edit) {
-            homeBinding.actualizarDatos();
+        switch (item.getItemId()) {
+            case R.id.action_edit:
+            //    int id_venta = 0;
+                Venta venta = null;
+                final BaseDatosApp bdLocal = new BaseDatosApp(MainActivity.this);
+               venta = bdLocal.ultimaVenta();
+                Toast.makeText(this, "ultima venta es" + venta.getId_venta(), Toast.LENGTH_SHORT).show();
+
+
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
