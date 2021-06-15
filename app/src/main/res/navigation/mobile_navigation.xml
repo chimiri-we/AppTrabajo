@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@id/nav_perfilEmpleado">
 
     <fragment
         android:id="@+id/nav_home"
@@ -27,5 +27,20 @@
         android:name="com.example.apptrabajo.RegistroClienteFragment"
         android:label="@string/registro"
         tools:layout="@layout/fragment_registro_cliente" />
+    <fragment
+        android:id="@+id/nav_perfilFragment"
+        android:name="com.example.apptrabajo.PerfilFragment"
+        android:label="@string/fragment_perfil"
+        tools:layout="@layout/fragment_perfil" />
+    <fragment
+        android:id="@+id/nav_mostrarDetalle"
+        android:name="com.example.apptrabajo.MostrarDetalle"
+tools:layout="@layout/mostrar_detalle"
+        android:label="MostrarDetalle" />
+    <fragment
+        android:id="@+id/nav_perfilEmpleado"
+        tools:layout="@layout/perfil_empleado"
+        android:name="com.example.apptrabajo.PerfilEmpleadoFragment"
+        android:label="ComunicadosFragment" />
 
 </navigation>

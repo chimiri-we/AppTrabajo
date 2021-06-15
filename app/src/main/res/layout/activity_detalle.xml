@@ -205,7 +205,7 @@
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|right|end"
         app:rippleColor="#FFFBFB"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription,UnusedAttribute" />
 
 
 

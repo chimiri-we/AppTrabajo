@@ -1,21 +1,14 @@
 package com.example.apptrabajo;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteAccessPermException;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
-import android.widget.BaseAdapter;
 import android.widget.Toast;
 
-import com.example.apptrabajo.databinding.FragmentHomeBinding;
 import com.example.apptrabajo.datos.BaseDatosApp;
-import com.example.apptrabajo.entidades.Clientes;
 import com.example.apptrabajo.entidades.Venta;
-import com.example.apptrabajo.ui.home.DetalleCliente;
 import com.example.apptrabajo.ui.home.HomeFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -58,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_registroClienteFragment, R.id.nav_slideshow)
+                R.id.nav_home, R.id.nav_mostrarDetalle, R.id.nav_perfilFragment, R.id.nav_perfilEmpleado, R.id.nav_slideshow, R.id.nav_registroClienteFragment)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);

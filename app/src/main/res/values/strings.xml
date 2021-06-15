@@ -21,6 +21,8 @@
     <string name="message_no_schedules">No hay Peedidos</string>
     <string name="ver_detalle">Ver detalle</string>
     <string name="lista_producto">Lista Producto</string>
+    <string name="perfil">Perfil</string>
+    <string name="fragment_perfil">Perfil de Usuario</string>
 
     <string-array name="dias">
         <item>Lunes</item>
