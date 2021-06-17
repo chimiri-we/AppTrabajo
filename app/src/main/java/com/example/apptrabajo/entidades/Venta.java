@@ -3,6 +3,11 @@ package com.example.apptrabajo.entidades;
 public class
 Venta {
     private int id_venta;
+
+    public void setId_cliente(int id_cliente) {
+        this.id_cliente = id_cliente;
+    }
+
     private int id_cliente;
     private String nombre_cliente;
     private String fecha;

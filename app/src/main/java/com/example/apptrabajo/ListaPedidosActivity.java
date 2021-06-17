@@ -56,8 +56,9 @@ public class ListaPedidosActivity  extends AppCompatActivity {
         setContentView(R.layout.activity_content);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+      Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
+      //  toolbar.getBackground().setAlpha(0);
 
        recyclerViewVenta = findViewById(R.id.list_ventas);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

@@ -189,13 +189,13 @@
             android:layout_centerInParent="true"
             android:background="@null" />
 
-        <ListView
-
-            android:id="@+id/listDetalleVenta"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lista_venta"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+
             android:layout_below="@id/centro"
-            tools:ignore="NestedScrolling" />
+            android:paddingBottom="8dp" />
 
     </RelativeLayout>
 

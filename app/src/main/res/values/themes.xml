@@ -18,7 +18,8 @@
     </style>
 
     <style name="Theme.AppTrabajo.NoActionBar">
-        <item name="windowActionBar">false</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="android:windowActionBarOverlay">true</item>
         <item name="windowNoTitle">true</item>
         <item name="android:textColorPrimary">@color/black</item>
     </style>

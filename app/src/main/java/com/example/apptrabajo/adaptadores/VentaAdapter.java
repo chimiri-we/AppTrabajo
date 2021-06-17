@@ -9,16 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.apptrabajo.R;
 import com.example.apptrabajo.datos.BaseDatosApp;
 import com.example.apptrabajo.entidades.Clientes;
+import com.example.apptrabajo.entidades.DetalleVenta;
 import com.example.apptrabajo.entidades.Venta;
 import com.example.apptrabajo.modelo.VentaModel;
 
@@ -35,10 +39,12 @@ public class VentaAdapter extends RecyclerView.Adapter<VentaModel>
     private final ArrayList<Venta> vArrayList;
     private final BaseDatosApp mDatabase;
    Venta venta;
+    DetalleVentaAdapter detalleVentaAdapter;
    Clientes clientes;
     int idCliente;
     int idVenta;
     TextView clienteNomb, clienteDire, clienteTel, ventaTotla, ventaId;
+    RecyclerView listView;
 
     public VentaAdapter(Context context, ArrayList<Venta> listVenta) {
         this.context = context;
@@ -95,6 +101,7 @@ public class VentaAdapter extends RecyclerView.Adapter<VentaModel>
     private void verDetalleVenta(Intent intent) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View subView = inflater.inflate(R.layout.mostrar_detalle, null);
+        listView = subView.findViewById(R.id.lista_venta);
          clienteNomb = subView.findViewById(R.id.dtNombre);
       clienteDire = subView.findViewById(R.id.dtDireccion);
      clienteTel = subView.findViewById(R.id.dtTelefono);
@@ -118,10 +125,27 @@ public class VentaAdapter extends RecyclerView.Adapter<VentaModel>
             clienteTel.setText(clientes.getTelefono());
         }*/
         venta = mDatabase.verVentaPorIdCliente(idVenta);
-    //    if (venta != null) {
+       if (venta != null) {
 
-          //  ventaTotla.setText(venta.getTota_venta());
-       // }
+           idCliente = venta.getId_cliente();
+
+            ventaTotla.setText(String.valueOf(venta.getTota_venta()));
+           LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+           listView.setLayoutManager(linearLayoutManager);
+           listView.setHasFixedSize(true);
+           ArrayList<DetalleVenta> dtventa = mDatabase.listDetalleVenta(idVenta);
+          detalleVentaAdapter = new DetalleVentaAdapter(context, dtventa);
+          listView.setAdapter(detalleVentaAdapter);
+
+          clientes = mDatabase.verCliente(idCliente);
+           if (clientes != null) {
+
+               clienteNomb.setText(clientes.getNombre());
+               clienteDire.setText(clientes.getDireccion());
+               clienteTel.setText(clientes.getTelefono());
+           }
+
+        }
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);

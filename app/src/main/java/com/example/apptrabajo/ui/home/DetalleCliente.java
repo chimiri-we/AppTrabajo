@@ -73,6 +73,7 @@ public class DetalleCliente extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
        // setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        toolbar.getBackground().setAlpha(0);
      collapser = findViewById(R.id.toolbar_layout);
 
         //obtenemos fecha y hora

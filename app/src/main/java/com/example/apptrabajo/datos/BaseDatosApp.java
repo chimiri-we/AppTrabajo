@@ -258,14 +258,17 @@ cursor.close();
         return venta;
     }
 
-    public Venta verVentaPorIdCliente(int idCliente) {
+    public Venta verVentaPorIdCliente(int idVenta) {
         SQLiteDatabase db = this.getWritableDatabase();
         Venta venta = null;
         Cursor cursor;
-        cursor = db.rawQuery("select * from Venta WHERE id_cliente = " + idCliente + " LIMIT 1", null);
+        cursor = db.rawQuery("select * from Venta WHERE id_venta = " + idVenta + " LIMIT 1", null);
         if (cursor.moveToFirst()) {
 
             venta = new Venta();
+            venta.setId_cliente(cursor.getInt(1));
+            venta.setNombre_cliente(cursor.getString(2));
+            venta.setFecha(cursor.getString(3));
             venta.setTota_venta(cursor.getInt(4));
 
         }
