@@ -280,7 +280,7 @@ cursor.close();
         cursor=db.rawQuery( "select SUM(total) from DetalleVenta WHERE id_venta = " + idventa +"", null);
         if (cursor.moveToNext()) {
             dtVenta = new DetalleVenta();
-            dtVenta.setTotal(String.valueOf(cursor.getInt(6)));
+            dtVenta.setTotal(String.valueOf(cursor.getInt(0)));
 
         }
         cursor.close();

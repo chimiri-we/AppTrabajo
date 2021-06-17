@@ -146,10 +146,22 @@ public class DetalleCliente extends AppCompatActivity {
             collapser.setTitle(clientes.getNombre());
 
             nombreCli = collapser.getTitle().toString().trim();
-            obtenerTotalVenta();
+         //   obtenerTotalVenta();
+            Venta idVen = bdLocal.ultimaVenta();
+            //   String idVenta = String.valueOf(idVen.getId_venta());
+            int idventa = 1+(idVen.getId_venta());
+            TotalVenta(idventa);
           //
 
         }
+    }
+
+    private void TotalVenta(int idventa) {
+        bdLocal = new BaseDatosApp(this.getApplicationContext());
+        // SQLiteDatabase db = bdLocal.getWritableDatabase();
+        DetalleVenta dtVenta = bdLocal.sumarItems(idventa);
+
+        tvTotal.setText(dtVenta.getTotal());
     }
 
     private void generarVenta() {

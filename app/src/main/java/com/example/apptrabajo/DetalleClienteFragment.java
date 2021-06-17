@@ -71,6 +71,7 @@ public class DetalleClienteFragment extends Fragment {
 
            DetalleVentaAdapter detalleVentaAdapter = new DetalleVentaAdapter(getContext(), detalleVenta);
             detalleVentaView.setAdapter(detalleVentaAdapter);
+            obtenerTotalVenta(idventa);
 
         }
         else {
@@ -85,7 +86,7 @@ public class DetalleClienteFragment extends Fragment {
                 startActivity(nuevointent);
             }
         });*/
-      // obtenerTotalVenta(idventa);
+     //  obtenerTotalVenta(idventa);
         return view;
 
     }
@@ -93,7 +94,7 @@ public class DetalleClienteFragment extends Fragment {
     private void obtenerTotalVenta(int idventa) {
        // int vt = 0;
         bdLocal = new BaseDatosApp(getContext().getApplicationContext());
-        SQLiteDatabase db = bdLocal.getWritableDatabase();
+       // SQLiteDatabase db = bdLocal.getWritableDatabase();
         DetalleVenta dtVenta = bdLocal.sumarItems(idventa);
 
         Total.setText(dtVenta.getTotal());
