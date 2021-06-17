@@ -27,7 +27,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class DetalleVentaAdapter extends RecyclerView.Adapter<VentaDetalleModel>
+public class
+DetalleVentaAdapter extends RecyclerView.Adapter<VentaDetalleModel>
         implements Filterable {
 
     private final Context context;
@@ -52,7 +53,7 @@ public class DetalleVentaAdapter extends RecyclerView.Adapter<VentaDetalleModel>
     @NotNull
     @Override
     public VentaDetalleModel onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.contact_list_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_compras, parent, false);
         return new VentaDetalleModel(view);
     }
 

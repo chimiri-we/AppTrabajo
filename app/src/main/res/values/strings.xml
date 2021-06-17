@@ -7,9 +7,9 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
+    <string name="menu_home">Lista Clientes</string>
     <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_slideshow">Lista Productos</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="nombre_cliente">Nombre Cliente</string>
@@ -23,6 +23,7 @@
     <string name="lista_producto">Lista Producto</string>
     <string name="perfil">Perfil</string>
     <string name="fragment_perfil">Perfil de Usuario</string>
+    <string name="idCliente">Id Cliente</string>
 
     <string-array name="dias">
         <item>Lunes</item>
@@ -32,4 +33,33 @@
         <item>Viernes</item>
     </string-array>
 
+    <!-- Strings de diálogo personalizado -->
+    <string name="info_text">Necesitas tener creada una cuenta para iniciar la aplicación</string>
+    <string name="crear_boton">CREAR CUENTA</string>
+    <string name="nombre_input">Nombre</string>
+    <string name="contrasena_input">Constraseña</string>
+    <string name="recordar_check">Recordarme</string>
+    <string name="olvidar_text">¿Olvidaste tu Contraseña?</string>
+    <string name="entrar_boton">ENTRAR</string>
+    <string name="cliente_label">Cliente</string>
+    <string name="producto_label">Producto</string>
+    <string name="fecha_label">Fecha</string>
+    <string name="prioridad_label">Prioridad</string>
+    <string name="notas_label">Notas</string>
+    <string name="notas_hint">Notas</string>
+    <string-array name="clientes">
+        <item>Fernando Jimenez</item>
+        <item>Carlos Fuentes</item>
+        <item>Pedro Lopez</item>
+    </string-array>
+    <string-array name="productos">
+        <item>Seguro A</item>
+        <item>Seguro B</item>
+        <item>Seguro C</item>
+    </string-array>
+    <string-array name="prioridades">
+        <item>Alta</item>
+        <item>Media</item>
+        <item>Baja</item>
+    </string-array>
 </resources>

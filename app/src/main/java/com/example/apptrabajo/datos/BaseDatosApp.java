@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class BaseDatosApp extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 13;
     private static final String DATABASE_NAME = "DatosTrabajo";
     private static final String TABLE_CLIENTE = "Cliente";
     private static final String COLUMN_ID = "id";
@@ -69,7 +69,6 @@ public class BaseDatosApp extends SQLiteOpenHelper {
                 "id_venta INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "id_cliente INTEGER NOT NULL,"+
                 "nombre_cliente TEXT NOT NULL,"+
-                "cod_detalle INTEGER,"+
                 "fecha TEXT,"+
                 "total_venta integer,"+
                 "FOREIGN KEY(id_cliente) REFERENCES Cliente(id_cliente))";
@@ -83,7 +82,6 @@ public class BaseDatosApp extends SQLiteOpenHelper {
                 "precio_producto TEXT,"+
                 "cantidad integer,"+
                 "total integer,"+
-                "cod_detalle INTEGER,"+
                 "FOREIGN KEY(id_producto) REFERENCES Producto(id_producto),"+
                 "FOREIGN KEY(id_venta) REFERENCES Venta(id_venta))";
         db.execSQL(dbDetalleVenta);
@@ -116,7 +114,7 @@ public class BaseDatosApp extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("id_cliente", venta.getId_cliente());
         values.put("nombre_cliente", venta.getNombre_cliente());
-        values.put("cod_detalle", venta.getDetalle_venta());
+
         values.put("fecha", venta.getFecha());
         values.put("total_venta", venta.getTota_venta());
         SQLiteDatabase db = this.getWritableDatabase();
@@ -125,20 +123,20 @@ public class BaseDatosApp extends SQLiteOpenHelper {
     }
     public void agregaProductos(DetalleVenta newVenta) {
         ContentValues values = new ContentValues();
+
         values.put("nombre_producto", newVenta.getNombre_producto());
         values.put("precio_producto", newVenta.getPrecio());
         values.put("cantidad", newVenta.getCantidad());
         values.put("id_venta", newVenta.getId_venta());
         values.put("id_producto", newVenta.getId_producto());
         values.put("total", newVenta.getTotal());
-        values.put("cod_detalle", newVenta.getCod_detalle());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_DETALLE_VENTA, null, values);
     }
 
 
-    public ArrayList<DetalleVenta> listDetalleVenta() {
-        String sql = "select * from  DetalleVenta";
+    public ArrayList<DetalleVenta> listDetalleVenta(int idventa) {
+        String sql = "select * from  DetalleVenta WHERE id_venta = " + idventa + "";
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<DetalleVenta> storeContacts = new ArrayList<>();
         Cursor cursor = db.rawQuery(sql, null);
@@ -151,8 +149,7 @@ public class BaseDatosApp extends SQLiteOpenHelper {
                 String precio = cursor.getString(4);
                 String cantidad = cursor.getString(5);
                 String total = cursor.getString(6);
-                String detalle_venta = cursor.getString(7);
-                storeContacts.add(new DetalleVenta(id_detalle, nombre_producto, precio, cantidad, total));
+                storeContacts.add(new DetalleVenta(id_detalle, id_venta, nombre_producto, precio, cantidad, total));
             }
             while (cursor.moveToNext());
         }
@@ -205,12 +202,12 @@ public class BaseDatosApp extends SQLiteOpenHelper {
             do {
 
             int idVenta = Integer.parseInt(cursor.getString(0));
+            int id_cliente = Integer.parseInt(cursor.getString(1));
             String nombreClient = cursor.getString(2);
-            String dtVenta = cursor.getString(3);
-            String fechaVenta = cursor.getString(4);
-           int totalVenta = Integer.parseInt(cursor.getString(5));
+            String fechaVenta = cursor.getString(3);
+           int totalVenta = Integer.parseInt(cursor.getString(4));
 
-            storeVenta.add(new Venta(idVenta, nombreClient, dtVenta, fechaVenta, totalVenta));
+            storeVenta.add(new Venta(idVenta, id_cliente, nombreClient, fechaVenta, totalVenta));
         }
             while (cursor.moveToNext());
         }
@@ -261,4 +258,33 @@ cursor.close();
         return venta;
     }
 
+    public Venta verVentaPorIdCliente(int idCliente) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Venta venta = null;
+        Cursor cursor;
+        cursor = db.rawQuery("select * from Venta WHERE id_cliente = " + idCliente + " LIMIT 1", null);
+        if (cursor.moveToFirst()) {
+
+            venta = new Venta();
+            venta.setTota_venta(cursor.getInt(4));
+
+        }
+        cursor.close();
+        return venta;
+    }
+
+    public DetalleVenta sumarItems(int idventa) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        DetalleVenta dtVenta = null;
+        Cursor cursor;
+        cursor=db.rawQuery( "select SUM(total) from DetalleVenta WHERE id_venta = " + idventa +"", null);
+        if (cursor.moveToNext()) {
+            dtVenta = new DetalleVenta();
+            dtVenta.setTotal(String.valueOf(cursor.getInt(6)));
+
+        }
+        cursor.close();
+        return  dtVenta;
+
+    }
 }

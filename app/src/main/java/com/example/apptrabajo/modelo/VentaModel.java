@@ -10,7 +10,7 @@ import com.example.apptrabajo.R;
 
 public class VentaModel extends RecyclerView.ViewHolder {
 
-    public TextView nombreCliente, fechaVenta, tVenta, tIdVenta, detalle;
+    public TextView nombreCliente, fechaVenta, tVenta, tIdVenta, dtIdCliente;
 
     public Button btnVerId;
     public VentaModel(View itemView) {
@@ -20,7 +20,7 @@ public class VentaModel extends RecyclerView.ViewHolder {
         nombreCliente = itemView.findViewById(R.id.name_cliente);
         fechaVenta = itemView.findViewById(R.id.fecha_text);
         tVenta = itemView.findViewById(R.id.tv_total_venta);
-        detalle = itemView.findViewById(R.id.tv_detalle_venta);
+        dtIdCliente = itemView.findViewById(R.id.tv_detalle_venta);
 
     }
 

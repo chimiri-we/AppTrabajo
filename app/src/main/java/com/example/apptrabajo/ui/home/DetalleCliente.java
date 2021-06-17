@@ -60,7 +60,7 @@ public class DetalleCliente extends AppCompatActivity {
     TextView tvTotal;
     String formattedDate;
     Spinner spinnerPro;
-    String cod;
+
     FloatingActionButton btnAgregar;
     CollapsingToolbarLayout collapser;
     public DetalleCliente() {
@@ -86,7 +86,7 @@ public class DetalleCliente extends AppCompatActivity {
         fecha.setText(formattedDate);
 
 
-       TextView codDetalle = findViewById(R.id.tv_numeroPedido);
+      codDetalle = findViewById(R.id.tv_numeroPedido);
 
       tvTotal = findViewById(R.id.mostrarTotal);
         direccion = findViewById(R.id.tv_direccion);
@@ -125,22 +125,21 @@ public class DetalleCliente extends AppCompatActivity {
 
             } else {
                 id = extras.getInt("id");
-             cod = extras.getString("cod");
+//             cod = extras.getString("cod");
             }
 
         } else {
             id = (int) savedInstanceState.getSerializable("id");
-           cod = savedInstanceState.getString("cod");
-            codDetalle.setText(cod);
+           //cod = savedInstanceState.getString("cod");
+          //  codDetalle.setText(String.valueOf(id));
         }
-        codDetalle.setText(cod);
+       // codDetalle.setText(id);
         final BaseDatosApp bdLocal = new BaseDatosApp(DetalleCliente.this);
         clientes = bdLocal.verCliente(id);
 
         if(clientes != null){
 
-
-          // codDetalle.setText(clientes.getId());
+           codDetalle.setText(String.valueOf(id));
             diaVisita.setText(clientes.getDiaVisita());
            telefono.setText(clientes.getTelefono());
             direccion.setText(clientes.getDireccion());
@@ -217,8 +216,9 @@ public class DetalleCliente extends AppCompatActivity {
         builder.create();
         builder.setPositiveButton("Agregar", (dialog, which) -> {
 
-
-
+            Venta idVen = bdLocal.ultimaVenta();
+         //   String idVenta = String.valueOf(idVen.getId_venta());
+            int idventa = 1+(idVen.getId_venta());
             final String nombrePro = nameField.getText().toString();
             final String precioProd = precio.getText().toString();
             final String cantidad = edCantidad.getText().toString();
@@ -234,10 +234,10 @@ public class DetalleCliente extends AppCompatActivity {
                 Toast.makeText(this, "Algo salió mal. Verifique sus valores de entrada", Toast.LENGTH_LONG).show();
             }
             else {
-                DetalleVenta newDetalleVenta = new DetalleVenta(nombrePro, precioProd, cantidad, resultado);
+                DetalleVenta newDetalleVenta = new DetalleVenta(idventa, nombrePro, precioProd, cantidad, resultado);
                 bdLocal.agregaProductos(newDetalleVenta);
 
-             //   Toast.makeText(this, "El id es" + newDetalleVenta.getId_detalle(), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "El id de venta es" +idventa, Toast.LENGTH_LONG).show();
 
                 finish();
 
@@ -313,10 +313,13 @@ public class DetalleCliente extends AppCompatActivity {
        // nombreCli = clientes.getNombre();
         totalV = Integer.parseInt(tvTotal.getText().toString().trim());
 
-        Venta venta = new Venta(id, nombreCli, cod, formattedDate, totalV);
+        Venta venta = new Venta(nombreCli, id, formattedDate, totalV);
         bdLocal.generarVenta(venta);
-        actualizarPedio();
+     //   actualizarPedio();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
         Toast.makeText(this, "se ha generado venta" + venta, Toast.LENGTH_SHORT).show();
+
 
     }
 

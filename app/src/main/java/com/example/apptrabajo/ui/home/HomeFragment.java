@@ -107,7 +107,7 @@ ImageView btn;
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
        String cliente =""+nuevaListaCliente.get(position).getId_cliente();
-       String codDetalle = "cod_"+(nuevaListaCliente.get(position).getId_cliente()+1);
+    //   String codDetalle = "cod_"+(nuevaListaCliente.get(position).getId_cliente()+1);
 
     //    Toast.makeText(getContext(), "id del cliente es " + codDetalle, Toast.LENGTH_SHORT).show();
 
@@ -115,7 +115,7 @@ ImageView btn;
       Bundle bundle=new Bundle();
 
         bundle.putInt("id", Integer.parseInt(cliente));
-        bundle.putString("cod", codDetalle);
+      //  bundle.putString("cod", codDetalle);
         Intent intent = new Intent(getContext(), DetalleCliente.class);
         intent.putExtras(bundle);
         startActivity(intent);

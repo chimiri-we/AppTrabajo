@@ -8,7 +8,6 @@ public class DetalleVenta {
     private String cantidad;
     private String precio;
     private String total;
-    private String cod_detalle;
 
     public DetalleVenta(int id_detalle, int id_producto, int id_venta, String nombre_producto, String cantidad, String precio, String total) {
         this.id_detalle = id_detalle;
@@ -31,8 +30,9 @@ public class DetalleVenta {
         this.precio = precio;
     }
 
-    public DetalleVenta(int id_detalle, String nombre_producto, String precio, String cantidad, String total) {
+    public DetalleVenta(int id_detalle, int id_venta, String nombre_producto, String precio, String cantidad, String total) {
         this.id_detalle = id_detalle;
+        this.id_venta = id_venta;
         this.nombre_producto = nombre_producto;
         this.cantidad = cantidad;
         this.precio = precio;
@@ -63,12 +63,22 @@ public class DetalleVenta {
         this.total = resultado;
     }
 
-    public DetalleVenta(String nombrePro, String precioProd, String cantidad, String resultado, String s) {
+    public DetalleVenta(int idventa, String nombrePro, String precioProd, String cantidad, String resultado, String s) {
+        this.id_venta = idventa;
         this.nombre_producto = nombrePro;
         this.cantidad = cantidad;
         this.precio = precioProd;
         this.total = resultado;
-        this.cod_detalle = s;
+
+    }
+
+    public DetalleVenta(int idventa, String nombrePro, String precioProd, String cantidad, String resultado) {
+
+        this.id_venta = idventa;
+        this.nombre_producto = nombrePro;
+        this.cantidad = cantidad;
+        this.precio = precioProd;
+        this.total = resultado;
     }
 
 
@@ -136,11 +146,4 @@ public class DetalleVenta {
         this.id_detalle = id_detalle;
     }
 
-    public String getCod_detalle() {
-        return cod_detalle;
-    }
-
-    public void setCod_detalle(String cod_detalle) {
-        this.cod_detalle = cod_detalle;
-    }
 }

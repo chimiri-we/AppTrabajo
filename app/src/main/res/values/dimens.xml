@@ -15,7 +15,7 @@
     <dimen name="loginCardRadius">20dp</dimen>
     <dimen name="loginViewsMargin">20dp</dimen>
 
-    <dimen name="signup_text_margin_top">10dp</dimen>
+    <dimen name="signup_text_margin_top">5dp</dimen>
 
 
     <dimen name="spacing">8dp</dimen>

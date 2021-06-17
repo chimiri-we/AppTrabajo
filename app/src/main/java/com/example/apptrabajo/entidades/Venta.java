@@ -1,11 +1,11 @@
 package com.example.apptrabajo.entidades;
 
-public class Venta {
+public class
+Venta {
     private int id_venta;
     private int id_cliente;
     private String nombre_cliente;
     private String fecha;
-    private String detalle_venta;
     private int tota_venta;
 
     public Venta(int id_venta, int id_cliente, String nombre_cliente, String fecha, String detalle_venta, int tv) {
@@ -13,7 +13,6 @@ public class Venta {
         this.id_cliente = id_cliente;
         this.nombre_cliente = nombre_cliente;
         this.fecha = fecha;
-        this.detalle_venta = detalle_venta;
         this.tota_venta = tv;
     }
 
@@ -28,12 +27,23 @@ public class Venta {
         this.tota_venta = totaVenta;
     }
 
-    public Venta(int idVenta, String nombreClient, String dtVenta, String fechaVenta, int totalVenta) {
+
+    public Venta(int idVenta, int idCliente, String nombreClient, String fechaVenta, int totalVenta) {
         this.id_venta = idVenta;
+
+        this.id_cliente = idCliente;
         this.nombre_cliente = nombreClient;
         this.fecha = fechaVenta;
-        this.detalle_venta = dtVenta;
         this.tota_venta = totalVenta;
+    }
+
+    public Venta(String nombreCli, int id, String formattedDate, int totalV) {
+        this.nombre_cliente = nombreCli;
+        this.id_cliente = id;
+        this.fecha = formattedDate;
+        this.tota_venta = totalV;
+
+
     }
 
 
@@ -53,13 +63,9 @@ public class Venta {
         this.fecha = fecha;
     }
 
-    public String getDetalle_venta() {
-        return detalle_venta;
-    }
 
-    public void setDetalle_venta(String detalle_venta) {
-        this.detalle_venta = detalle_venta;
-    }
+
+
 
     public int getId_cliente() {
         return id_cliente;

@@ -26,6 +26,7 @@ import com.example.apptrabajo.adaptadores.DetalleVentaAdapter;
 import com.example.apptrabajo.datos.BaseDatosApp;
 import com.example.apptrabajo.entidades.DetalleVenta;
 import com.example.apptrabajo.entidades.Productos;
+import com.example.apptrabajo.entidades.Venta;
 import com.example.apptrabajo.ui.home.DetalleCliente;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
@@ -59,7 +60,11 @@ public class DetalleClienteFragment extends Fragment {
         detalleVentaView.setLayoutManager(linearLayoutManager);
         detalleVentaView.setHasFixedSize(true);
         bdLocal = new BaseDatosApp(getContext());
-        ArrayList<DetalleVenta> detalleVenta = bdLocal.listDetalleVenta();
+        Venta idVen = bdLocal.ultimaVenta();
+        //   String idVenta = String.valueOf(idVen.getId_venta());
+        int idventa = 1+(idVen.getId_venta());
+
+        ArrayList<DetalleVenta> detalleVenta = bdLocal.listDetalleVenta(idventa);
         if (detalleVenta.size() > 0) {
             detalleVentaView.setVisibility(View.VISIBLE);
 
@@ -70,7 +75,7 @@ public class DetalleClienteFragment extends Fragment {
         }
         else {
             detalleVentaView.setVisibility(View.GONE);
-          //  Toast.makeText(getContext(), "No hay ningún articulo guardado para este cliente", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "No hay ningún articulo guardado para este cliente", Toast.LENGTH_LONG).show();
         }
     /*    Button btnAdd = view.findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -80,35 +85,28 @@ public class DetalleClienteFragment extends Fragment {
                 startActivity(nuevointent);
             }
         });*/
-       obtenerTotalVenta();
+      // obtenerTotalVenta(idventa);
         return view;
 
     }
 
-    private void obtenerTotalVenta() {
-        int vt = 0;
+    private void obtenerTotalVenta(int idventa) {
+       // int vt = 0;
         bdLocal = new BaseDatosApp(getContext().getApplicationContext());
         SQLiteDatabase db = bdLocal.getWritableDatabase();
-        DetalleVenta dtVenta=null;
-        Cursor cursor=db.rawQuery( "select SUM(total) from DetalleVenta", null);
-        if (cursor.moveToNext()) {
-            DetalleVenta detalleVenta = new DetalleVenta();
-            vt = cursor.getInt(0);
-            ContentValues values = new ContentValues();
-            values.put("total", cursor.getInt(0));
+        DetalleVenta dtVenta = bdLocal.sumarItems(idventa);
 
-
-            Total.setText(String.valueOf(vt));
-
+        Total.setText(dtVenta.getTotal());
 
         }
-        db.close();
+
+
 
       /*  Toast.makeText(getContext(), "Total es "+cursor.getInt(0), Toast.LENGTH_LONG).show();
         System.out.println();
         Log.d("Respuesta: ", cursor.toString());
 */
-    }
+
 
 
     private void addTaskDialog() {
