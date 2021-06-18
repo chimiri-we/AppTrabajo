@@ -2,31 +2,27 @@ package com.example.apptrabajo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.apptrabajo.datos.BaseDatosApp;
-import com.example.apptrabajo.entidades.Venta;
-import com.example.apptrabajo.ui.home.HomeFragment;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.apptrabajo.databinding.ActivityMainBinding;
+import com.example.apptrabajo.datos.BaseDatosApp;
+import com.example.apptrabajo.entidades.Venta;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-   HomeFragment homeBinding;
-    BaseDatosApp bdLocal;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +32,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
-        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                Intent intent = new Intent(MainActivity.this, ListaPedidosActivity.class);
-                startActivity(intent);
 
-            }
+        binding.appBarMain.fab.setOnClickListener(view -> {
+
+            Intent intent = new Intent(MainActivity.this, UbicacionActivity.class);
+            startActivity(intent);
+
         });
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;

@@ -152,7 +152,7 @@ public class VentaAdapter extends RecyclerView.Adapter<VentaModel>
         builder.setTitle("Detalle de venta");
         builder.setView(subView);
         builder.create();
-        builder.setPositiveButton("", (dialog, which) -> {
+        builder.setPositiveButton("EDITAR", (dialog, which) -> {
             Toast.makeText(context, "Algo salió mal. Verifique sus valores de entrada", Toast.LENGTH_LONG).show();
 
         }).setNegativeButton("CANCELAR", new DialogInterface.OnClickListener() {

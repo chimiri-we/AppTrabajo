@@ -31,7 +31,7 @@
         android:id="@+id/nav_perfilFragment"
         android:name="com.example.apptrabajo.PerfilFragment"
         android:label="@string/fragment_perfil"
-        tools:layout="@layout/fragment_perfil" />
+        tools:layout="@layout/activity_ubicacion" />
     <fragment
         android:id="@+id/nav_mostrarDetalle"
         android:name="com.example.apptrabajo.MostrarDetalle"
@@ -42,5 +42,10 @@ tools:layout="@layout/mostrar_detalle"
         tools:layout="@layout/perfil_empleado"
         android:name="com.example.apptrabajo.PerfilEmpleadoFragment"
         android:label="@string/perfil" />
+    <fragment
+        android:id="@+id/nav_comunicadosFragment"
+        android:name="com.example.apptrabajo.ComunicadosFragment"
+        android:label="fragment_comunicados"
+        tools:layout="@layout/fragment_comunicados" />
 
 </navigation>

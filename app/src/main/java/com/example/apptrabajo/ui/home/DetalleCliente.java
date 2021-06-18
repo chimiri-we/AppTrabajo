@@ -44,15 +44,14 @@ import java.util.Objects;
 public class DetalleCliente extends AppCompatActivity {
 
 
-    private static final String COLUMN_TOTAL = "total";
+
     private static final String TABLE_VENTA = "Venta";
     ArrayList<Productos> arrayList = new ArrayList<Productos>();
     ArrayList<String> strinsProducto;
 
     Clientes clientes;
-    Venta venta;
+
     int totalV;
-    int vt;
     int id = 0;
     String nombreCli;
     BaseDatosApp bdLocal;

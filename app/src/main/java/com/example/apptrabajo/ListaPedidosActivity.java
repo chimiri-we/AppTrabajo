@@ -95,4 +95,7 @@ public class ListaPedidosActivity  extends AppCompatActivity {
         mProgress.setVisibility(show ? View.VISIBLE : View.GONE);
         mList.setVisibility(show ? View.GONE : View.VISIBLE);
     }
+
+    public void sincronizarPedido(View view) {
+    }
 }

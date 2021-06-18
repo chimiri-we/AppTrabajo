@@ -20,13 +20,13 @@
             android:title="@string/registro" />
 
         <item
-            android:id="@+id/nav_mostrarDetalle"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/lista_producto" />
+            android:id="@+id/nav_comunicadosFragment"
+            android:icon="@drawable/ic_comunicadso"
+            android:title="@string/comunicado" />
 
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_lista"
             android:title="@string/lista_producto" />
     </group>
 </menu>

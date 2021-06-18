@@ -1,5 +1,6 @@
 package com.example.apptrabajo.ui.home;
 
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -42,6 +43,7 @@ public class HomeFragment extends Fragment implements Response.Listener<JSONObje
 
 
 
+    ProgressDialog progress;
     private FragmentHomeBinding binding;
     ArrayList<String> listaCliente;
     ArrayList<Clientes> nuevaListaCliente;
@@ -138,6 +140,9 @@ ImageView btn;
     }
 
     public void cargarWebService() {
+        progress=new ProgressDialog(getContext());
+        progress.setMessage("Consultando...");
+        progress.show();
         String url="https://servicioparanegocio.es/superClean/consultarUsuario.php?";
         //String url="https://servicioparanegocio.es/superClean/consultarUsuario.php?dia_visita=jueves";
         jsonObjectRequest=new JsonObjectRequest(Request.Method.GET,url,null, this, this);
@@ -150,6 +155,7 @@ ImageView btn;
         Toast.makeText(getContext(), "No se puede conectar "+error.toString(), Toast.LENGTH_LONG).show();
         System.out.println();
         Log.d("ERROR: ", error.toString());
+        progress.hide();
 
     }
 
@@ -189,6 +195,7 @@ ImageView btn;
                 db.insert(TABLE_CLIENTE, null, values);
             }
 
+            progress.hide();
 
 
 
@@ -204,7 +211,7 @@ ImageView btn;
 
 
 
-    private void consultarClientes() {
+    public void consultarClientes() {
         SQLiteDatabase db = bdLocal.getReadableDatabase();
         Clientes clientes=null;
         nuevaListaCliente = new ArrayList<Clientes>();

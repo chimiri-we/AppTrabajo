@@ -11,13 +11,13 @@
         android:id="@+id/appbar"
 
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="280dp"
         android:background="@drawable/fondo_perfil_empleado"
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginBottom="20dp"
 
             android:fitsSystemWindows="true"
@@ -30,23 +30,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/cardColor"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:gravity="center|center_horizontal">
 
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/line_chart_button_selected"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/fab_details"
                     android:foreground="@drawable/ic_person"
                     tools:ignore="ContentDescription" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:helperText="Empleado"
-                    app:helperTextEnabled="true">
+                    android:layout_gravity="center|right"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#1C1A1A"
+                    app:endIconTint="#163194"
+                    app:helperText="Nombre del Cliente"
+                    app:helperTextEnabled="true"
+                    app:hintTextColor="#0288D1">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -72,7 +78,8 @@
         android:layout_height="match_parent"
 
 
-        android:layout_marginTop="-50dp"
+        android:layout_marginTop="-80dp"
+        android:background="@color/cardColor"
         android:foregroundGravity="center"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
@@ -85,46 +92,42 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
-                style="@style/loginCard"
-                android:layout_width="350dp"
-                android:layout_height="120dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                app:cardForegroundColor="@color/cardColor"
-                app:elevation="16dp"
-                app:layout_anchor="@string/hide_bottom_view_on_scroll_behavior"
-                app:layout_anchorGravity="top"
-                app:shapeAppearance="@style/loginCard">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:background="@color/cardColor"
+                android:foregroundGravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:showDividers="middle|beginning"
+                android:weightSum="3">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:background="@color/cardColor"
-                    android:foregroundGravity="center"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:showDividers="middle|beginning"
-                    android:weightSum="3">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/verListaVentas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginRight="15dp"
+                    android:clickable="true"
+                    app:cardCornerRadius="10dp">
 
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:paddingTop="5dp"
-                        android:showDividers="middle|beginning|end">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Ventas del Dia"
-                            android:textSize="16sp"
+                            android:gravity="center"
 
-                            />
+                            android:paddingTop="5dp"
+                            android:text="Clientes por Visitar"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -132,17 +135,27 @@
                             android:layout_gravity="center"
                             android:paddingTop="10dp"
                             android:text="125"
-                            android:textColor="@color/design_default_color_primary"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
 
                     </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="1"
                         android:foregroundGravity="center"
                         android:orientation="vertical"
                         android:paddingTop="5dp"
@@ -156,7 +169,7 @@
                             android:gravity="center"
                             android:text="Clientes Visitados"
 
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -165,27 +178,46 @@
                             android:paddingTop="10dp"
                             android:text="125"
                             android:textColor="@color/material_on_background_disabled"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
 
                     </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    style="@style/loginCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:clickable="true"
+                    app:cardForegroundColor="@color/cardColor"
+                    app:elevation="16dp"
+                    app:layout_anchor="@string/hide_bottom_view_on_scroll_behavior"
+                    app:layout_anchorGravity="center"
+                    app:shapeAppearance="@style/loginCard">
 
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:paddingTop="5dp"
+                        android:showDividers="middle|beginning|end">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
+                            android:text="Ventas del Dia"
 
-                            android:paddingTop="5dp"
-                            android:text="Clientes por Visitar"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -193,45 +225,37 @@
                             android:layout_gravity="center"
                             android:paddingTop="10dp"
                             android:text="125"
-                            android:textColor="@color/black"
-                            android:textSize="20sp"
+                            android:textColor="@color/design_default_color_primary"
+                            android:textSize="14sp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
+            </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="35dp"
                 android:layout_weight="1"
-                android:foregroundGravity="center"
-                android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingStart="25dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:weightSum="2"
-                tools:ignore="RtlSymmetry,UseCompoundDrawables"
-                tools:visibility="visible">
+                tools:ignore="RtlSymmetry,UseCompoundDrawables">
 
                 <androidx.cardview.widget.CardView
                     style="@style/loginCard"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:foregroundGravity="center">
+                    app:cardBackgroundColor="#BEC6FF00">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:foregroundGravity="center"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -259,15 +283,16 @@
 
                 <androidx.cardview.widget.CardView
                     style="@style/loginCard"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="#BEC6FF00">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:foregroundGravity="center"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -284,7 +309,6 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="1"
                             android:paddingStart="20dp"
-                            android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="Actualizar Productos"
                             android:textStyle="bold"
