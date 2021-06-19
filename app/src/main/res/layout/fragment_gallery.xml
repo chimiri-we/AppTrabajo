@@ -8,11 +8,10 @@
     tools:context=".ui.gallery.GalleryFragment"
     android:orientation="horizontal"
     >
+
     <GridView
         android:id="@+id/gvJoyas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="70dp"
-        android:numColumns="2"
-        />
+        android:numColumns="2" />
 </LinearLayout>

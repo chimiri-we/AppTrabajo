@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ClienteActivity">
+    <item
+        android:id="@+id/action_edit"
+
+        android:icon="@drawable/ic_guardar"
+        android:iconTint="@color/black"
+        android:orderInCategory="1"
+        android:title="Generar Venta"
+        app:showAsAction="ifRoom|withText" />
+
+    <item
+        android:id="@+id/action_delete"
+        android:orderInCategory="2"
+        android:iconTint="@color/black"
+        android:icon="@drawable/ic_alert_circle"
+        app:showAsAction="ifRoom"
+        android:title="borrar" />
+</menu>
