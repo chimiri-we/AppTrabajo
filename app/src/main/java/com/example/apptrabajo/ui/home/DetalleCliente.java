@@ -310,7 +310,7 @@ public class DetalleCliente extends AppCompatActivity {
      //   actualizarPedio();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        Toast.makeText(this, "se ha generado venta" + venta, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "el total es" + totalV, Toast.LENGTH_SHORT).show();
 
 
     }

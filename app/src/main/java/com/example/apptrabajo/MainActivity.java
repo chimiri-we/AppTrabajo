@@ -19,7 +19,8 @@ import com.example.apptrabajo.datos.BaseDatosApp;
 import com.example.apptrabajo.entidades.Venta;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class
+MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_mostrarDetalle, R.id.nav_perfilFragment, R.id.nav_perfilEmpleado, R.id.nav_slideshow, R.id.nav_registroClienteFragment)
+                R.id.nav_home, R.id.nav_slideshow, R.id.nav_mostrarDetalle, R.id.nav_perfilFragment, R.id.nav_perfilEmpleado, R.id.nav_gallery, R.id.nav_registroClienteFragment)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -78,13 +79,13 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "ultima venta es" + venta.getId_venta(), Toast.LENGTH_SHORT).show();
 
 
-             */
+
 
                BaseDatosApp bdLocal = new BaseDatosApp(this.getApplicationContext());
                 SQLiteDatabase db = bdLocal.getReadableDatabase();
                 db.execSQL("delete from " + TABLE_PRODUCTO);
                 Toast.makeText(this, "Se ha eliminado, actualiza la vista", Toast.LENGTH_LONG).show();
-                onStart();
+                onStart();  */
                 break;
         }
         return super.onOptionsItemSelected(item);

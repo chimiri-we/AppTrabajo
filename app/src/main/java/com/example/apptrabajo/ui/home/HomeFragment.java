@@ -27,7 +27,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.apptrabajo.R;
 import com.example.apptrabajo.adaptadores.ClientesAdapter;
-import com.example.apptrabajo.api.Coneccion;
 import com.example.apptrabajo.databinding.FragmentHomeBinding;
 import com.example.apptrabajo.datos.BaseDatosApp;
 import com.example.apptrabajo.entidades.Clientes;
@@ -53,7 +52,7 @@ public class HomeFragment extends Fragment implements Response.Listener<JSONObje
     JsonObjectRequest jsonObjectRequest;
     private static final String TABLE_CLIENTE = "Cliente";
 ImageView btn;
-    Coneccion conn;
+    
     ClientesAdapter clientesAdapter;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -62,7 +61,7 @@ ImageView btn;
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         listViewOriginal = binding.produclis;
-        btn = binding.button2;
+      //  btn = binding.button2;
 
 
 
@@ -125,7 +124,7 @@ ImageView btn;
     }
 });
 
-        btn.setOnClickListener(v -> actualizarDatos());
+      //  btn.setOnClickListener(v -> actualizarDatos());
 
         return root;
     }

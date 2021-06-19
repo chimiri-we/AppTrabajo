@@ -89,6 +89,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="30dp"
             android:background="@android:color/transparent"
+            android:clickable="true"
             android:foregroundGravity="center"
             android:gravity="center"
             android:orientation="vertical">
@@ -102,17 +103,24 @@
                 android:foregroundGravity="center"
                 android:gravity="center"
                 android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingTop="20dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="20dp"
                 android:showDividers="middle|beginning"
                 android:weightSum="3">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/verListaVentas"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginRight="15dp"
-                    android:clickable="true"
-                    app:cardCornerRadius="10dp">
+                    style="@style/loginCard"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/loginViewsMargin"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="@dimen/loginViewsMargin"
+                    android:background="@color/whiteCardColor"
+                    android:elevation="5dp"
+                    app:cardCornerRadius="@dimen/loginCardRadius">
 
                     <LinearLayout
                         android:layout_width="80dp"
@@ -125,34 +133,37 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:gravity="center"
 
+                            android:gravity="center"
                             android:paddingTop="5dp"
-                            android:text="Clientes por Visitar"
+                            android:text="Ventas Del Dia"
+                            android:textColor="#00B0FF"
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tv_ventas_dia"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:paddingTop="10dp"
                             android:text="125"
                             android:textColor="@color/black"
-                            android:textSize="14sp"
+                            android:textSize="20sp"
                             android:textStyle="normal" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
-                    android:clickable="true"
-                    android:focusable="true">
+                    style="@style/loginCard"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="@dimen/loginViewsMargin"
+                    android:layout_marginBottom="@dimen/loginViewsMargin"
+                    android:background="@color/whiteCardColor"
+                    android:elevation="5dp"
+                    app:cardCornerRadius="@dimen/loginCardRadius">
 
                     <LinearLayout
                         android:layout_width="80dp"
@@ -172,6 +183,7 @@
                             android:gravity="center"
                             android:text="Clientes Visitados"
 
+                            android:textColor="#00B0FF"
                             android:textSize="14sp" />
 
                         <TextView
@@ -181,7 +193,7 @@
                             android:paddingTop="10dp"
                             android:text="125"
                             android:textColor="@color/material_on_background_disabled"
-                            android:textSize="14sp"
+                            android:textSize="20sp"
                             android:textStyle="normal" />
 
                     </LinearLayout>
@@ -197,6 +209,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginLeft="15dp"
                     android:clickable="true"
+                    app:cardCornerRadius="20dp"
                     app:cardForegroundColor="@color/cardColor"
                     app:elevation="16dp"
                     app:layout_anchor="@string/hide_bottom_view_on_scroll_behavior"
@@ -219,8 +232,9 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:text="Ventas del Dia"
+                            android:text="Clientes Por Visitar"
 
+                            android:textColor="#00B0FF"
                             android:textSize="14sp" />
 
                         <TextView
@@ -230,7 +244,7 @@
                             android:paddingTop="10dp"
                             android:text="125"
                             android:textColor="@color/design_default_color_primary"
-                            android:textSize="14sp"
+                            android:textSize="20sp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -255,27 +269,78 @@
                     android:layout_weight="1"
                     android:background="?attr/actionModeBackground"
                     android:clipToPadding="true"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:paddingStart="25dp"
                     android:paddingLeft="25dp"
                     tools:ignore="RtlSymmetry,UseCompoundDrawables"
                     tools:visibility="visible">
 
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:src="@drawable/ic_menu_share"
-                        tools:ignore="ContentDescription" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:paddingStart="20dp"
-                        android:paddingLeft="20dp"
-                        android:text="show all comments"
-                        android:textStyle="bold"
-                        tools:ignore="HardcodedText" />
+                        <Switch
+                            android:id="@+id/switch1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Switch" />
+
+                        <CheckBox
+                            android:id="@+id/checkBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="CheckBox" />
+
+                        <RadioButton
+                            android:id="@+id/radioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="RadioButton" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/dvFecha"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="TextView" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:paddingStart="20dp"
+                            android:paddingLeft="20dp"
+                            android:text="Compartir "
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText" />
+
+                        <ImageView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/ic_menu_share"
+                            tools:ignore="ContentDescription" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/actualizar_productos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            tools:text="Actualizar Producto" />
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -295,7 +360,7 @@
                     <ImageView
                         android:layout_width="36dp"
                         android:layout_height="36dp"
-                        android:src="@drawable/ic_menu_manage"
+                        android:src="@drawable/ic_edit"
                         tools:ignore="ContentDescription" />
 
                     <TextView
@@ -304,7 +369,7 @@
                         android:layout_gravity="center_vertical"
                         android:paddingStart="20dp"
                         android:paddingLeft="20dp"
-                        android:text="add to group"
+                        android:text="Editar Mis Datos"
                         android:textStyle="bold"
                         tools:ignore="RtlSymmetry" />
 
@@ -324,7 +389,7 @@
                     <ImageView
                         android:layout_width="36dp"
                         android:layout_height="36dp"
-                        android:src="@drawable/fab_refresh"
+                        android:src="@drawable/ic_person"
                         tools:ignore="ContentDescription" />
 
                     <TextView
@@ -333,7 +398,7 @@
                         android:layout_gravity="center_vertical"
                         android:paddingStart="20dp"
                         android:paddingLeft="20dp"
-                        android:text="084-492-1275"
+                        android:text="Clientes Asignados"
                         android:textStyle="bold"
                         tools:ignore="HardcodedText,RtlSymmetry" />
 
@@ -353,7 +418,7 @@
                     <ImageView
                         android:layout_width="36dp"
                         android:layout_height="36dp"
-                        android:src="@drawable/ic_edit"
+                        android:src="@drawable/ic_ubicacion"
                         tools:ignore="ContentDescription" />
 
                     <TextView
@@ -362,7 +427,7 @@
                         android:layout_gravity="center_vertical"
                         android:paddingStart="20dp"
                         android:paddingLeft="20dp"
-                        android:text="gregory@ghostcoder.org"
+                        android:text="Ruta"
                         android:textStyle="bold"
                         tools:ignore="RtlSymmetry" />
 

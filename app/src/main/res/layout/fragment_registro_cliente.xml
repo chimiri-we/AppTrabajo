@@ -13,13 +13,14 @@
     <LinearLayout
         style="@style/linearParent"
         android:layout_gravity="center"
+        android:overScrollMode="always"
         android:padding="@dimen/loginViewsMargin">
 
 
         <TextView
             style="@style/headerTextPrimary"
-            android:text="@string/registro"
-            android:layout_marginTop="@dimen/loginViewsMargin"/>
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:text="@string/registro" />
 
         <com.google.android.material.textfield.TextInputLayout
 
@@ -31,13 +32,14 @@
             app:boxStrokeColor="#1C1A1A"
             app:endIconTint="#163194"
             app:hintTextColor="#0288D1">
+
             <EditText
 
                 android:id="@+id/edt_nombre"
                 style="@style/modifiedEditText"
+                android:hint="@string/nombre_cliente"
                 android:inputType="text"
-                android:maxLines="1"
-                android:hint="@string/nombre_cliente"/>
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -50,12 +52,13 @@
             app:boxStrokeColor="#1C1A1A"
             app:endIconTint="#163194"
             app:hintTextColor="#0288D1">
+
             <EditText
                 android:id="@+id/edt_telefono"
                 style="@style/modifiedEditText"
+                android:hint="@string/Numero_de_Telefono"
                 android:inputType="text"
-                android:maxLines="1"
-                android:hint="@string/Numero_de_Telefono"/>
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -103,10 +106,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/signup_text_margin_top"
+            android:hint="Selecciona dia de Visita"
             app:boxBackgroundMode="outline"
             app:boxStrokeColor="#1C1A1A"
             app:endIconTint="#163194"
-            android:hint="Selecciona dia de Visita"
             app:expandedHintEnabled="true"
             app:hintTextColor="#0288D1">
 
@@ -115,7 +118,7 @@
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/dias"/>
+                android:entries="@array/dias" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

@@ -198,7 +198,7 @@
             android:onClick="sincronizarPedido"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_refresh"
+            app:srcCompat="@drawable/ic_enviar_datos"
             tools:ignore="VectorDrawableCompat" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

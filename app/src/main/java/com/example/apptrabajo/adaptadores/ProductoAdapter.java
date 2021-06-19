@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.apptrabajo.R;
@@ -41,6 +42,7 @@ public class ProductoAdapter extends ArrayAdapter<Productos> {
 
         TextView Name;
         TextView Precio;
+        ImageView imageView;
     }
 
     @Override
@@ -52,12 +54,16 @@ public class ProductoAdapter extends ArrayAdapter<Productos> {
 
             LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            convertView = layoutInflater.inflate(R.layout.productos_list,null);
+            convertView = layoutInflater.inflate(R.layout.layout_item_joya,null);
             holder = new ProductoAdapter.ViewHolder();
 
-            holder.Name = convertView.findViewById(R.id.txt_nombre_producto);
+//            holder.Name = convertView.findViewById(R.id.txt_nombre_producto);
 
-            holder.Precio = convertView.findViewById(R.id.txt_precio);
+  //          holder.Precio = convertView.findViewById(R.id.txt_precio);
+            holder.Name = convertView.findViewById(R.id.tvNombreProducto);
+
+            holder.imageView = convertView.findViewById(R.id.ivJoya);
+            holder.Precio = convertView.findViewById(R.id.tvPrecioProducto);
 
             convertView.setTag(holder);
 

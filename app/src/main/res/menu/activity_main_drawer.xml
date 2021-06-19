@@ -25,6 +25,11 @@
             android:title="@string/comunicado" />
 
         <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_lista"
+            android:title="@string/lista_producto" />
+
+        <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_lista"
             android:title="@string/lista_producto" />

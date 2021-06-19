@@ -6,14 +6,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.example.apptrabajo.api.Consultas;
 import com.example.apptrabajo.datos.BaseDatosApp;
+import com.example.apptrabajo.entidades.DetalleVenta;
+import com.example.apptrabajo.entidades.Venta;
+import com.google.android.material.chip.Chip;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Objects;
 
 public class PerfilEmpleadoFragment extends Fragment {
 
@@ -23,7 +32,12 @@ public class PerfilEmpleadoFragment extends Fragment {
     private static final String TABLE_CLIENTE = "Cliente";
 
     BaseDatosApp bdLocal;
+    Consultas con;
 
+    Chip chip;
+  Venta venta;
+    String fecha;
+    TextView totalV, txtFecha;
     private static final String TABLE_PRODUCTO = "Producto";
 
     @Override
@@ -32,6 +46,25 @@ public class PerfilEmpleadoFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.perfil_empleado, container, false);
 
+        chip = v.findViewById(R.id.actualizar_productos);
+        totalV = v.findViewById(R.id.tv_ventas_dia);
+        txtFecha = v.findViewById(R.id.dvFecha);
+        Date fechaActual= Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        fecha = df.format(fechaActual);
+        System.out.println("Current time => " + fecha);
+        txtFecha.setText(fecha);
+        con = new Consultas(requireContext().getApplicationContext());
+
+        String f = txtFecha.getText().toString().trim();
+        venta = con.obtenerVentasDia(fecha);
+        if (venta != null) {
+            //venta = new DetalleVenta();
+
+            totalV.setText(String.valueOf(venta.getTota_venta()));
+        }
+
+
 
 /*        btnActuClie.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,13 +72,13 @@ public class PerfilEmpleadoFragment extends Fragment {
                 actualizarCliente();
             }
         });
-        btnActuPro = v.findViewById(R.id.btn_actuali_pro);
-        btnActuPro.setOnClickListener(new View.OnClickListener() {
+      */
+        chip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 actualizarPro();
             }
-        });*/
+        });
         verListaVenta = v.findViewById(R.id.verListaVentas);
         verListaVenta.setOnClickListener(new View.OnClickListener() {
             @Override
