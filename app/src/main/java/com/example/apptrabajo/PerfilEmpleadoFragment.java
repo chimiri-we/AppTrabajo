@@ -33,8 +33,7 @@ public class PerfilEmpleadoFragment extends Fragment {
         View v = inflater.inflate(R.layout.perfil_empleado, container, false);
 
 
-        btnActuClie = v.findViewById(R.id.btnActualizarCliente);
-        btnActuClie.setOnClickListener(new View.OnClickListener() {
+/*        btnActuClie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 actualizarCliente();
@@ -46,7 +45,7 @@ public class PerfilEmpleadoFragment extends Fragment {
             public void onClick(View v) {
                 actualizarPro();
             }
-        });
+        });*/
         verListaVenta = v.findViewById(R.id.verListaVentas);
         verListaVenta.setOnClickListener(new View.OnClickListener() {
             @Override

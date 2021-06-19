@@ -3,13 +3,19 @@ package com.example.apptrabajo.adaptadores;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,25 +23,27 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.apptrabajo.MainActivity;
 import com.example.apptrabajo.R;
 import com.example.apptrabajo.datos.BaseDatosApp;
 import com.example.apptrabajo.entidades.DetalleVenta;
 import com.example.apptrabajo.entidades.Productos;
+import com.example.apptrabajo.entidades.Venta;
 import com.example.apptrabajo.modelo.VentaDetalleModel;
+import com.example.apptrabajo.ui.home.DetalleCliente;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class
-DetalleVentaAdapter extends RecyclerView.Adapter<VentaDetalleModel>
+public class DetalleVentaAdapter extends RecyclerView.Adapter<VentaDetalleModel>
         implements Filterable {
 
     private final Context context;
     private ArrayList listProductos;
     private final ArrayList<DetalleVenta> mArrayList;
     private final BaseDatosApp mDatabase;
-    DetalleVenta detalleVenta;
 
     public DetalleVentaAdapter(Context context, ArrayList<DetalleVenta> listProductos) {
         this.context = context;
@@ -68,53 +76,26 @@ DetalleVentaAdapter extends RecyclerView.Adapter<VentaDetalleModel>
 
 
 
+        holder.tvNameProducto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id_detalle = ((DetalleVenta) listProductos.get(position)).getId_detalle();
+            actualizarPedio(id_detalle);
+            }
+        });
       //  holder.editContact.setOnClickListener(view -> editTaskDialog(productos));
 
     }
+    private void actualizarPedio(int id_detalle) {
+        BaseDatosApp bdLocal = new BaseDatosApp(context.getApplicationContext());
+        SQLiteDatabase db = bdLocal.getReadableDatabase();
 
-    private void editTaskDialog(Productos productos) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View subView = inflater.inflate(R.layout.add_productos, null);
-        final TextView editName = subView.findViewById(R.id.tvNombrePro);
-        final TextView editPrecio = subView.findViewById(R.id.tvPrecio);
-        final EditText editCantidad = subView.findViewById(R.id.tvtotal);
-        // final  TextView tvCosto = subView.findViewById(R.id.costo);
-        if (productos != null) {
-            editName.setText(productos.getNombre());
-
-
-        }
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Editar Nota");
-        builder.setView(subView);
-        builder.create();
-        builder.setPositiveButton("EDITAR NOTA", (dialog, which) -> {
-            final String name = editName.getText().toString();
-            final String precio = editPrecio.getText().toString();
-            final String total = editCantidad.getText().toString();
-
-            if (TextUtils.isEmpty(name)) {
-                Toast.makeText(context, "Algo salió mal. Verifique sus valores de entrada", Toast.LENGTH_LONG).show();
-            } else {
-                int sumaCant = Integer.parseInt(editPrecio.getText().toString());
-                int sumaCost = Integer.parseInt(editCantidad.getText().toString());
-                int costo = sumaCant * sumaCost;
-                // tvCosto.setText(costo);
-
-                mDatabase.updateProducto(new
-                        DetalleVenta(detalleVenta.getId_producto(), detalleVenta.getNombre_producto(), precio));
-                ((Activity) context).finish();
-                context.startActivity(((Activity)
-                        context).getIntent());
-            }
-        }).setNegativeButton("CANCELAR", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(context, "Tarea Cancelada", Toast.LENGTH_LONG).show();
-            }
-        });
-        builder.show();
+        db.delete("DetalleVenta", "id_detalle" + " = ?", new String[]{String.valueOf(id_detalle)});  // Toast.makeText(this, "Se ha eliminado, actualiza la vista", Toast.LENGTH_LONG).show();
+        ((Activity) context).finish();
+        context.startActivity(((Activity)
+                context).getIntent());
     }
+
 
 
     @Override

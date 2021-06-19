@@ -171,16 +171,19 @@ ImageView btn;
                 cliente=new Clientes();
                 JSONObject jsonObject=null;
                 jsonObject=json.getJSONObject(i);
-                cliente.setId_cliente(jsonObject.optInt("Id"));
+                cliente.setId_Remoto(jsonObject.optInt("Id"));
                 cliente.setNombre(jsonObject.optString("nombre"));
                 cliente.setTelefono(jsonObject.optString("telefono"));
                 cliente.setDireccion(jsonObject.optString("direccion"));
+                cliente.setColonia(jsonObject.optString("colonia"));
                 cliente.setDiaVisita(jsonObject.getString("dia_visita"));
 
                 ContentValues values = new ContentValues();
+                values.put("id_Remoto", cliente.getId_Remoto());
                 values.put("nombre", cliente.getNombre());
                 values.put("telefono", cliente.getTelefono());
                 values.put("direccion", cliente.getDireccion());
+                values.put("colonia", cliente.getColonia());
                 values.put("dia_visita", cliente.getDiaVisita());
 
                 bdLocal = new BaseDatosApp(requireContext().getApplicationContext());
@@ -219,10 +222,11 @@ ImageView btn;
         while (cursor.moveToNext()) {
             clientes=new Clientes();
             clientes.setId_cliente(cursor.getInt(0));
-            clientes.setNombre(cursor.getString(1));
-            clientes.setTelefono(cursor.getString(3));
-            clientes.setDireccion(cursor.getString(2));
-            clientes.setDiaVisita(cursor.getString(4));
+            clientes.setNombre(cursor.getString(2));
+            clientes.setTelefono(cursor.getString(5));
+            clientes.setDireccion(cursor.getString(3));
+            clientes.setColonia(cursor.getString(4));
+            clientes.setDiaVisita(cursor.getString(6));
             nuevaListaCliente.add(clientes);
         }
         clientesAdapter = new ClientesAdapter(getContext(), R.layout.usuarios_list, nuevaListaCliente);

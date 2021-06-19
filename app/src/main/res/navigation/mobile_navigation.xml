@@ -45,7 +45,7 @@ tools:layout="@layout/mostrar_detalle"
     <fragment
         android:id="@+id/nav_comunicadosFragment"
         android:name="com.example.apptrabajo.ComunicadosFragment"
-        android:label="fragment_comunicados"
-        tools:layout="@layout/fragment_comunicados" />
+        android:label="fragmen_comunicados"
+        tools:layout="@layout/fragmen_comunicados" />
 
 </navigation>

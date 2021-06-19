@@ -48,6 +48,7 @@
     <string name="notas_label">Notas</string>
     <string name="notas_hint">Notas</string>
     <string name="comunicado">Comunicados</string>
+    <string name="telefono">Telefono</string>
     <string-array name="clientes">
         <item>Fernando Jimenez</item>
         <item>Carlos Fuentes</item>

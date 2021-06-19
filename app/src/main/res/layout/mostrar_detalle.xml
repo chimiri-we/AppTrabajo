@@ -22,12 +22,13 @@
             android:layout_height="match_parent"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:stretchColumns="1">
+            android:stretchColumns="2">
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#128675"
+                android:background="@color/purple_500"
+                android:paddingLeft="5dp"
                 android:showDividers="beginning">
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -58,8 +59,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="2"
-                    android:layout_gravity="center"
-                    android:gravity="center"
+                    android:layout_gravity="center|left"
+                    android:gravity="left"
                     app:boxBackgroundMode="outline"
                     app:boxStrokeColor="#1C1A1A"
                     app:endIconTint="#163194"
@@ -80,43 +81,36 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingLeft="5dp">
 
                 <com.google.android.material.textfield.TextInputLayout
-
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_column="0"
-                    android:layout_gravity="center"
-                    android:gravity="center"
+                    android:layout_gravity="left"
+                    android:layout_weight="2"
                     app:boxBackgroundMode="outline"
                     app:boxStrokeColor="#1C1A1A"
                     app:endIconTint="#163194"
-                    app:helperText="@string/Numero_de_Telefono"
+                    app:helperText="Colonia"
                     app:hintTextColor="#0288D1">
 
                     <TextView
-                        android:id="@+id/dtTelefono"
+                        android:id="@+id/colonia"
                         style="@style/modifiedEditText"
-                        android:hint="@string/Numero_de_Telefono"
-                        android:inputType="text"
+                        android:hint="Id venta"
+                        android:inputType="textEmailAddress"
                         android:maxLines="1"
                         android:textSize="14sp"
                         tools:ignore="TextViewEdits" />
                 </com.google.android.material.textfield.TextInputLayout>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_column="0"
-                    android:layout_gravity="center"
+                    android:layout_column="2"
                     app:boxBackgroundMode="outline"
                     app:boxStrokeColor="#1C1A1A"
                     app:endIconTint="#163194"
@@ -134,12 +128,43 @@
                         tools:ignore="TextViewEdits" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="5dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#1C1A1A"
+                    app:endIconTint="#163194"
+                    app:helperText="@string/telefono"
+                    app:hintTextColor="#0288D1">
+
+                    <TextView
+                        android:id="@+id/dtTelefono"
+                        style="@style/modifiedEditText"
+                        android:hint="@string/Numero_de_Telefono"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:textSize="14sp"
+                        tools:ignore="TextViewEdits" />
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_column="1"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     app:boxBackgroundMode="outline"
                     app:boxStrokeColor="#1C1A1A"
                     app:endIconTint="#163194"
@@ -160,8 +185,8 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_column="2"
                     android:layout_gravity="center"
+                    android:layout_weight="2"
                     app:boxBackgroundMode="outline"
                     app:boxStrokeColor="#1C1A1A"
                     app:endIconTint="#163194"
@@ -190,6 +215,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tab"
             android:layout_marginTop="20dp"
+            android:background="@color/colorFondo"
+            android:gravity="right"
+            android:orientation="horizontal"
             android:weightSum="4">
 
             <TextView
@@ -198,12 +226,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="bottom|right"
+                android:maxWidth="150dp"
                 android:text="PRODUCTO"
                 android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/textView5"
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center|right"
@@ -212,7 +241,7 @@
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center|right"
@@ -221,7 +250,7 @@
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -243,6 +272,7 @@
             android:layout_height="wrap_content"
 
             android:layout_below="@id/centro"
+            android:layout_marginTop="15dp"
             android:paddingBottom="8dp" />
 
     </RelativeLayout>

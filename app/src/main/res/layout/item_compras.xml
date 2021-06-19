@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:padding="5dp"
         android:weightSum="4">
 
         <TextView
@@ -17,11 +18,13 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
+            android:baselineAligned="false"
+            android:gravity="center|left"
+            android:maxWidth="100dp"
             android:text="@string/menu_home"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="14sp"
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/precioProducto"
@@ -30,8 +33,9 @@
 
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:hint="$"
+            android:textSize="14sp"
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/cantidad"
@@ -40,8 +44,9 @@
 
             android:layout_weight="1"
             android:gravity="center"
+            android:hint="pz"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/total"
@@ -50,6 +55,7 @@
 
             android:layout_weight="1"
             android:gravity="center"
+            android:hint="$"
             android:textSize="16sp"
             android:textStyle="bold" />
 

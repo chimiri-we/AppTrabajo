@@ -45,6 +45,7 @@ public class SlideshowFragment extends Fragment  implements Response.Listener<JS
     private static final String nombre_producto = "nombre_producto";
 
     private static final String precioProducto = "precioProducto";
+    private static final String id_remoto = "id_remoto";
 
     ArrayList<Productos> arrayList = new ArrayList<Productos>();
     ArrayList<String> strinsProducto;
@@ -121,8 +122,8 @@ public class SlideshowFragment extends Fragment  implements Response.Listener<JS
         while (cursor.moveToNext()){
             producto=new Productos();
             producto.setId(cursor.getInt(0));
-            producto.setNombre(cursor.getString(1));
-            producto.setPrecio(cursor.getString(2));
+            producto.setNombre(cursor.getString(2));
+            producto.setPrecio(cursor.getString(3));
             arrayList.add(producto);
         }
    //     obtenerLista();
@@ -192,19 +193,19 @@ public class SlideshowFragment extends Fragment  implements Response.Listener<JS
                 JSONObject jsonObject;
                 jsonObject=json.getJSONObject(i);
 
-                producto.setId(jsonObject.optInt("id"));
+                producto.setId_remoto(jsonObject.optInt("id"));
                 producto.setNombre(jsonObject.optString("name"));
                 producto.setPrecio(jsonObject.optString("precio"));
                 //  producto = new Producto(name, precio);
                 arrayList.add(producto);
                 ContentValues values = new ContentValues();
-              //  values.put(COLUMN_ID, producto.getId());
+                values.put(id_remoto, producto.getId_remoto());
                 values.put(nombre_producto, producto.getNombre());
                 values.put(precioProducto, producto.getPrecio());
                 bdLocal = new BaseDatosApp(requireContext().getApplicationContext());
                 SQLiteDatabase db = bdLocal.getReadableDatabase();
                 if(db!= null) {
-                    Toast.makeText(getContext(), "Datos guardados"+ SQLiteAccessPermException.class, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Datos guardados", Toast.LENGTH_SHORT).show();
 
                 } else {
                     Toast.makeText(getContext(), "Tienes un problema" +

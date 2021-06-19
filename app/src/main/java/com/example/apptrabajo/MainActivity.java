@@ -1,6 +1,7 @@
 package com.example.apptrabajo;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
-
+    private static final String TABLE_PRODUCTO = "Producto";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,13 +71,20 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_edit:
-            //    int id_venta = 0;
+            /*   int id_venta = 0;
                 Venta venta = null;
                 final BaseDatosApp bdLocal = new BaseDatosApp(MainActivity.this);
                venta = bdLocal.ultimaVenta();
                 Toast.makeText(this, "ultima venta es" + venta.getId_venta(), Toast.LENGTH_SHORT).show();
 
 
+             */
+
+               BaseDatosApp bdLocal = new BaseDatosApp(this.getApplicationContext());
+                SQLiteDatabase db = bdLocal.getReadableDatabase();
+                db.execSQL("delete from " + TABLE_PRODUCTO);
+                Toast.makeText(this, "Se ha eliminado, actualiza la vista", Toast.LENGTH_LONG).show();
+                onStart();
                 break;
         }
         return super.onOptionsItemSelected(item);

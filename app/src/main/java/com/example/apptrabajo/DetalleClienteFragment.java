@@ -87,6 +87,7 @@ public class DetalleClienteFragment extends Fragment {
             }
         });*/
      //  obtenerTotalVenta(idventa);
+
         return view;
 
     }

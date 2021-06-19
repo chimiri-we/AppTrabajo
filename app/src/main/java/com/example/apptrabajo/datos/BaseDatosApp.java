@@ -15,10 +15,10 @@ import java.util.ArrayList;
 
 public class BaseDatosApp extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 14;
+    private static final int DATABASE_VERSION = 15;
     private static final String DATABASE_NAME = "DatosTrabajo";
     private static final String TABLE_CLIENTE = "Cliente";
-    private static final String COLUMN_ID = "id";
+    private static final String id_remoto = "id_remoto";
     private static final String id_cliente = "id_cliente";
     private static final String COLUMN_NOMBRE_CLIENTE = "nombre_cliente";
     private static final String COLUMN_TELEFONO = "telefono";
@@ -51,16 +51,30 @@ public class BaseDatosApp extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
+        String dbEmpleado="create table Empleado("+
+                "id_empleado INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "id_R INTEGER,"+
+                "nombre TEXT NOT NULL,"+
+                "domicilio TEXT,"+
+                "puesto TEXT,"+
+                "telefono TEXT,"+
+                "usuario TEXT,"+
+                "password TEXT)";
+        db.execSQL(dbEmpleado);
+
   String dbCliente="create table Cliente("+
                 "id_cliente INTEGER PRIMARY KEY AUTOINCREMENT,"+
+          "id_Remoto INTEGER,"+
                 "nombre TEXT NOT NULL,"+
                 "direccion TEXT,"+
+          "colonia TEXT,"+
                 "telefono TEXT,"+
                 "dia_visita TEXT)";
         db.execSQL(dbCliente);
         
         String dbProducto="create table Producto("+
                 "id_producto INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "id_remoto INTEGER,"+
                 "nombre_producto TEXT NOT NULL,"+
                 "precioProducto INTEGER)";
         db.execSQL(dbProducto);
@@ -71,6 +85,8 @@ public class BaseDatosApp extends SQLiteOpenHelper {
                 "nombre_cliente TEXT NOT NULL,"+
                 "fecha TEXT,"+
                 "total_venta integer,"+
+                "id_empleado INTEGER,"+
+                "FOREIGN KEY(id_empleado) REFERENCES Empleado(id_empleado),"+
                 "FOREIGN KEY(id_cliente) REFERENCES Cliente(id_cliente))";
         db.execSQL(dbVenta);
 
@@ -164,11 +180,16 @@ public class BaseDatosApp extends SQLiteOpenHelper {
 
     public void updateProducto(DetalleVenta detalleVenta) {
         ContentValues values = new ContentValues();
-        values.put(nombre_producto, detalleVenta.getNombre_producto());
-        values.put(precioProducto, detalleVenta.getPrecio());
+        values.put("nombre_producto", detalleVenta.getNombre_producto());
+        values.put("precio_producto", detalleVenta.getPrecio());
+        values.put("cantidad", detalleVenta.getCantidad());
+        values.put("id_venta", detalleVenta.getId_venta());
+        values.put("id_producto", detalleVenta.getId_producto());
+        values.put("total", detalleVenta.getTotal());
         SQLiteDatabase db = this.getWritableDatabase();
-        db.update(TABLE_PRODUCTO, values, COLUMN_ID + " = ?", new String[]{String.valueOf(detalleVenta.getId())});
+        db.update("DetalleVenta", values, "id_detalle" + " = ?" , new String[]{String.valueOf(detalleVenta.getId()), String.valueOf(detalleVenta.getId_venta())});
     }
+
 
     public Clientes verCliente(int id_cliente) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -180,10 +201,11 @@ public class BaseDatosApp extends SQLiteOpenHelper {
 
                 clientes = new Clientes();
                 clientes.setId_cliente(cursor.getInt(0));
-                clientes.setNombre(cursor.getString(1));
-                clientes.setDireccion(cursor.getString(2));
-                clientes.setTelefono(cursor.getString(3));
-            clientes.setDiaVisita(cursor.getString(4));
+                clientes.setNombre(cursor.getString(2));
+                clientes.setDireccion(cursor.getString(3));
+            clientes.setColonia(cursor.getString(4));
+                clientes.setTelefono(cursor.getString(5));
+            clientes.setDiaVisita(cursor.getString(6));
 
 
         }
@@ -216,15 +238,16 @@ public class BaseDatosApp extends SQLiteOpenHelper {
     }
 
     public ArrayList<Productos> spinerProducto() {
-        String sql = "select * from Productos";
+        String sql = "select * from Producto";
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<Productos> storeProduct = new ArrayList<>();
         Cursor cursor = db.rawQuery(sql, null);
         while (cursor.moveToNext()){
 
                 int id = Integer.parseInt(cursor.getString(0));
-                String nombre = cursor.getString(1);
-                String precio = cursor.getString(2);
+            int id_remoto = Integer.parseInt(cursor.getString(1));
+                String nombre = cursor.getString(2);
+                String precio = cursor.getString(3);
                 storeProduct.add(new Productos(id, nombre, precio));
             }
 

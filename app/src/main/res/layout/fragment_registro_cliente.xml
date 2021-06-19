@@ -61,19 +61,39 @@
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="@dimen/signup_text_margin_top"
             app:boxBackgroundMode="outline"
             app:boxStrokeColor="#1C1A1A"
             app:endIconTint="#163194"
             app:hintTextColor="#0288D1">
+
             <EditText
 
                 android:id="@+id/edt_direccion"
                 style="@style/modifiedEditText"
+                android:hint="@string/Direccion"
                 android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:hint="@string/Direccion"/>
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/signup_text_margin_top"
+            android:hint="Colonia"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="#1C1A1A"
+            app:endIconTint="#163194"
+            app:hintTextColor="#0288D1">
+
+            <EditText
+
+                android:id="@+id/edt_colonia"
+                style="@style/modifiedEditText"
+
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout

@@ -70,7 +70,7 @@ public class DetalleCliente extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-       // setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.getBackground().setAlpha(0);
      collapser = findViewById(R.id.toolbar_layout);
@@ -164,28 +164,8 @@ public class DetalleCliente extends AppCompatActivity {
         tvTotal.setText(dtVenta.getTotal());
     }
 
-    private void generarVenta() {
-        Venta venta = new Venta();
-        ContentValues values = new ContentValues();
-  //      int idCliente = clientes.getId();
-        String nombreCliente = clientes.getNombre();
-//        String dtVenta = t1.getText().toString();
-        {
-        //values.put(COLUMN_ID_CLI, cliente.getId());
-  //      values.put("id_cliente", idCliente);
-        values.put("nombre_cliente", nombreCliente);
-//        values.put("fecha", venta.getFecha());
 
-     //   values.put("id_detalle", dtVenta);
-        bdLocal = new BaseDatosApp(this.getApplicationContext());
-        SQLiteDatabase db = bdLocal.getReadableDatabase();
-            Toast.makeText(this, "Datos de venta Guardados", Toast.LENGTH_SHORT).show();
-
-            db.insert(TABLE_VENTA, null, values);
-        }
-    }
-
-    private void agregarProducto() {
+    public void agregarProducto() {
         LayoutInflater inflater = LayoutInflater.from(this);
         View subView = inflater.inflate(R.layout.add_productos, null);
         final TextView nameField = subView.findViewById(R.id.tvNombrePro);
@@ -276,8 +256,8 @@ public class DetalleCliente extends AppCompatActivity {
             while (cursor.moveToNext()){
                 producto=new Productos();
                 producto.setId(cursor.getInt(0));
-                producto.setNombre(cursor.getString(1));
-                producto.setPrecio(cursor.getString(2));
+                producto.setNombre(cursor.getString(2));
+                producto.setPrecio(cursor.getString(3));
                 arrayList.add(producto);
             }
             obtenerLista();
@@ -291,7 +271,7 @@ public class DetalleCliente extends AppCompatActivity {
             strinsProducto.add("selecciona");
 
             for (int i=0;i<arrayList.size();i++) {
-                strinsProducto.add(arrayList.get(i).getNombre()+" $ "+arrayList.get(i).getPrecio());
+                strinsProducto.add(arrayList.get(i).getNombre());
             }
         }
 
