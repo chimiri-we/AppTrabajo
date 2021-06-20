@@ -47,5 +47,10 @@ tools:layout="@layout/mostrar_detalle"
         android:name="com.example.apptrabajo.ComunicadosFragment"
         android:label="fragmen_comunicados"
         tools:layout="@layout/fragmen_comunicados" />
+    <fragment
+        android:id="@+id/nav_vistasActivity"
+        android:name="com.example.apptrabajo.VistasActivity"
+        android:label="activity_vistas"
+        tools:layout="@layout/activity_vistas" />
 
 </navigation>

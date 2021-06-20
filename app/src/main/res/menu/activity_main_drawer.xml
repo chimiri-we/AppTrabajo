@@ -33,5 +33,10 @@
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_lista"
             android:title="@string/lista_producto" />
+        <item
+            android:id="@+id/nav_vistasActivity"
+            android:icon="@drawable/ic_comunicadso"
+            android:title="@string/comunicado" />
+
     </group>
 </menu>
