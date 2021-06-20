@@ -15,9 +15,11 @@ import java.util.ArrayList;
 
 public class BaseDatosApp extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 15;
+    private static final int DATABASE_VERSION = 16;
     private static final String DATABASE_NAME = "DatosTrabajo";
     private static final String TABLE_CLIENTE = "Cliente";
+
+    private static final String TABLE_EMPLEADO = "Empleado";
     private static final String id_remoto = "id_remoto";
     private static final String id_cliente = "id_cliente";
     private static final String COLUMN_NOMBRE_CLIENTE = "nombre_cliente";
@@ -106,7 +108,7 @@ public class BaseDatosApp extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EMPLEADO);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCTO);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_VENTA);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_DETALLE_VENTA);

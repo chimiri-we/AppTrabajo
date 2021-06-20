@@ -10,9 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.example.apptrabajo.api.Consultas;
 import com.example.apptrabajo.datos.BaseDatosApp;
 import com.example.apptrabajo.entidades.DetalleVenta;
@@ -49,6 +52,7 @@ public class PerfilEmpleadoFragment extends Fragment {
         chip = v.findViewById(R.id.actualizar_productos);
         totalV = v.findViewById(R.id.tv_ventas_dia);
         txtFecha = v.findViewById(R.id.dvFecha);
+
         Date fechaActual= Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
         fecha = df.format(fechaActual);
@@ -56,7 +60,7 @@ public class PerfilEmpleadoFragment extends Fragment {
         txtFecha.setText(fecha);
         con = new Consultas(requireContext().getApplicationContext());
 
-        String f = txtFecha.getText().toString().trim();
+       // String f = txtFecha.getText().toString().trim();
         venta = con.obtenerVentasDia(fecha);
         if (venta != null) {
             //venta = new DetalleVenta();
@@ -103,7 +107,23 @@ public class PerfilEmpleadoFragment extends Fragment {
         bdLocal = new BaseDatosApp(requireContext().getApplicationContext());
         SQLiteDatabase db = bdLocal.getReadableDatabase();
         db.execSQL("delete from " + TABLE_PRODUCTO);
-        Toast.makeText(getContext(), "Se ha eliminado, actualiza la vista", Toast.LENGTH_LONG).show();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+
+        builder.setTitle("Actualiza tu base de Datos");
+        builder.setMessage("No tienes tu lista actualizada, porfavor actualiza");
+
+        builder.create();
+        builder.setPositiveButton("Actualizar", (dialog, which) -> {
+            Consultas consultas = new Consultas(getContext());
+            RequestQueue request= Volley.newRequestQueue(requireContext());
+            consultas.actualizarProducto(request);
+
+        });
+        Toast.makeText(getContext(), "Datos Guardados", Toast.LENGTH_LONG).show();
+
+        bdLocal.close();
+        builder.show();
         onStart();
     }
 }

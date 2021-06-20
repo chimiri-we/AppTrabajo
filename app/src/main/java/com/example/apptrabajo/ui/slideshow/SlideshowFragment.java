@@ -174,10 +174,11 @@ public class SlideshowFragment extends Fragment  implements Response.Listener<JS
 
     @Override
     public void onErrorResponse(VolleyError error) {
+        progress.hide();
         Toast.makeText(getContext(), "No se puede conectar "+error.toString(), Toast.LENGTH_SHORT).show();
         System.out.println();
         Log.d("ERROR: ", error.toString());
-        progress.hide();
+
     }
 
     @Override
@@ -205,8 +206,8 @@ public class SlideshowFragment extends Fragment  implements Response.Listener<JS
                 bdLocal = new BaseDatosApp(requireContext().getApplicationContext());
                 SQLiteDatabase db = bdLocal.getReadableDatabase();
                 if(db!= null) {
-                    Toast.makeText(getContext(), "Datos guardados", Toast.LENGTH_SHORT).show();
 
+                    progress.hide();
                 } else {
                     Toast.makeText(getContext(), "Tienes un problema" +
                             " "+response, Toast.LENGTH_SHORT).show();

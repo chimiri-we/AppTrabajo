@@ -14,8 +14,10 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.apptrabajo.api.Consultas;
 import com.example.apptrabajo.databinding.ActivityMainBinding;
 import com.example.apptrabajo.datos.BaseDatosApp;
+import com.example.apptrabajo.entidades.Productos;
 import com.example.apptrabajo.entidades.Venta;
 import com.google.android.material.navigation.NavigationView;
 
@@ -23,8 +25,8 @@ public class
 MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-
-    private static final String TABLE_PRODUCTO = "Producto";
+Productos productos;
+//    private static final String TABLE_PRODUCTO = "Producto";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,9 @@ MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
+
+  //      Consultas consultas = new Consultas(MainActivity.this);
+//        consultas.verificarTabla(productos);
 
         binding.appBarMain.fab.setOnClickListener(view -> {
 
