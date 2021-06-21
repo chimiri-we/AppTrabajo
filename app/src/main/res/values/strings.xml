@@ -25,6 +25,17 @@
     <string name="fragment_perfil">Perfil de Usuario</string>
     <string name="idCliente">Id Cliente</string>
 
+    <string name="mapbox_access_token">MAPBOX_ACCESS_TOKEN</string>
+    <string name="click_instructions">Instrucciones</string>
+    <string name="only_twelve_stops_allowed" />
+    <string name="no_success" />
+    <string name="successful_but_no_routes" />
+    <string name="null_in_response" />
+    <string name="access_token">pk.eyJ1IjoiY2FyMDEiLCJhIjoiY2tnbGNtajRqMDFraDJ5bnVpeWRqam5yeSJ9.q0qvBDseNsXwnqoL5A45VA</string>
+    <string name="new_location">Nueva Hubicacion</string>
+    <string name="user_location_permission_not_granted">Permiso Denegado</string>
+    <string name="user_location_permission_explanation">Permiso</string>
+
     <string-array name="dias">
         <item>Lunes</item>
         <item>Martes</item>
@@ -58,6 +69,7 @@
     <string name="Fecha">"Fecha "</string>
     <string name="comentario">Escribe tu mensaje</string>
     <string name="publica">Publica tu comentario</string>
+    <string name="titulo">Escribe un titulo para tu comentario</string>
     <string-array name="clientes">
         <item>Fernando Jimenez</item>
         <item>Carlos Fuentes</item>

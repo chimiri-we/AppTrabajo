@@ -14,6 +14,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -48,5 +49,19 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'com.android.volley:volley:1.2.0'
+
+    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-geojson:5.9.0-alpha.1'
+    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:5.8.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-turf:5.8.0'
+    //implementation 'androidx.annotation:annotation:1.2.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.6.1'
+    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-core:5.9.0-alpha.1'
+    //  implementation "com.mapbox.search:mapbox-search-android-ui:1.0.0-beta.14"
+  //  implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.5.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v9:0.9.0'
+
+  //  implementation 'androidx.multidex:multidex:3.0.1'
+
+
 
 }

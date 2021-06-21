@@ -38,37 +38,62 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp" />
 
-            <Spinner
-                android:id="@+id/medical_center_menu"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:listitem="@android:layout/simple_list_item_1" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/label_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:text="@string/Fecha"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/date_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:focusable="false"
+                        android:inputType="none"
+                        android:textSize="12sp"
+                        tools:text="31 de Enero de 2018" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <Spinner
+                        android:id="@+id/medical_center_menu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:listitem="@android:layout/simple_list_item_1" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/label_date"
+                android:id="@+id/label_titulo_comentario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="@string/Fecha"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                android:textColor="@color/colorPrimary"
-                android:textSize="12sp" />
-
-            <EditText
-                android:id="@+id/date_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:focusable="false"
-                android:inputType="none"
-                tools:text="31 de Enero de 2018" />
-
-            <TextView
-                android:id="@+id/label_time_schedule"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:text="@string/comentario"
+                android:text="@string/titulo"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 android:textColor="@color/colorPrimary" />
 
@@ -77,6 +102,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="Titulo"
+                android:inputType="text"
+                android:maxLength="50"
+                android:maxLines="50"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/label_time_schedule2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/comentario"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/colorPrimary" />
+
+            <EditText
+                android:id="@+id/edt_comentario2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="50"
                 android:hint="Escribe tu Comentario"
                 android:inputType="text"
                 android:maxLength="50"
