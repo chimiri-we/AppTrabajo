@@ -1,5 +1,6 @@
 package com.example.apptrabajo;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -38,10 +39,11 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 
-public class PerfilEmpleadoFragment extends Fragment {
+public class PerfilEmpleadoFragment extends Fragment  {
 
 
 
@@ -59,10 +61,15 @@ public class PerfilEmpleadoFragment extends Fragment {
     final String RUTA_IMAGEN = CARPETA_RAIZ + CARPETA_IMAGENES;
     String path;
     Button btnActPro, btnActClien;
+    CamaraActivity camaraActivity;
   Venta venta;
     String fecha;
     TextView totalV, txtFecha;
     private static final String TABLE_PRODUCTO = "Producto";
+    private int requestCode;
+    private int resultCode;
+    @Nullable
+    private Intent data;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,7 +78,12 @@ public class PerfilEmpleadoFragment extends Fragment {
         View v = inflater.inflate(R.layout.perfil_empleado, container, false);
 
         imFoto = v.findViewById(R.id.imFotoPerfil);
-        imFoto.setOnClickListener(this::ocTomaFoto);
+        imFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ocTomaFoto(v);
+            }
+        });
         btnActPro = v.findViewById(R.id.actualizar_productos);
         btnActClien = v.findViewById(R.id.actualizar_cliente);
         totalV = v.findViewById(R.id.tv_ventas_dia);
@@ -119,16 +131,10 @@ public class PerfilEmpleadoFragment extends Fragment {
         return v;
     }
 
-    public static byte[] imageViewToByte(ImageView image) {
-        Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-        return byteArray;
-    }
+
 
     private void ocTomaFoto(View v) {
-        String nombreImagen = "";
+   /*     String nombreImagen = "";
 
         File fileImagen = new File(Environment.getExternalStorageDirectory(), RUTA_IMAGEN);
         boolean isCreada = fileImagen.exists();
@@ -145,39 +151,35 @@ public class PerfilEmpleadoFragment extends Fragment {
         path = Environment.getExternalStorageDirectory()+File.separator+RUTA_IMAGEN+File.separator+nombreImagen;
         File imagen = new File(path);
 
-        Intent intent = null;
-        intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+      */
+     //   intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        @SuppressLint("IntentReset") Intent intent1 = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent1.setType("image/");
+        startActivityForResult(Intent.createChooser(intent1, "selecciona"), 10);
+
+      /*  if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             String authorities = v.getContext().getPackageName()+".provider";
             Uri imageUri = FileProvider.getUriForFile(v.getContext(), authorities, imagen);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-            getContext().startActivity(intent.putExtra("COD_FOTO", COD_FOTO));
-        } else {
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imagen));
-            getContext().startActivity(intent);
-        }
+            requireContext().startActivity(intent.putExtra("COD_FOTO", COD_FOTO));
+        }*/
     }
+
+
+
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case COD_FOTO:
-                    MediaScannerConnection.scanFile(getContext(), new String[]{path}, null, new MediaScannerConnection.OnScanCompletedListener() {
-                        @Override
-                        public void onScanCompleted(String path, Uri uri) {
-
-                        }
-                    });
-                    Bitmap bitmap = BitmapFactory.decodeFile(path);
-                    imFoto.setImageBitmap(bitmap);
-                    break;
-            }
+           Uri path= data.getData();
+           imFoto.setImageURI(path);
         }
-
     }
+
+
 
     private void actualizarCliente() {
         bdLocal = new BaseDatosApp(requireContext().getApplicationContext());

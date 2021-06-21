@@ -54,6 +54,10 @@
     <string name="actualizar_pro">Actualizar Producto</string>
     <string name="actualizar_cli">Actualizar Clientes</string>
     <string name="activity_vistas">Lista Clientes</string>
+    <string name="SelectEmpleado">Selecciona el Cargo al que va dirigido tu comentario</string>
+    <string name="Fecha">"Fecha "</string>
+    <string name="comentario">Escribe tu mensaje</string>
+    <string name="publica">Publica tu comentario</string>
     <string-array name="clientes">
         <item>Fernando Jimenez</item>
         <item>Carlos Fuentes</item>

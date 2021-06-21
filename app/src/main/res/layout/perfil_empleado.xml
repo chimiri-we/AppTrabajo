@@ -37,8 +37,9 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/fab_details"
-                    android:foreground="@drawable/ic_person"
+                    android:background="@drawable/ic_person"
+                    android:clickable="true"
+                    android:focusable="auto"
                     tools:ignore="ContentDescription" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -267,7 +268,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_weight="1"
                     android:background="?attr/actionModeBackground"
-                    android:clipToPadding="true"
+                    android:clipToPadding="false"
                     android:orientation="vertical"
                     android:paddingStart="25dp"
                     android:paddingLeft="5dp"
@@ -300,6 +301,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 
+                        android:layout_marginBottom="10dp"
                         android:orientation="horizontal"
                         android:weightSum="3">
 
