@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class BaseDatosApp extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 16;
+    private static final int DATABASE_VERSION = 17;
     private static final String DATABASE_NAME = "DatosTrabajo";
     private static final String TABLE_CLIENTE = "Cliente";
 
@@ -24,7 +24,7 @@ public class BaseDatosApp extends SQLiteOpenHelper {
     private static final String id_cliente = "id_cliente";
     private static final String COLUMN_NOMBRE_CLIENTE = "nombre_cliente";
     private static final String COLUMN_TELEFONO = "telefono";
-    private static final String COLUMN_DIA_VISITA = "dia_visita";
+    private static final String diaVisita = "dia_visita";
 
     private static final String TABLE_PRODUCTO = "Producto";
     private static final String precioProducto = "precioProducto";
@@ -315,4 +315,6 @@ cursor.close();
         return  dtVenta;
 
     }
+
+
 }

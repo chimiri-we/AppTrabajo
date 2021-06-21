@@ -75,7 +75,7 @@ public class RegistroClienteFragment extends Fragment {
         final String direccion = edtDireccion.getText().toString().trim();
         final String colonia = edtColonia.getText().toString().trim();
         final String telefono = edtNumeroCliente.getText().toString().trim();
-        final String dia_visita = edtNumeroCliente.getText().toString().trim();
+        final String dia_visita = spinner.getSelectedItem().toString().trim();
 
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Cargando..");

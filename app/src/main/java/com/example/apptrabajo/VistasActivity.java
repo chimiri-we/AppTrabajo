@@ -1,43 +1,97 @@
 package com.example.apptrabajo;
 
 import android.os.Bundle;
-
-import com.example.apptrabajo.main.SectionsPagerAdapter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.apptrabajo.databinding.FragmenComunicadosBinding;
+import com.example.apptrabajo.main.PageViewModel;
+import com.example.apptrabajo.main.PlaceholderFragment;
+import com.example.apptrabajo.ui.home.HomeFragment;
+import com.example.apptrabajo.ui.slideshow.SlideshowFragment;
+import com.google.android.material.tabs.TabItem;
+
+import java.util.Objects;
 
 public class VistasActivity extends Fragment {
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_vistas, container, false);
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getContext(), getChildFragmentManager());
-        ViewPager viewPager = v.findViewById(R.id.view_pager);
-        viewPager.setAdapter(sectionsPagerAdapter);
-        TabLayout tabs = v.findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
-      /*  FloatingActionButton fab = findViewById(R.id.fab);
+    private Fragment fragmentR, fragmentS;
+    private Fragment fragmentL;
 
-        fab.setOnClickListener(new View.OnClickListener() {
+    TextView tvLista, tvListF, tvListV;
+    int fragmentTransaction;
+FragmentManager fragmentManager;
+    private Object View;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.activity_vistas, container, false);
+
+        tvLista = view.findViewById(R.id.lista_clientes);
+        tvListF = view.findViewById(R.id.client_faltante);
+        tvListV = view.findViewById(R.id.cliente_visitados);
+       fragmentS = new HomeFragment();
+         fragmentL = new PlaceholderFragment();
+         fragmentR = new PageViewModel();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.add(R.id.contenedorFragment, fragmentS).commit();
+
+        tvLista.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(android.view.View v) {
+                FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+
+                transaction.replace(R.id.contenedorFragment, fragmentS).commit();
+                transaction.addToBackStack(null);
             }
-        });*/
-        return v;
+        });
+        tvListV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(android.view.View v) {
+                FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+
+                transaction.replace(R.id.contenedorFragment, fragmentR).commit();
+                transaction.addToBackStack(null);
+            }
+        });
+        tvListF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(android.view.View v) {
+                FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+
+                transaction.replace(R.id.contenedorFragment, fragmentL).commit();
+                transaction.addToBackStack(null);
+            }
+        });
+        return view;
     }
+
+
+
+    public void onClick(ViewGroup view) {
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        switch (view.getId())
+        {
+            case R.id.client_faltante: transaction.replace(R.id.contenedorFragment, fragmentL);
+                transaction.addToBackStack(null);
+                break;
+            case R.id.cliente_visitados: transaction.replace(R.id.contenedorFragment, fragmentR);
+                transaction.addToBackStack(null);
+                break;
+            case R.id.lista_clientes: transaction.replace(R.id.contenedorFragment, fragmentS);
+                transaction.addToBackStack(null);
+                break;
+        }
+        transaction.commit();
+    }
+
 }

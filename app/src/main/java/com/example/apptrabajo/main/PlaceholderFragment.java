@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.apptrabajo.R;
+import com.example.apptrabajo.ui.slideshow.SlideshowFragment;
 
 
 /**
@@ -18,28 +19,7 @@ import com.example.apptrabajo.R;
  */
 public class PlaceholderFragment extends Fragment {
 
-    private static final String ARG_SECTION_NUMBER = "section_number";
 
-    private PageViewModel pageViewModel;
-
-    public static PlaceholderFragment newInstance(int index) {
-        PlaceholderFragment fragment = new PlaceholderFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt(ARG_SECTION_NUMBER, index);
-        fragment.setArguments(bundle);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        pageViewModel = new ViewModelProvider(this).get(PageViewModel.class);
-        int index = 1;
-        if (getArguments() != null) {
-            index = getArguments().getInt(ARG_SECTION_NUMBER);
-        }
-        pageViewModel.setIndex(index);
-    }
 
     @Override
     public View onCreateView(
@@ -47,7 +27,7 @@ public class PlaceholderFragment extends Fragment {
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_vistas, container, false);
         final TextView textView = root.findViewById(R.id.section_label);
-        pageViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
         return root;
     }
 }

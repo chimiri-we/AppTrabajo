@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.apptrabajo.datos.BaseDatosApp;
+import com.example.apptrabajo.entidades.Clientes;
 import com.example.apptrabajo.entidades.DetalleVenta;
 import com.example.apptrabajo.entidades.Productos;
 import com.example.apptrabajo.entidades.Venta;
@@ -42,7 +43,7 @@ public class Consultas extends BaseDatosApp implements Response.Listener<JSONObj
     Productos productos;
     Venta venta;
     private static final String TABLE_PRODUCTO = "Producto";
-
+    private static final String TABLE_CLIENTE = "Cliente";
     private static final String nombre_producto = "nombre_producto";
 
     private static final String precioProducto = "precioProducto";
@@ -50,8 +51,8 @@ public class Consultas extends BaseDatosApp implements Response.Listener<JSONObj
 
     ArrayList<Productos> arrayList = new ArrayList<Productos>();
     ArrayList<String> strinsProducto;
-    RequestQueue request;
-    JsonObjectRequest jsonObjectRequest;
+    RequestQueue request, nuevaRequest;
+    JsonObjectRequest jsonObjectRequest, nuevoJson;
     BaseDatosApp bdLocal;
     Context context;
     public Consultas(Context context) {
@@ -131,7 +132,7 @@ public class Consultas extends BaseDatosApp implements Response.Listener<JSONObj
                 bdLocal = new BaseDatosApp(context.getApplicationContext());
                 SQLiteDatabase db = bdLocal.getReadableDatabase();
                 if(db!= null) {
-                   // Toast.makeText(context, "Datos guardados", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Datos guardados", Toast.LENGTH_SHORT).show();
 
                 } else {
                     Toast.makeText(context, "Tienes un problema" +
@@ -149,6 +150,62 @@ public class Consultas extends BaseDatosApp implements Response.Listener<JSONObj
             progress.hide();
         }
 
+    }
+
+    public void actualizarCliente(RequestQueue nuevaRequest) {
+        progress=new ProgressDialog(context);
+        progress.setMessage("Consultando...");
+        progress.show();
+        String url="https://servicioparanegocio.es/superClean/consultarUsuario.php?";
+        //String url="https://servicioparanegocio.es/superClean/consultarUsuario.php?dia_visita=jueves";
+        nuevoJson=new JsonObjectRequest(Request.Method.GET,url,null,this::onNuevoResponse,this);
+        nuevaRequest.add(nuevoJson);
+    }
+
+    public void onNuevoResponse(JSONObject response) {
+        progress.hide();
+
+        Clientes cliente=null;
+
+        JSONArray json=response.optJSONArray("usuario");
+
+        try {
+
+            for (int i = 0; i< Objects.requireNonNull(json).length(); i++){
+                cliente=new Clientes();
+                JSONObject jsonObject=null;
+                jsonObject=json.getJSONObject(i);
+                cliente.setId_Remoto(jsonObject.optInt("Id"));
+                cliente.setNombre(jsonObject.optString("nombre"));
+                cliente.setTelefono(jsonObject.optString("telefono"));
+                cliente.setDireccion(jsonObject.optString("direccion"));
+                cliente.setColonia(jsonObject.optString("colonia"));
+                cliente.setDiaVisita(jsonObject.getString("dia_visita"));
+
+                ContentValues values = new ContentValues();
+                values.put("id_Remoto", cliente.getId_Remoto());
+                values.put("nombre", cliente.getNombre());
+                values.put("telefono", cliente.getTelefono());
+                values.put("direccion", cliente.getDireccion());
+                values.put("colonia", cliente.getColonia());
+                values.put("dia_visita", cliente.getDiaVisita());
+
+                bdLocal = new BaseDatosApp(context.getApplicationContext());
+                SQLiteDatabase db = bdLocal.getReadableDatabase();
+                if(db!= null) {
+                   Toast.makeText(context, "Datos guardados", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Toast.makeText(context, "Tienes un problema", Toast.LENGTH_SHORT).show();
+                }
+                db.insert(TABLE_CLIENTE, null, values);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Verifica tu coneccion", Toast.LENGTH_LONG).show();
+
+        }
     }
 }
 

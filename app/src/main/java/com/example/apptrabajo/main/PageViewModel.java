@@ -1,20 +1,28 @@
 package com.example.apptrabajo.main;
 
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-public class PageViewModel extends ViewModel {
+import com.example.apptrabajo.R;
 
-    private final MutableLiveData<Integer> mIndex = new MutableLiveData<>();
-    private final LiveData<String> mText = Transformations.map(mIndex, input -> "Hello world from section: " + input);
+public class PageViewModel extends Fragment {
 
-    public void setIndex(int index) {
-        mIndex.setValue(index);
-    }
+    @Override
+    public View onCreateView(
+            @NonNull LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_lista_nueva, container, false);
 
-    public LiveData<String> getText() {
-        return mText;
+        return root;
     }
 }

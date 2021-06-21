@@ -51,6 +51,9 @@
     <string name="telefono">Telefono</string>
     <string name="action_send">Enviar</string>
     <string name="prompt_message">mensage</string>
+    <string name="actualizar_pro">Actualizar Producto</string>
+    <string name="actualizar_cli">Actualizar Clientes</string>
+    <string name="activity_vistas">Lista Clientes</string>
     <string-array name="clientes">
         <item>Fernando Jimenez</item>
         <item>Carlos Fuentes</item>

@@ -11,10 +11,6 @@
             android:title="@string/perfil" />
 
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/face_profile"
-            android:title="@string/menu_home" />
-        <item
             android:id="@+id/nav_registroClienteFragment"
             android:icon="@drawable/ic_edit"
             android:title="@string/registro" />
@@ -29,10 +25,6 @@
             android:icon="@drawable/ic_lista"
             android:title="@string/lista_producto" />
 
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_lista"
-            android:title="@string/lista_producto" />
         <item
             android:id="@+id/nav_vistasActivity"
             android:icon="@drawable/ic_comunicadso"

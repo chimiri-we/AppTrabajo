@@ -1,6 +1,8 @@
 package com.example.apptrabajo;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,6 +10,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -46,12 +50,18 @@ Productos productos;
             startActivity(intent);
 
         });
+
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+        }
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_slideshow, R.id.nav_vistasActivity, R.id.nav_mostrarDetalle, R.id.nav_perfilFragment, R.id.nav_perfilEmpleado, R.id.nav_gallery, R.id.nav_registroClienteFragment)
+               R.id.nav_vistasActivity, R.id.nav_mostrarDetalle, R.id.nav_perfilFragment, R.id.nav_perfilEmpleado, R.id.nav_gallery, R.id.nav_registroClienteFragment)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);

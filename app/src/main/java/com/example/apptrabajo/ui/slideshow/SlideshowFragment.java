@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,6 +30,8 @@ import com.example.apptrabajo.adaptadores.ProductoAdapter;
 import com.example.apptrabajo.databinding.FragmentSlideshowBinding;
 import com.example.apptrabajo.datos.BaseDatosApp;
 import com.example.apptrabajo.entidades.Productos;
+import com.example.apptrabajo.main.PageViewModel;
+import com.example.apptrabajo.main.PlaceholderFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +50,7 @@ public class SlideshowFragment extends Fragment  implements Response.Listener<JS
     private static final String precioProducto = "precioProducto";
     private static final String id_remoto = "id_remoto";
 
+    private PageViewModel pageViewModel;
     ArrayList<Productos> arrayList = new ArrayList<Productos>();
     ArrayList<String> strinsProducto;
     RequestQueue request;
@@ -57,9 +61,12 @@ public class SlideshowFragment extends Fragment  implements Response.Listener<JS
     //  RecyclerView listView;
     ListView listView;
     ProductoAdapter productoAdapter;
+    private static final String ARG_SECTION_NUMBER = "section_number";
 
     private SlideshowViewModel slideshowViewModel;
     private FragmentSlideshowBinding binding;
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

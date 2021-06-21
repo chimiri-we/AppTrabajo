@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/loginCard"
-    app:cardCornerRadius="@dimen/loginCardRadius"
-    android:elevation="5dp"
+    android:layout_width="wrap_content"
     android:layout_gravity="center"
     android:layout_marginTop="@dimen/loginViewsMargin"
     android:layout_marginBottom="@dimen/loginViewsMargin"
-    android:background="@color/whiteCardColor">
+    android:background="@color/whiteCardColor"
+    android:elevation="5dp"
+    android:fadeScrollbars="true"
+    android:isScrollContainer="true"
+    android:overScrollMode="always"
+    android:verticalScrollbarPosition="defaultPosition"
+    app:cardCornerRadius="@dimen/loginCardRadius"
+    app:layout_scrollFlags="scroll">
 
     <LinearLayout
         style="@style/linearParent"
+        android:layout_width="370dp"
         android:layout_gravity="center"
+        android:fadeScrollbars="true"
         android:overScrollMode="always"
-        android:padding="@dimen/loginViewsMargin">
+        android:padding="@dimen/loginViewsMargin"
+        android:persistentDrawingCache="scrolling"
+        android:verticalScrollbarPosition="defaultPosition">
 
 
         <TextView
@@ -111,6 +120,10 @@
             app:boxStrokeColor="#1C1A1A"
             app:endIconTint="#163194"
             app:expandedHintEnabled="true"
+            app:helperText="Selecciona dia de Visita"
+            app:helperTextEnabled="true"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true"
             app:hintTextColor="#0288D1">
 
 
