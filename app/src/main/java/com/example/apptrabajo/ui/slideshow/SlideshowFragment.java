@@ -3,21 +3,18 @@ package com.example.apptrabajo.ui.slideshow;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteAccessPermException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,8 +27,7 @@ import com.example.apptrabajo.adaptadores.ProductoAdapter;
 import com.example.apptrabajo.databinding.FragmentSlideshowBinding;
 import com.example.apptrabajo.datos.BaseDatosApp;
 import com.example.apptrabajo.entidades.Productos;
-import com.example.apptrabajo.main.PageViewModel;
-import com.example.apptrabajo.main.PlaceholderFragment;
+import com.example.apptrabajo.main.VisitasFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,18 +46,17 @@ public class SlideshowFragment extends Fragment  implements Response.Listener<JS
     private static final String precioProducto = "precioProducto";
     private static final String id_remoto = "id_remoto";
 
-    private PageViewModel pageViewModel;
+    private VisitasFragment pageViewModel;
     ArrayList<Productos> arrayList = new ArrayList<Productos>();
     ArrayList<String> strinsProducto;
     RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
     ProgressDialog progress;
     BaseDatosApp bdLocal;
-    Connection con;
+
     //  RecyclerView listView;
     ListView listView;
     ProductoAdapter productoAdapter;
-    private static final String ARG_SECTION_NUMBER = "section_number";
 
     private SlideshowViewModel slideshowViewModel;
     private FragmentSlideshowBinding binding;

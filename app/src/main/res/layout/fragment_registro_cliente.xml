@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/loginCard"
     android:layout_width="wrap_content"
@@ -15,136 +15,153 @@
     app:cardCornerRadius="@dimen/loginCardRadius"
     app:layout_scrollFlags="scroll">
 
-    <LinearLayout
-        style="@style/linearParent"
-        android:layout_width="370dp"
+    <androidx.cardview.widget.CardView
+        style="@style/loginCard"
+        android:layout_width="wrap_content"
         android:layout_gravity="center"
+        android:background="@color/whiteCardColor"
+        android:elevation="5dp"
         android:fadeScrollbars="true"
+        android:isScrollContainer="true"
         android:overScrollMode="always"
-        android:padding="@dimen/loginViewsMargin"
-        android:persistentDrawingCache="scrolling"
-        android:verticalScrollbarPosition="defaultPosition">
+        android:verticalScrollbarPosition="defaultPosition"
+        app:cardCornerRadius="@dimen/loginCardRadius"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            style="@style/linearParent"
+            android:layout_width="370dp"
+            android:layout_gravity="center"
+            android:fadeScrollbars="true"
+            android:overScrollMode="always"
+            android:padding="@dimen/loginViewsMargin"
+            android:persistentDrawingCache="scrolling"
+            android:verticalScrollbarPosition="defaultPosition">
 
 
-        <TextView
-            style="@style/headerTextPrimary"
-            android:layout_marginTop="@dimen/loginViewsMargin"
-            android:text="@string/registro" />
+            <TextView
+                style="@style/headerTextPrimary"
+                android:layout_marginTop="@dimen/loginViewsMargin"
+                android:text="@string/registro" />
 
-        <com.google.android.material.textfield.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
 
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/signup_text_margin_top"
-            app:boxBackgroundMode="outline"
-            app:boxStrokeColor="#1C1A1A"
-            app:endIconTint="#163194"
-            app:hintTextColor="#0288D1">
-
-            <EditText
-
-                android:id="@+id/edt_nombre"
-                style="@style/modifiedEditText"
-                android:hint="@string/nombre_cliente"
-                android:inputType="text"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/signup_text_margin_top"
-            app:boxBackgroundMode="outline"
-            app:boxStrokeColor="#1C1A1A"
-            app:endIconTint="#163194"
-            app:hintTextColor="#0288D1">
-
-            <EditText
-                android:id="@+id/edt_telefono"
-                style="@style/modifiedEditText"
-                android:hint="@string/Numero_de_Telefono"
-                android:inputType="text"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/signup_text_margin_top"
-            app:boxBackgroundMode="outline"
-            app:boxStrokeColor="#1C1A1A"
-            app:endIconTint="#163194"
-            app:hintTextColor="#0288D1">
-
-            <EditText
-
-                android:id="@+id/edt_direccion"
-                style="@style/modifiedEditText"
-                android:hint="@string/Direccion"
-                android:inputType="textEmailAddress"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/signup_text_margin_top"
-            android:hint="Colonia"
-            app:boxBackgroundMode="outline"
-            app:boxStrokeColor="#1C1A1A"
-            app:endIconTint="#163194"
-            app:hintTextColor="#0288D1">
-
-            <EditText
-
-                android:id="@+id/edt_colonia"
-                style="@style/modifiedEditText"
-
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/signup_text_margin_top"
-            android:hint="Selecciona dia de Visita"
-            app:boxBackgroundMode="outline"
-            app:boxStrokeColor="#1C1A1A"
-            app:endIconTint="#163194"
-            app:expandedHintEnabled="true"
-            app:helperText="Selecciona dia de Visita"
-            app:helperTextEnabled="true"
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="true"
-            app:hintTextColor="#0288D1">
-
-
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/spinner"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/dias" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="@dimen/signup_text_margin_top"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="#1C1A1A"
+                app:endIconTint="#163194"
+                app:hintTextColor="#0288D1">
 
-        <Button
+                <EditText
 
-            android:id="@+id/btn_registro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:layout_margin="15dp"
-            android:layout_marginTop="20dp"
-            android:text="Registrar Cliene"
-            android:textColor="#EAE5E5"
-            app:backgroundTint="#4593E1" />
+                    android:id="@+id/edt_nombre"
+                    style="@style/modifiedEditText"
+                    android:hint="@string/nombre_cliente"
+                    android:inputType="text"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+            <com.google.android.material.textfield.TextInputLayout
+
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/signup_text_margin_top"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="#1C1A1A"
+                app:endIconTint="#163194"
+                app:hintTextColor="#0288D1">
+
+                <EditText
+                    android:id="@+id/edt_telefono"
+                    style="@style/modifiedEditText"
+                    android:hint="@string/Numero_de_Telefono"
+                    android:inputType="text"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/signup_text_margin_top"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="#1C1A1A"
+                app:endIconTint="#163194"
+                app:hintTextColor="#0288D1">
+
+                <EditText
+
+                    android:id="@+id/edt_direccion"
+                    style="@style/modifiedEditText"
+                    android:hint="@string/Direccion"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/signup_text_margin_top"
+                android:hint="Colonia"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="#1C1A1A"
+                app:endIconTint="#163194"
+                app:hintTextColor="#0288D1">
+
+                <EditText
+
+                    android:id="@+id/edt_colonia"
+                    style="@style/modifiedEditText"
+
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/signup_text_margin_top"
+                android:hint="Selecciona dia de Visita"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="#1C1A1A"
+                app:endIconTint="#163194"
+                app:expandedHintEnabled="true"
+                app:helperText="Selecciona dia de Visita"
+                app:helperTextEnabled="true"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:hintTextColor="#0288D1">
+
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/dias" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+
+                android:id="@+id/btn_registro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_margin="15dp"
+                android:layout_marginTop="20dp"
+                android:text="Registrar Cliene"
+                android:textColor="#EAE5E5"
+                app:backgroundTint="#4593E1" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

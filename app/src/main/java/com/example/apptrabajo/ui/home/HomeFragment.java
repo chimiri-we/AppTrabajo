@@ -188,8 +188,10 @@ ImageView btn;
                 bdLocal = new BaseDatosApp(requireContext().getApplicationContext());
                 SQLiteDatabase db = bdLocal.getReadableDatabase();
                 if(db!= null) {
-                    Toast.makeText(getContext(), "Datos guardados", Toast.LENGTH_SHORT).show();
-
+                  //  Toast.makeText(getContext(), "Datos guardados", Toast.LENGTH_SHORT).show();
+                    progress=new ProgressDialog(getContext());
+                    progress.setMessage("Datos Guardados");
+                    progress.show();
                 } else {
                     Toast.makeText(getContext(), "Tienes un problema" +
                             " "+response, Toast.LENGTH_SHORT).show();

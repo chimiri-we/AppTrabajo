@@ -10,38 +10,31 @@ import com.example.apptrabajo.entidades.Clientes;
 import com.example.apptrabajo.entidades.DetalleVenta;
 import com.example.apptrabajo.entidades.Productos;
 import com.example.apptrabajo.entidades.Venta;
+import com.example.apptrabajo.entidades.Visitas;
 
 import java.util.ArrayList;
 
 public class BaseDatosApp extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 17;
+    private static final int DATABASE_VERSION = 18;
     private static final String DATABASE_NAME = "DatosTrabajo";
     private static final String TABLE_CLIENTE = "Cliente";
 
     private static final String TABLE_EMPLEADO = "Empleado";
-    private static final String id_remoto = "id_remoto";
-    private static final String id_cliente = "id_cliente";
-    private static final String COLUMN_NOMBRE_CLIENTE = "nombre_cliente";
     private static final String COLUMN_TELEFONO = "telefono";
     private static final String diaVisita = "dia_visita";
-
+    private static final String TABLE_VISITAS = "Visitas";
     private static final String TABLE_PRODUCTO = "Producto";
     private static final String precioProducto = "precioProducto";
 
     private static final String TABLE_VENTA = "Venta";
     private static final String COLUMN_TOTAL = "total";
-    private static final String COLUMN_FECHA = "fecha";
 
     private static final String TABLE_DETALLE_VENTA = "DetalleVenta";
     private static final String COLUMN_ID_VENTA = "id_venta";
     private static final String COLUMN_ID_PRODUCTO = "id_producto";
     private static final String nombre_producto = "nombre_producto";
     private static final String COLUMN_PRECIO_PRODUCTO = "precio_producto";
-    private static final String COLUMN_CANTIDAD = "cantidad";
-
-
-
 
 
     public BaseDatosApp(Context context) {
@@ -64,12 +57,22 @@ public class BaseDatosApp extends SQLiteOpenHelper {
                 "password TEXT)";
         db.execSQL(dbEmpleado);
 
+        String dbVisitas="create table Visitas("+
+                "id_visita INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "id_empleado INTEGER,"+
+                "id_cliente INTEGER,"+
+                "fecha_visita TEXT,"+
+                "estado INTEGER,"+
+                "FOREIGN KEY(id_empleado) REFERENCES Empleado(id_empleado),"+
+                "FOREIGN KEY(id_cliente) REFERENCES Cliente(id_cliente))";
+        db.execSQL(dbVisitas);
+
   String dbCliente="create table Cliente("+
                 "id_cliente INTEGER PRIMARY KEY AUTOINCREMENT,"+
-          "id_Remoto INTEGER,"+
+                "id_Remoto INTEGER,"+
                 "nombre TEXT NOT NULL,"+
                 "direccion TEXT,"+
-          "colonia TEXT,"+
+                "colonia TEXT,"+
                 "telefono TEXT,"+
                 "dia_visita TEXT)";
         db.execSQL(dbCliente);
@@ -113,6 +116,7 @@ public class BaseDatosApp extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_VENTA);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_DETALLE_VENTA);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CLIENTE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_VISITAS);
         onCreate(db);
 
     }
@@ -132,7 +136,6 @@ public class BaseDatosApp extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("id_cliente", venta.getId_cliente());
         values.put("nombre_cliente", venta.getNombre_cliente());
-
         values.put("fecha", venta.getFecha());
         values.put("total_venta", venta.getTota_venta());
         SQLiteDatabase db = this.getWritableDatabase();
@@ -317,4 +320,13 @@ cursor.close();
     }
 
 
+    public void generarVisita(Visitas visitas) {
+        ContentValues values = new ContentValues();
+        values.put("id_cliente", visitas.getId_cliente());
+    //    values.put("id_empleado", visitas.getId_empleado());
+        values.put("fecha_visita", visitas.getFecha_visita());
+        values.put("estado", visitas.getEstado());
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(TABLE_VISITAS, null, values);
+    }
 }

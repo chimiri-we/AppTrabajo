@@ -1,37 +1,31 @@
 package com.example.apptrabajo.api;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AlertDialog;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.apptrabajo.R;
+import com.example.apptrabajo.adaptadores.VisitasAdapter;
 import com.example.apptrabajo.datos.BaseDatosApp;
 import com.example.apptrabajo.entidades.Clientes;
-import com.example.apptrabajo.entidades.DetalleVenta;
 import com.example.apptrabajo.entidades.Productos;
 import com.example.apptrabajo.entidades.Venta;
+import com.example.apptrabajo.entidades.Visitas;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Objects;
 
 public class Consultas extends BaseDatosApp implements Response.Listener<JSONObject>, Response.ErrorListener {
@@ -49,6 +43,7 @@ public class Consultas extends BaseDatosApp implements Response.Listener<JSONObj
     private static final String precioProducto = "precioProducto";
     private static final String id_remoto = "id_remoto";
 
+    VisitasAdapter adapter;
     ArrayList<Productos> arrayList = new ArrayList<Productos>();
     ArrayList<String> strinsProducto;
     RequestQueue request, nuevaRequest;
@@ -207,6 +202,9 @@ public class Consultas extends BaseDatosApp implements Response.Listener<JSONObj
 
         }
     }
+
+
+
 }
 
 

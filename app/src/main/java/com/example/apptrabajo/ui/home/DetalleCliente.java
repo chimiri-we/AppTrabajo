@@ -30,6 +30,8 @@ import com.example.apptrabajo.entidades.Clientes;
 import com.example.apptrabajo.entidades.DetalleVenta;
 import com.example.apptrabajo.entidades.Productos;
 import com.example.apptrabajo.entidades.Venta;
+import com.example.apptrabajo.entidades.Visitas;
+import com.example.apptrabajo.main.VisitasFragment;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -50,7 +52,7 @@ public class DetalleCliente extends AppCompatActivity {
     ArrayList<String> strinsProducto;
 
     Clientes clientes;
-
+    VisitasFragment visitasFragment;
     int totalV;
     int id = 0;
     String nombreCli;
@@ -59,7 +61,7 @@ public class DetalleCliente extends AppCompatActivity {
     TextView tvTotal;
     String formattedDate;
     Spinner spinnerPro;
-
+    int stado = 0;
     FloatingActionButton btnAgregar;
     CollapsingToolbarLayout collapser;
     public DetalleCliente() {
@@ -288,14 +290,39 @@ public class DetalleCliente extends AppCompatActivity {
                 ventaNueva();
 
                 break;
-            case R.id.action_delete:
+            case R.id.action_terminar:
 
-                actualizarPedio();
+              terminarVisita();
 
         break;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void terminarVisita() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Terminar Visita");
+        builder.setMessage("Estas a punto de generar una visita sin venta...");
+
+        builder.create();
+        builder.setPositiveButton("Terminar", (dialog, which) -> {
+            Date fechaActual= Calendar.getInstance().getTime();
+            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+            formattedDate = df.format(fechaActual);
+            Visitas visitas = new Visitas(id, formattedDate, stado);
+
+            bdLocal.generarVisita(visitas);
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, "EL ID DE VISITA ES" + visitas.getId_visitas(), Toast.LENGTH_SHORT).show();
+        });
+
+        builder.show();
+        onStart();
+    }
+
+
 
     private void ventaNueva() {
 

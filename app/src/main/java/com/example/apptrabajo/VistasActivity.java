@@ -6,19 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.apptrabajo.databinding.FragmenComunicadosBinding;
-import com.example.apptrabajo.main.PageViewModel;
+import com.example.apptrabajo.main.VisitasFragment;
 import com.example.apptrabajo.main.PlaceholderFragment;
 import com.example.apptrabajo.ui.home.HomeFragment;
-import com.example.apptrabajo.ui.slideshow.SlideshowFragment;
-import com.google.android.material.tabs.TabItem;
-
-import java.util.Objects;
 
 public class VistasActivity extends Fragment {
 
@@ -41,7 +35,7 @@ FragmentManager fragmentManager;
         tvListV = view.findViewById(R.id.cliente_visitados);
        fragmentS = new HomeFragment();
          fragmentL = new PlaceholderFragment();
-         fragmentR = new PageViewModel();
+         fragmentR = new VisitasFragment();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.add(R.id.contenedorFragment, fragmentS).commit();
 

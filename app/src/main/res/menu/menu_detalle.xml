@@ -13,10 +13,10 @@
         app:showAsAction="ifRoom|withText" />
 
     <item
-        android:id="@+id/action_delete"
+        android:id="@+id/action_terminar"
         android:orderInCategory="2"
         android:iconTint="@color/black"
-        android:icon="@drawable/ic_alert_circle"
+        android:icon="@drawable/ic_terminar"
         app:showAsAction="ifRoom"
         android:title="borrar" />
 </menu>
